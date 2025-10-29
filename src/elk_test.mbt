@@ -4100,7 +4100,7 @@ test "补测 update_layout_positions None 分支" {
 // 只要不 panic 即可
 
 ///|
-test "补测 remove_node_from_list Nil" {
+test "补测 remove_node_from_list @immut/list.Nil" {
   let l = @immut/list.Nil
   let r = remove_node_from_list(l, "A")
   if list_length(r) != 0 {

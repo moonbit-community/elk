@@ -1,6 +1,7 @@
 // src/layered.mbt：ELK 所有核心类型与 Layered 算法唯一实现文件，便于 Moonbit 识别
 
 // 类型定义
+
 ///|
 pub typealias (String, Float, Float) as ElkLabel // (text, x, y)
 
@@ -103,8 +104,8 @@ pub fn default_layered_options() -> LayeredOptions {
      true, // consider_node_labels
      true, // consider_port_positions
      1.0, // aspect_ratio
-     10, // iterations
-  )
+     10,
+  ) // iterations
 }
 
 // 递归遍历所有节点，构建 id -> ElkNode 映射
@@ -669,8 +670,8 @@ fn create_layout_state() -> LayoutState {
     @hashmap.new(), // 节点映射
     @hashmap.new(), // 层映射
     @hashmap.new(), // 层到节点列表映射
-    @hashmap.new(), // 节点位置映射
-  )
+    @hashmap.new(),
+  ) // 节点位置映射
 }
 
 ///|
