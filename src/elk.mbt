@@ -1,6 +1,7 @@
 // src/layered.mbt：ELK 所有核心类型与 Layered 算法唯一实现文件，便于 Moonbit 识别
 
 // 类型定义
+
 ///|
 pub type ElkLabel = (String, Float, Float) // (text, x, y)
 
@@ -103,8 +104,8 @@ pub fn default_layered_options() -> LayeredOptions {
      true, // consider_node_labels
      true, // consider_port_positions
      1.0, // aspect_ratio
-     10, // iterations
-  )
+     10,
+  ) // iterations
 }
 
 // 递归遍历所有节点，构建 id -> ElkNode 映射
@@ -121,7 +122,7 @@ fn visit_edges(
     acc.set(node.0, node)
     match node.3 {
       [] => acc
-      [edge, ..rest] => {
+      [edge, .. rest] => {
         let target_node_opt = acc.get(edge.1)
         let acc2 = match target_node_opt {
           Some(target_node) => visit(target_node, acc)
@@ -174,7 +175,7 @@ fn add_children(
         Some(target_node) =>
           add_children(
             rest_edges,
-            [(target_node, ..next_layer], q),
+            @list.T.Cons((target_node, next_layer), q),
             node_map,
             next_layer,
           )
@@ -279,13 +280,13 @@ pub fn get_node_at_index(nodes : @list.T[String], index : Int) -> String {
   let mut i = 0
   while i < index {
     match current {
-      [_, ..rest] => current = rest
+      [_, .. rest] => current = rest
       [] => break
     }
     i = i + 1
   }
   match current {
-    [node, .._] => node
+    [node, ..] => node
     [] => ""
   }
 }
@@ -299,7 +300,7 @@ pub fn has_edge_between(
   let mut current = edges
   while true {
     match current {
-      [edge, ..rest] => {
+      [edge, .. rest] => {
         if edge.1 == source && edge.2 == target {
           return true
         }
@@ -317,7 +318,7 @@ pub fn[T] reverse_list(lst : @list.T[T]) -> @list.T[T] {
   let mut current = lst
   while true {
     match current {
-      [head, ..rest] => {
+      [head, .. rest] => {
         result = [head, ..result]
         current = rest
       }
@@ -351,7 +352,7 @@ pub fn sort_nodes_by_name(
 ) -> @list.T[String] {
   match ids {
     [] => result
-    [id, ..rest] => sort_nodes_by_name(rest, insert_by_name(id, result))
+    [id, .. rest] => sort_nodes_by_name(rest, insert_by_name(id, result))
   }
 }
 
@@ -381,7 +382,7 @@ pub fn node_degree(node : ElkNode) -> Int {
 pub fn[T] list_length(lst : @list.T[T]) -> Int {
   match lst {
     [] => 0
-    [_, ..rest] => 1 + list_length(rest)
+    [_, .. rest] => 1 + list_length(rest)
   }
 }
 
@@ -395,7 +396,7 @@ fn sort_nodes_by_degree(
 ) -> @list.T[String] {
   match ids {
     [] => result
-    [id, ..rest] => {
+    [id, .. rest] => {
       let node_opt = node_map.get(id)
       let degree = match node_opt {
         Some(node) => node_degree(node)
@@ -444,7 +445,7 @@ pub fn group_layers(
 ) -> @hashmap.T[Int, @list.T[String]] {
   match keys {
     [] => layers
-    [id, ..rest] => {
+    [id, .. rest] => {
       let layer_opt = map.get(id)
       match layer_opt {
         Some(layer) => {
@@ -489,7 +490,7 @@ pub fn assign_x(
 ) -> Float {
   match ids {
     [] => x
-    [id, ..rest_ids] => {
+    [id, .. rest_ids] => {
       let node_opt = node_map.get(id)
       let node_width = match node_opt {
         Some(node) => node.6
@@ -518,7 +519,7 @@ pub fn calculate_max_width(
 ) -> Float {
   match ids {
     [] => max
-    [id, ..rest] => {
+    [id, .. rest] => {
       let node_opt = node_map.get(id)
       let width = match node_opt {
         Some(node) => node.6
@@ -640,8 +641,8 @@ fn create_layout_state() -> LayoutState {
     @hashmap.new(), // 节点映射
     @hashmap.new(), // 层映射
     @hashmap.new(), // 层到节点列表映射
-    @hashmap.new(), // 节点位置映射
-  )
+    @hashmap.new(),
+  ) // 节点位置映射
 }
 
 ///|
@@ -701,7 +702,7 @@ pub fn remove_node_from_list(
   let mut current = nodes
   while true {
     match current {
-      [head, ..rest] => {
+      [head, .. rest] => {
         if head != node_id {
           result = [head, ..result]
         }
@@ -814,7 +815,7 @@ pub fn force_init_pos(
 ) -> @hashmap.T[String, (Float, Float)] {
   match ids {
     [] => acc
-    [id, ..rest] => {
+    [id, .. rest] => {
       acc.set(id, (0.0, 0.0))
       force_init_pos(rest, acc)
     }
@@ -830,7 +831,7 @@ pub fn force_calc_repulsion(
 ) -> @hashmap.T[String, (Float, Float)] {
   match ids {
     [] => acc
-    [id, ..rest] => {
+    [id, .. rest] => {
       let pos_opt = pos.get(id)
       let (x, y) = match pos_opt {
         Some((x, y)) => (x, y)
@@ -857,7 +858,7 @@ fn force_sum_rep(
 ) -> (Float, Float) {
   match ids2 {
     [] => (fx, fy)
-    [id2, ..rest2] =>
+    [id2, .. rest2] =>
       if id == id2 {
         force_sum_rep(ids, id, x, y, pos, k, rest2, fx, fy)
       } else {
@@ -892,7 +893,7 @@ fn force_append_edges(
 ) -> @list.T[ElkEdge] {
   match edges {
     [] => acc
-    [e, ..rest] => force_append_edges(rest, [e, ..acc])
+    [e, .. rest] => force_append_edges(rest, [e, ..acc])
   }
 }
 
@@ -915,7 +916,7 @@ fn force_sum_att(
 ) -> @hashmap.T[String, (Float, Float)] {
   match edges {
     [] => acc2
-    [e, ..rest] => {
+    [e, .. rest] => {
       let (src, tgt) = (e.1, e.2)
       let src_pos_opt = pos.get(src)
       let tgt_pos_opt = pos.get(tgt)
@@ -999,7 +1000,7 @@ pub fn force_update(
 ) -> @hashmap.T[String, (Float, Float)] {
   match ids {
     [] => acc
-    [id, ..rest] => {
+    [id, .. rest] => {
       let pos_opt = pos.get(id)
       let (x, y) = match pos_opt {
         Some((x, y)) => (x, y)
