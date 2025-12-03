@@ -1,6 +1,7 @@
 // examples.mbt: ELK 布局库使用示例
 
 // 示例1: 基本分层布局
+
 ///|
 pub fn example_basic_layered() -> ElkNode {
   // 创建简单的图结构：A -> B -> C
