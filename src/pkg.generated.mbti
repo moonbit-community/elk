@@ -1,0 +1,140 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "0Ayachi0/elk/src"
+
+import(
+  "moonbitlang/core/hashmap"
+  "moonbitlang/core/immut/list"
+)
+
+// Values
+pub fn append_edges(@list.T[(String, String, String, @list.T[(String, Float, Float)])], @list.T[(String, String, String, @list.T[(String, Float, Float)])]) -> @list.T[(String, String, String, @list.T[(String, Float, Float)])]
+
+pub fn assign_coords(@hashmap.HashMap[Int, @list.T[String]], Float, (Float, Float, String, String, String, String, Bool, Bool, Float, Int), @hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)]) -> Unit
+
+pub fn assign_x(@list.T[String], Float, Float, @hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], String, Float) -> Float
+
+pub fn calculate_max_width(@list.T[String], @hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], Float) -> Float
+
+pub fn collect_all_edges(@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)]) -> @list.T[(String, String, String, @list.T[(String, Float, Float)])]
+
+pub fn collect_ids(@hashmap.HashMap[String, Int]) -> @list.T[String]
+
+pub fn collect_node_ids(@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)]) -> @list.T[String]
+
+pub fn count_crossings(@list.T[String], @list.T[String], @list.T[(String, String, String, @list.T[(String, Float, Float)])]) -> Int
+
+pub fn default_layered_options() -> (Float, Float, String, String, String, String, Bool, Bool, Float, Int)
+
+pub fn elk_layout((String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float), (String, (Float, Float, String, String, String, String, Bool, Bool, Float, Int))) -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn example_basic_layered() -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn example_complex_multilayer() -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn example_different_directions() -> @list.T[(String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)]
+
+pub fn example_edge_routing() -> @list.T[@list.T[(Float, Float)]]
+
+pub fn example_force_layout() -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn example_incremental_layout() -> (@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)])
+
+pub fn example_performance_test() -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn example_universal_api() -> @list.T[(String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)]
+
+pub fn example_with_labels_and_ports() -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn example_workflow_graph() -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn force_calc_attraction(@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, (Float, Float)], Float, @hashmap.HashMap[String, (Float, Float)]) -> @hashmap.HashMap[String, (Float, Float)]
+
+pub fn force_calc_repulsion(@list.T[String], @hashmap.HashMap[String, (Float, Float)], Float, @hashmap.HashMap[String, (Float, Float)]) -> @hashmap.HashMap[String, (Float, Float)]
+
+pub fn force_edges_for(@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])]) -> @list.T[(String, String, String, @list.T[(String, Float, Float)])]
+
+pub fn force_init_pos(@list.T[String], @hashmap.HashMap[String, (Float, Float)]) -> @hashmap.HashMap[String, (Float, Float)]
+
+pub fn force_iterate(@hashmap.HashMap[String, (Float, Float)], @list.T[String], @hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], Float, Float, Int) -> @hashmap.HashMap[String, (Float, Float)]
+
+pub fn force_update(@list.T[String], @hashmap.HashMap[String, (Float, Float)], @hashmap.HashMap[String, (Float, Float)], @hashmap.HashMap[String, (Float, Float)], Float, Int, @hashmap.HashMap[String, (Float, Float)]) -> @hashmap.HashMap[String, (Float, Float)]
+
+pub fn force_update_node((String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float), @hashmap.HashMap[String, (Float, Float)]) -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn get_node_at_index(@list.T[String], Int) -> String
+
+pub fn group_layers(@list.T[String], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> @hashmap.HashMap[Int, @list.T[String]]
+
+pub fn has_edge_between(String, String, @list.T[(String, String, String, @list.T[(String, Float, Float)])]) -> Bool
+
+pub fn incremental_layout_add_edge((@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)]), (String, String, String, @list.T[(String, Float, Float)])) -> (@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)])
+
+pub fn incremental_layout_add_node((@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)]), (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float), Int) -> (@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)])
+
+pub fn incremental_layout_get_positions((@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)])) -> @hashmap.HashMap[String, (Float, Float)]
+
+pub fn incremental_layout_update((@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)]), (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> (@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)])
+
+pub fn insert_by_degree(String, Int, @list.T[String], @hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)]) -> @list.T[String]
+
+pub fn insert_by_name(String, @list.T[String]) -> @list.T[String]
+
+pub fn layout_fixed((String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn layout_force((String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn layout_layered((String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub fn[T] list_length(@list.T[T]) -> Int
+
+pub fn minimize_crossings(@hashmap.HashMap[Int, @list.T[String]], @list.T[(String, String, String, @list.T[(String, Float, Float)])]) -> @hashmap.HashMap[Int, @list.T[String]]
+
+pub fn node_degree((String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)) -> Int
+
+pub fn remove_node_from_list(@list.T[String], String) -> @list.T[String]
+
+pub fn[T] reverse_list(@list.T[T]) -> @list.T[T]
+
+pub fn route_edge(String, String, (Float, Float), (Float, Float), String) -> @list.T[(Float, Float)]
+
+pub fn sort_nodes_by_name(@list.T[String], @list.T[String]) -> @list.T[String]
+
+pub fn to_float(Int) -> Float
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub type Alignment = String
+
+pub type EdgePair = (String, String)
+
+pub type EdgeRoutingStrategy = String
+
+pub type ElkEdge = (String, String, String, @list.T[(String, Float, Float)])
+
+pub type ElkLabel = (String, Float, Float)
+
+pub type ElkNode = (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)
+
+pub type ElkPort = (String, String?, Float, Float, Float, Float)
+
+pub type LayeredOptions = (Float, Float, String, String, String, String, Bool, Bool, Float, Int)
+
+pub type LayoutAlgorithm = String
+
+pub type LayoutDirection = String
+
+pub type LayoutOptions = (String, (Float, Float, String, String, String, String, Bool, Bool, Float, Int))
+
+pub type LayoutState = (@hashmap.HashMap[String, (String, String?, @list.T[(String, String?, Float, Float, Float, Float)], @list.T[(String, String, String, @list.T[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.T[String]], @hashmap.HashMap[String, (Float, Float)])
+
+pub type NodePosition = (String, (Float, Float))
+
+pub type NodeSortingStrategy = String
+
+pub type Position = (Float, Float)
+
+// Traits
+
