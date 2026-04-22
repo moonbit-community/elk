@@ -364,7 +364,7 @@ pub fn insert_by_name(
 ) -> @list.List[String] {
   match sorted {
     @list.List::Empty => @list.cons(id, @list.empty())
-    @list.List::More(head, tail=tail) =>
+    @list.List::More(head, tail~) =>
       if id <= head {
         @list.cons(id, sorted)
       } else {
@@ -424,7 +424,7 @@ pub fn insert_by_degree(
 ) -> @list.List[String] {
   match sorted {
     @list.List::Empty => @list.cons(id, @list.empty())
-    @list.List::More(head, tail=tail) => {
+    @list.List::More(head, tail~) => {
       let head_node_opt = node_map.get(head)
       let head_degree = match head_node_opt {
         Some(node) => node_degree(node)
@@ -561,7 +561,6 @@ pub fn assign_coords(
           options.5,
           max_width,
         )
-
       }
       None => ()
     }
@@ -589,19 +588,11 @@ pub fn route_edge(
   strategy : EdgeRoutingStrategy,
 ) -> @list.List[Position] {
   match strategy {
-    "STRAIGHT" =>
-      @list.cons(
-        source_pos,
-        @list.cons(target_pos, @list.empty()),
-      )
+    "STRAIGHT" => @list.cons(source_pos, @list.cons(target_pos, @list.empty()))
     "ORTHOGONAL" => route_orthogonal(source_pos, target_pos)
     "POLYLINE" => route_polyline(source_pos, target_pos)
     "SPLINES" => route_splines(source_pos, target_pos)
-    _ =>
-      @list.cons(
-        source_pos,
-        @list.cons(target_pos, @list.empty()),
-      )
+    _ => @list.cons(source_pos, @list.cons(target_pos, @list.empty()))
   }
 }
 
@@ -624,10 +615,7 @@ fn route_orthogonal(
 }
 
 ///|
-fn route_polyline(
-  source : Position,
-  target : Position,
-) -> @list.List[Position] {
+fn route_polyline(source : Position, target : Position) -> @list.List[Position] {
   let (sx, sy) = source
   let (tx, ty) = target
   let mid_x : Float = (sx + tx) / 2.0
@@ -639,10 +627,7 @@ fn route_polyline(
 }
 
 ///|
-fn route_splines(
-  source : Position,
-  target : Position,
-) -> @list.List[Position] {
+fn route_splines(source : Position, target : Position) -> @list.List[Position] {
   // 简化的样条曲线实现，使用多个控制点
   let (sx, sy) = source
   let (tx, ty) = target
@@ -654,10 +639,7 @@ fn route_splines(
     source,
     @list.cons(
       (ctrl1_x, ctrl1_y),
-      @list.cons(
-        (ctrl2_x, ctrl2_y),
-        @list.cons(target, @list.empty()),
-      ),
+      @list.cons((ctrl2_x, ctrl2_y), @list.cons(target, @list.empty())),
     ),
   )
 }
