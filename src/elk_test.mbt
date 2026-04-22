@@ -241,7 +241,7 @@ test "增量式布局测试" {
   let positions = incremental_layout_get_positions(final_state)
 
   // 验证位置不为空
-  if positions.size() == 0 {
+  if positions.length() == 0 {
     let _ = panic
 
   }
@@ -1222,7 +1222,7 @@ test "复杂增量式布局测试" {
   let positions = incremental_layout_get_positions(final_state)
 
   // 验证位置不为空
-  if positions.size() == 0 {
+  if positions.length() == 0 {
     let _ = panic
 
   }
@@ -2218,7 +2218,7 @@ test "测试增量布局复杂场景" {
 
   // 测试获取位置
   let positions = incremental_layout_get_positions(state4)
-  if positions.size() == 0 {
+  if positions.length() == 0 {
     let _ = panic
 
   }
@@ -3177,7 +3177,7 @@ test "测试增量布局完整流程" {
 
   // 测试获取位置
   let positions = incremental_layout_get_positions(state6)
-  if positions.size() == 0 {
+  if positions.length() == 0 {
     let _ = panic
 
   }
@@ -3370,7 +3370,7 @@ test "group_layers 边界测试" {
   let options = default_layered_options()
   let result = group_layers(keys, map, layers, node_map, options)
   // 空输入应返回空 layers
-  if result.size() != 0 {
+  if result.length() != 0 {
     let _ = panic
 
   }
@@ -3419,7 +3419,7 @@ test "force_init_pos/collect_node_ids 空输入测试" {
   let ids = @list.empty()
   let pos = @hashmap.new()
   let result = force_init_pos(ids, pos)
-  if result.size() != 0 {
+  if result.length() != 0 {
     let _ = panic
 
   }
@@ -3447,22 +3447,22 @@ test "force_sum_rep/force_calc_repulsion/force_sum_att/force_calc_attraction/for
   let pos = @hashmap.new()
   let k : Float = 1.0
   let rep = force_calc_repulsion(ids, pos, k, @hashmap.new())
-  if rep.size() != 0 {
+  if rep.length() != 0 {
     let _ = panic
 
   }
   let att = force_calc_attraction(@hashmap.new(), pos, k, @hashmap.new())
-  if att.size() != 0 {
+  if att.length() != 0 {
     let _ = panic
 
   }
   let updated = force_update(ids, pos, rep, att, 1.0, 1, @hashmap.new())
-  if updated.size() != 0 {
+  if updated.length() != 0 {
     let _ = panic
 
   }
   let iterated = force_iterate(pos, ids, @hashmap.new(), k, 1.0, 1)
-  if iterated.size() != 0 {
+  if iterated.length() != 0 {
     let _ = panic
 
   }
@@ -3553,7 +3553,7 @@ test "补测 route_edge 未知策略" {
 test "补测 force_sum_rep 递归终止" {
   let ids = @list.empty()
   let result = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
-  if result.size() != 0 {
+  if result.length() != 0 {
     let _ = panic
 
   }
@@ -3564,7 +3564,7 @@ test "补测 force_sum_att 递归终止" {
   let edges = @list.empty()
   let pos = @hashmap.new()
   let result = force_calc_attraction(@hashmap.new(), pos, 1.0, @hashmap.new())
-  if result.size() == 0 {
+  if result.length() == 0 {
     let _ = panic
 
   }
@@ -3799,14 +3799,14 @@ test "补测 minimize_crossings 空层和单层" {
   let edges = @list.empty()
   // 空层
   let result1 = minimize_crossings(layers, edges)
-  if result1.size() != 0 {
+  if result1.length() != 0 {
     let _ = panic
 
   }
   // 只有一层
   layers.set(0, @list.cons("A", @list.empty()))
   let result2 = minimize_crossings(layers, edges)
-  if result2.size() != 1 {
+  if result2.length() != 1 {
     let _ = panic
 
   }
@@ -3934,7 +3934,7 @@ test "补测 force_init_pos 空输入" {
   let ids = @list.empty()
   let pos = @hashmap.new()
   let r = force_init_pos(ids, pos)
-  if r.size() != 0 {
+  if r.length() != 0 {
     let _ = panic
 
   }
@@ -3945,7 +3945,7 @@ test "补测 force_calc_repulsion 空输入" {
   let ids = @list.empty()
   let pos = @hashmap.new()
   let r = force_calc_repulsion(ids, pos, 1.0, @hashmap.new())
-  if r.size() != 0 {
+  if r.length() != 0 {
     let _ = panic
 
   }
@@ -3955,7 +3955,7 @@ test "补测 force_calc_repulsion 空输入" {
 test "补测 force_sum_rep 递归终止" {
   let ids = @list.empty()
   let r = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
-  if r.size() != 0 {
+  if r.length() != 0 {
     let _ = panic
 
   }
@@ -3966,7 +3966,7 @@ test "补测 force_sum_att 空边" {
   let node_map = @hashmap.new()
   let pos = @hashmap.new()
   let r = force_calc_attraction(node_map, pos, 1.0, @hashmap.new())
-  if r.size() == 0 {
+  if r.length() == 0 {
     let _ = panic
 
   }
@@ -3978,7 +3978,7 @@ test "补测 force_iterate 0 次迭代" {
   let ids = @list.empty()
   let node_map = @hashmap.new()
   let r = force_iterate(pos, ids, node_map, 1.0, 1.0, 0)
-  if r.size() != 0 {
+  if r.length() != 0 {
     let _ = panic
 
   }
@@ -3991,7 +3991,7 @@ test "补测 force_update 空输入" {
   let rep = @hashmap.new()
   let att = @hashmap.new()
   let r = force_update(ids, pos, rep, att, 1.0, 1, @hashmap.new())
-  if r.size() != 0 {
+  if r.length() != 0 {
     let _ = panic
 
   }
@@ -4225,7 +4225,7 @@ test "补测 minimize_crossings 多层多边" {
   let edge2 : ElkEdge = ("e2", "B", "D", @list.empty())
   let edges = @list.cons(edge1, @list.cons(edge2, @list.empty()))
   let result = minimize_crossings(layers, edges)
-  if result.size() != 2 {
+  if result.length() != 2 {
     let _ = panic
 
   }

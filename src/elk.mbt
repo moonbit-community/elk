@@ -219,7 +219,7 @@ pub fn minimize_crossings(
   edges : @list.List[ElkEdge],
 ) -> @hashmap.HashMap[Int, @list.List[String]] {
   let mut i = 0
-  while i < layers.size() - 1 {
+  while i < layers.length() - 1 {
     let layer1_opt = layers.get(i)
     let layer2_opt = layers.get(i + 1)
     match (layer1_opt, layer2_opt) {
@@ -543,7 +543,7 @@ pub fn assign_coords(
 ) -> Unit {
   // 遍历所有层
   let mut i = 0
-  while i < layers.size() {
+  while i < layers.length() {
     let layer_opt : @list.List[String]? = layers.get(i)
     match layer_opt {
       Some(ids) => {
@@ -754,7 +754,7 @@ fn update_layout_positions(
   let mut layer_index = 0
   let mut y_pos : Float = 0.0
   let new_positions = @hashmap.new()
-  while layer_index < layer_nodes.size() {
+  while layer_index < layer_nodes.length() {
     let layer_nodes_opt = layer_nodes.get(layer_index)
     match layer_nodes_opt {
       Some(nodes) => {
@@ -1086,7 +1086,7 @@ pub fn collect_node_ids(
 
 ///|
 pub fn to_float(i : Int) -> Float {
-  i.to_float()
+  Float::from_int(i)
 }
 
 // Force-directed 布局主入口（使用扩展的LayeredOptions）
