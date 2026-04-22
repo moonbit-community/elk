@@ -958,7 +958,7 @@ test "不同排序策略测试" {
 }
 
 ///|
-test "不同对齐方式测试" {
+test "不同对齐方式测试 组合" {
   let x : Float = 0.0
   let y : Float = 0.0
   let w : Float = 10.0
@@ -3895,7 +3895,7 @@ test "补测 insert_by_name 空列表和已排序" {
 }
 
 ///|
-test "补测 node_degree 空节点" {
+test "补测 node_degree 空节点二" {
   let node : ElkNode = (
     "A",
     None,
@@ -3952,7 +3952,7 @@ test "补测 force_calc_repulsion 空输入" {
 }
 
 ///|
-test "补测 force_sum_rep 递归终止" {
+test "补测 force_sum_rep 递归终止二" {
   let ids = @list.empty()
   let r = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
   if r.length() != 0 {
@@ -4110,7 +4110,7 @@ test "补测 remove_node_from_list Nil" {
 }
 
 ///|
-test "补测 layout_layered 空节点" {
+test "补测 layout_layered 空节点二" {
   let node : ElkNode = (
     "A",
     None,
