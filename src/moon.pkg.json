@@ -1,4 +1,8 @@
 {
+  "import": [
+    "moonbitlang/core/hashmap",
+    "moonbitlang/core/list"
+  ],
   "dependencies": {
     "moonbitlang/core": "0.1.0"
   }

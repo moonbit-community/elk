@@ -7,8 +7,8 @@ test "简单分层布局" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -17,19 +17,19 @@ test "简单分层布局" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -61,8 +61,8 @@ test "不同对齐方式测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w1,
@@ -71,19 +71,19 @@ test "不同对齐方式测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w2,
     h2,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w1,
@@ -128,8 +128,8 @@ test "边缘交叉最小化测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -138,8 +138,8 @@ test "边缘交叉最小化测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -148,8 +148,8 @@ test "边缘交叉最小化测试" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -158,22 +158,22 @@ test "边缘交叉最小化测试" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeBD : ElkEdge = ("e3", "B", "D", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e4", "C", "D", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
+  let edgeCD : ElkEdge = ("e4", "C", "D", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Cons(edgeAC, @immut/list.Nil)),
+    @list.empty(),
+    @list.cons(edgeAB, @list.cons(edgeAC, @list.empty())),
     x,
     y,
     w,
@@ -209,8 +209,8 @@ test "增量式布局测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -220,8 +220,8 @@ test "增量式布局测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -230,7 +230,7 @@ test "增量式布局测试" {
   let state2 = incremental_layout_add_node(state1, nodeB, 1)
 
   // 添加边
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let state3 = incremental_layout_add_edge(state2, edgeAB)
 
   // 更新布局
@@ -294,8 +294,8 @@ test "多层复杂图测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -304,8 +304,8 @@ test "多层复杂图测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -314,8 +314,8 @@ test "多层复杂图测试" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -324,8 +324,8 @@ test "多层复杂图测试" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -334,8 +334,8 @@ test "多层复杂图测试" {
   let nodeE : ElkNode = (
     "E",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -344,8 +344,8 @@ test "多层复杂图测试" {
   let nodeF : ElkNode = (
     "F",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -354,27 +354,27 @@ test "多层复杂图测试" {
   let nodeG : ElkNode = (
     "G",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeBD : ElkEdge = ("e3", "B", "D", @immut/list.Nil)
-  let edgeBE : ElkEdge = ("e4", "B", "E", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e5", "C", "D", @immut/list.Nil)
-  let edgeCF : ElkEdge = ("e6", "C", "F", @immut/list.Nil)
-  let edgeDG : ElkEdge = ("e7", "D", "G", @immut/list.Nil)
-  let edgeEG : ElkEdge = ("e8", "E", "G", @immut/list.Nil)
-  let edgeFG : ElkEdge = ("e9", "F", "G", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
+  let edgeBE : ElkEdge = ("e4", "B", "E", @list.empty())
+  let edgeCD : ElkEdge = ("e5", "C", "D", @list.empty())
+  let edgeCF : ElkEdge = ("e6", "C", "F", @list.empty())
+  let edgeDG : ElkEdge = ("e7", "D", "G", @list.empty())
+  let edgeEG : ElkEdge = ("e8", "E", "G", @list.empty())
+  let edgeFG : ElkEdge = ("e9", "F", "G", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Cons(edgeAC, @immut/list.Nil)),
+    @list.empty(),
+    @list.cons(edgeAB, @list.cons(edgeAC, @list.empty())),
     x,
     y,
     w,
@@ -402,8 +402,8 @@ test "带标签和端口的复杂图测试" {
   let nodeA : ElkNode = (
     "A",
     Some("Start"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -412,8 +412,8 @@ test "带标签和端口的复杂图测试" {
   let nodeB : ElkNode = (
     "B",
     Some("Process"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -422,8 +422,8 @@ test "带标签和端口的复杂图测试" {
   let nodeC : ElkNode = (
     "C",
     Some("End"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -437,19 +437,19 @@ test "带标签和端口的复杂图测试" {
     "e1",
     "A",
     "B",
-    @immut/list.Cons(label1, @immut/list.Nil),
+    @list.cons(label1, @list.empty()),
   )
   let edgeBC : ElkEdge = (
     "e2",
     "B",
     "C",
-    @immut/list.Cons(label2, @immut/list.Nil),
+    @list.cons(label2, @list.empty()),
   )
   let nodeA_with_edges : ElkNode = (
     "A",
     Some("Start"),
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -477,8 +477,8 @@ test "Force布局算法测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -487,8 +487,8 @@ test "Force布局算法测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -497,21 +497,21 @@ test "Force布局算法测试" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e2", "B", "C", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e3", "A", "C", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
+  let edgeAC : ElkEdge = ("e3", "A", "C", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Cons(edgeAC, @immut/list.Nil)),
+    @list.empty(),
+    @list.cons(edgeAB, @list.cons(edgeAC, @list.empty())),
     x,
     y,
     w,
@@ -537,8 +537,8 @@ test "通用布局API测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -547,19 +547,19 @@ test "通用布局API测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -601,16 +601,16 @@ test "性能测试-中等规模图" {
   let h : Float = 10.0
 
   // 创建一个中等规模的图（10个节点）
-  let mut edges = @immut/list.Nil
+  let mut edges = @list.empty()
   let mut i = 0
   while i < 9 {
     let source = "node" + i.to_string()
     let target = "node" + (i + 1).to_string()
-    let edge : ElkEdge = ("e" + i.to_string(), source, target, @immut/list.Nil)
-    edges = @immut/list.Cons(edge, edges)
+    let edge : ElkEdge = ("e" + i.to_string(), source, target, @list.empty())
+    edges = @list.cons(edge, edges)
     i = i + 1
   }
-  let root : ElkNode = ("node0", None, @immut/list.Nil, edges, x, y, w, h)
+  let root : ElkNode = ("node0", None, @list.empty(), edges, x, y, w, h)
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
 
@@ -630,8 +630,8 @@ test "不同布局方向测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -640,19 +640,19 @@ test "不同布局方向测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -661,17 +661,17 @@ test "不同布局方向测试" {
   let root : ElkNode = nodeA_with_edges
 
   // 测试不同方向
-  let directions = @immut/list.Cons(
+  let directions = @list.cons(
     "DOWN",
-    @immut/list.Cons(
+    @list.cons(
       "UP",
-      @immut/list.Cons("LEFT", @immut/list.Cons("RIGHT", @immut/list.Nil)),
+      @list.cons("LEFT", @list.cons("RIGHT", @list.empty())),
     ),
   )
   let mut current = directions
   while true {
     match current {
-      @immut/list.Cons(direction, rest) => {
+      @list.List::More(direction, tail=rest) => {
         let options : LayeredOptions = (
           50.0, 30.0, direction, "INPUT_ORDER", "STRAIGHT", "CENTER", true, true,
           1.0, 10,
@@ -683,7 +683,7 @@ test "不同布局方向测试" {
         }
         current = rest
       }
-      @immut/list.Nil => break
+      @list.List::Empty => break
     }
   }
 }
@@ -701,8 +701,8 @@ test "单节点图测试" {
   let nodeA : ElkNode = (
     "A",
     Some("Single"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -730,8 +730,8 @@ test "无边图测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -740,8 +740,8 @@ test "无边图测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -750,8 +750,8 @@ test "无边图测试" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -760,8 +760,8 @@ test "无边图测试" {
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -789,19 +789,19 @@ test "自环边测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAA : ElkEdge = ("e1", "A", "A", @immut/list.Nil)
+  let edgeAA : ElkEdge = ("e1", "A", "A", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAA, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAA, @list.empty()),
     x,
     y,
     w,
@@ -829,8 +829,8 @@ test "循环图测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -839,8 +839,8 @@ test "循环图测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -849,21 +849,21 @@ test "循环图测试" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e2", "B", "C", @immut/list.Nil)
-  let edgeCA : ElkEdge = ("e3", "C", "A", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
+  let edgeCA : ElkEdge = ("e3", "C", "A", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -889,8 +889,8 @@ test "不同排序策略测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -899,8 +899,8 @@ test "不同排序策略测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -909,20 +909,20 @@ test "不同排序策略测试" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e2", "B", "C", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Cons(edgeBC, @immut/list.Nil)),
+    @list.empty(),
+    @list.cons(edgeAB, @list.cons(edgeBC, @list.empty())),
     x,
     y,
     w,
@@ -931,17 +931,17 @@ test "不同排序策略测试" {
   let root : ElkNode = nodeA_with_edges
 
   // 测试不同排序策略
-  let strategies = @immut/list.Cons(
+  let strategies = @list.cons(
     "NONE",
-    @immut/list.Cons(
+    @list.cons(
       "INPUT_ORDER",
-      @immut/list.Cons("NAME", @immut/list.Cons("DEGREE", @immut/list.Nil)),
+      @list.cons("NAME", @list.cons("DEGREE", @list.empty())),
     ),
   )
   let mut current = strategies
   while true {
     match current {
-      @immut/list.Cons(strategy, rest) => {
+      @list.List::More(strategy, tail=rest) => {
         let options : LayeredOptions = (
           50.0, 30.0, "DOWN", strategy, "STRAIGHT", "CENTER", true, true, 1.0, 10,
         )
@@ -952,7 +952,7 @@ test "不同排序策略测试" {
         }
         current = rest
       }
-      @immut/list.Nil => break
+      @list.List::Empty => break
     }
   }
 }
@@ -966,8 +966,8 @@ test "不同对齐方式测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -976,19 +976,19 @@ test "不同对齐方式测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -997,15 +997,15 @@ test "不同对齐方式测试" {
   let root : ElkNode = nodeA_with_edges
 
   // 测试不同对齐方式
-  let alignments = @immut/list.Cons(
+  let alignments = @list.cons(
     "LEFT",
-    @immut/list.Cons(
+    @list.cons(
       "CENTER",
-      @immut/list.Cons(
+      @list.cons(
         "RIGHT",
-        @immut/list.Cons(
+        @list.cons(
           "TOP",
-          @immut/list.Cons("BOTTOM", @immut/list.Cons("NONE", @immut/list.Nil)),
+          @list.cons("BOTTOM", @list.cons("NONE", @list.empty())),
         ),
       ),
     ),
@@ -1013,7 +1013,7 @@ test "不同对齐方式测试" {
   let mut current = alignments
   while true {
     match current {
-      @immut/list.Cons(alignment, rest) => {
+      @list.List::More(alignment, tail=rest) => {
         let options : LayeredOptions = (
           50.0, 30.0, "DOWN", "INPUT_ORDER", "STRAIGHT", alignment, true, true, 1.0,
           10,
@@ -1025,7 +1025,7 @@ test "不同对齐方式测试" {
         }
         current = rest
       }
-      @immut/list.Nil => break
+      @list.List::Empty => break
     }
   }
 }
@@ -1033,19 +1033,19 @@ test "不同对齐方式测试" {
 ///|
 test "工具函数测试" {
   // 测试 list_length 函数
-  let empty_list = @immut/list.Nil
+  let empty_list = @list.empty()
   if list_length(empty_list) != 0 {
     let _ = panic
 
   }
-  let single_list = @immut/list.Cons("A", @immut/list.Nil)
+  let single_list = @list.cons("A", @list.empty())
   if list_length(single_list) != 1 {
     let _ = panic
 
   }
-  let multi_list = @immut/list.Cons(
+  let multi_list = @list.cons(
     "A",
-    @immut/list.Cons("B", @immut/list.Cons("C", @immut/list.Nil)),
+    @list.cons("B", @list.cons("C", @list.empty())),
   )
   if list_length(multi_list) != 3 {
     let _ = panic
@@ -1114,25 +1114,25 @@ test "大规模图性能测试" {
   let h : Float = 10.0
 
   // 创建一个较大规模的图（50个节点）
-  let mut edges = @immut/list.Nil
+  let mut edges = @list.empty()
   let mut i = 0
   while i < 49 {
     let source = "node" + i.to_string()
     let target = "node" + (i + 1).to_string()
-    let edge : ElkEdge = ("e" + i.to_string(), source, target, @immut/list.Nil)
-    edges = @immut/list.Cons(edge, edges)
+    let edge : ElkEdge = ("e" + i.to_string(), source, target, @list.empty())
+    edges = @list.cons(edge, edges)
     i = i + 1
   }
 
   // 添加一些交叉边
-  let cross_edge1 : ElkEdge = ("cross1", "node0", "node25", @immut/list.Nil)
-  let cross_edge2 : ElkEdge = ("cross2", "node10", "node40", @immut/list.Nil)
-  let cross_edge3 : ElkEdge = ("cross3", "node5", "node35", @immut/list.Nil)
-  edges = @immut/list.Cons(
+  let cross_edge1 : ElkEdge = ("cross1", "node0", "node25", @list.empty())
+  let cross_edge2 : ElkEdge = ("cross2", "node10", "node40", @list.empty())
+  let cross_edge3 : ElkEdge = ("cross3", "node5", "node35", @list.empty())
+  edges = @list.cons(
     cross_edge1,
-    @immut/list.Cons(cross_edge2, @immut/list.Cons(cross_edge3, edges)),
+    @list.cons(cross_edge2, @list.cons(cross_edge3, edges)),
   )
-  let root : ElkNode = ("node0", None, @immut/list.Nil, edges, x, y, w, h)
+  let root : ElkNode = ("node0", None, @list.empty(), edges, x, y, w, h)
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
 
@@ -1162,8 +1162,8 @@ test "复杂增量式布局测试" {
   let nodeA : ElkNode = (
     "A",
     Some("Start"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1173,8 +1173,8 @@ test "复杂增量式布局测试" {
   let nodeB : ElkNode = (
     "B",
     Some("Process1"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1184,8 +1184,8 @@ test "复杂增量式布局测试" {
   let nodeC : ElkNode = (
     "C",
     Some("Process2"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1195,8 +1195,8 @@ test "复杂增量式布局测试" {
   let nodeD : ElkNode = (
     "D",
     Some("End"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1205,13 +1205,13 @@ test "复杂增量式布局测试" {
   let state4 = incremental_layout_add_node(state3, nodeD, 2)
 
   // 添加多条边
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let state5 = incremental_layout_add_edge(state4, edgeAB)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
   let state6 = incremental_layout_add_edge(state5, edgeAC)
-  let edgeBD : ElkEdge = ("e3", "B", "D", @immut/list.Nil)
+  let edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
   let state7 = incremental_layout_add_edge(state6, edgeBD)
-  let edgeCD : ElkEdge = ("e4", "C", "D", @immut/list.Nil)
+  let edgeCD : ElkEdge = ("e4", "C", "D", @list.empty())
   let state8 = incremental_layout_add_edge(state7, edgeCD)
 
   // 更新布局
@@ -1285,8 +1285,8 @@ test "Force布局复杂图测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1295,8 +1295,8 @@ test "Force布局复杂图测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1305,8 +1305,8 @@ test "Force布局复杂图测试" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1315,8 +1315,8 @@ test "Force布局复杂图测试" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1325,27 +1325,27 @@ test "Force布局复杂图测试" {
   let nodeE : ElkNode = (
     "E",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e2", "B", "C", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e3", "C", "D", @immut/list.Nil)
-  let edgeDE : ElkEdge = ("e4", "D", "E", @immut/list.Nil)
-  let edgeAE : ElkEdge = ("e5", "A", "E", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e6", "A", "C", @immut/list.Nil)
-  let edgeBD : ElkEdge = ("e7", "B", "D", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
+  let edgeCD : ElkEdge = ("e3", "C", "D", @list.empty())
+  let edgeDE : ElkEdge = ("e4", "D", "E", @list.empty())
+  let edgeAE : ElkEdge = ("e5", "A", "E", @list.empty())
+  let edgeAC : ElkEdge = ("e6", "A", "C", @list.empty())
+  let edgeBD : ElkEdge = ("e7", "B", "D", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(
+    @list.empty(),
+    @list.cons(
       edgeAB,
-      @immut/list.Cons(edgeAE, @immut/list.Cons(edgeAC, @immut/list.Nil)),
+      @list.cons(edgeAE, @list.cons(edgeAC, @list.empty())),
     ),
     x,
     y,
@@ -1372,8 +1372,8 @@ test "通用API未知算法测试" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1382,19 +1382,19 @@ test "通用API未知算法测试" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -1419,8 +1419,8 @@ test "测试所有布局方向" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1429,19 +1429,19 @@ test "测试所有布局方向" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -1450,11 +1450,11 @@ test "测试所有布局方向" {
   let root : ElkNode = nodeA2
 
   // 测试所有方向
-  let directions = @immut/list.Cons(
+  let directions = @list.cons(
     "DOWN",
-    @immut/list.Cons(
+    @list.cons(
       "UP",
-      @immut/list.Cons("LEFT", @immut/list.Cons("RIGHT", @immut/list.Nil)),
+      @list.cons("LEFT", @list.cons("RIGHT", @list.empty())),
     ),
   )
   let test_direction = fn(direction : String) {
@@ -1486,8 +1486,8 @@ test "测试所有排序策略" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1496,19 +1496,19 @@ test "测试所有排序策略" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -1517,13 +1517,13 @@ test "测试所有排序策略" {
   let root : ElkNode = nodeA2
 
   // 测试所有排序策略
-  let strategies = @immut/list.Cons(
+  let strategies = @list.cons(
     "INPUT_ORDER",
-    @immut/list.Cons(
+    @list.cons(
       "DEGREE",
-      @immut/list.Cons(
+      @list.cons(
         "DEPTH_FIRST",
-        @immut/list.Cons("BREADTH_FIRST", @immut/list.Nil),
+        @list.cons("BREADTH_FIRST", @list.empty()),
       ),
     ),
   )
@@ -1555,8 +1555,8 @@ test "测试所有对齐策略" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1565,19 +1565,19 @@ test "测试所有对齐策略" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -1586,15 +1586,15 @@ test "测试所有对齐策略" {
   let root : ElkNode = nodeA2
 
   // 测试所有对齐策略
-  let alignments = @immut/list.Cons(
+  let alignments = @list.cons(
     "CENTER",
-    @immut/list.Cons(
+    @list.cons(
       "LEFT",
-      @immut/list.Cons(
+      @list.cons(
         "RIGHT",
-        @immut/list.Cons(
+        @list.cons(
           "TOP",
-          @immut/list.Cons("BOTTOM", @immut/list.Cons("NONE", @immut/list.Nil)),
+          @list.cons("BOTTOM", @list.cons("NONE", @list.empty())),
         ),
       ),
     ),
@@ -1629,8 +1629,8 @@ test "测试所有边路由策略" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1639,19 +1639,19 @@ test "测试所有边路由策略" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -1660,11 +1660,11 @@ test "测试所有边路由策略" {
   let root : ElkNode = nodeA2
 
   // 测试所有边路由策略
-  let routings = @immut/list.Cons(
+  let routings = @list.cons(
     "STRAIGHT",
-    @immut/list.Cons(
+    @list.cons(
       "ORTHOGONAL",
-      @immut/list.Cons("POLYLINE", @immut/list.Cons("SPLINES", @immut/list.Nil)),
+      @list.cons("POLYLINE", @list.cons("SPLINES", @list.empty())),
     ),
   )
   let test_routing = fn(routing : String) {
@@ -1697,8 +1697,8 @@ test "测试复杂图结构" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1707,8 +1707,8 @@ test "测试复杂图结构" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1717,8 +1717,8 @@ test "测试复杂图结构" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1727,8 +1727,8 @@ test "测试复杂图结构" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1737,8 +1737,8 @@ test "测试复杂图结构" {
   let nodeE : ElkNode = (
     "E",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1747,8 +1747,8 @@ test "测试复杂图结构" {
   let nodeF : ElkNode = (
     "F",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1757,8 +1757,8 @@ test "测试复杂图结构" {
   let nodeG : ElkNode = (
     "G",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1767,28 +1767,28 @@ test "测试复杂图结构" {
   let nodeH : ElkNode = (
     "H",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeBD : ElkEdge = ("e3", "B", "D", @immut/list.Nil)
-  let edgeBE : ElkEdge = ("e4", "B", "E", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e5", "C", "D", @immut/list.Nil)
-  let edgeCF : ElkEdge = ("e6", "C", "F", @immut/list.Nil)
-  let edgeDG : ElkEdge = ("e7", "D", "G", @immut/list.Nil)
-  let edgeEG : ElkEdge = ("e8", "E", "G", @immut/list.Nil)
-  let edgeFG : ElkEdge = ("e9", "F", "G", @immut/list.Nil)
-  let edgeGH : ElkEdge = ("e10", "G", "H", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
+  let edgeBE : ElkEdge = ("e4", "B", "E", @list.empty())
+  let edgeCD : ElkEdge = ("e5", "C", "D", @list.empty())
+  let edgeCF : ElkEdge = ("e6", "C", "F", @list.empty())
+  let edgeDG : ElkEdge = ("e7", "D", "G", @list.empty())
+  let edgeEG : ElkEdge = ("e8", "E", "G", @list.empty())
+  let edgeFG : ElkEdge = ("e9", "F", "G", @list.empty())
+  let edgeGH : ElkEdge = ("e10", "G", "H", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Cons(edgeAC, @immut/list.Nil)),
+    @list.empty(),
+    @list.cons(edgeAB, @list.cons(edgeAC, @list.empty())),
     x,
     y,
     w,
@@ -1816,8 +1816,8 @@ test "测试带标签和端口的图" {
   let nodeA : ElkNode = (
     "A",
     Some("开始节点"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1826,8 +1826,8 @@ test "测试带标签和端口的图" {
   let nodeB : ElkNode = (
     "B",
     Some("处理节点"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1836,8 +1836,8 @@ test "测试带标签和端口的图" {
   let nodeC : ElkNode = (
     "C",
     Some("结束节点"),
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1847,19 +1847,19 @@ test "测试带标签和端口的图" {
     "e1",
     "A",
     "B",
-    @immut/list.Cons(label1, @immut/list.Nil),
+    @list.cons(label1, @list.empty()),
   )
   let edgeBC : ElkEdge = (
     "e2",
     "B",
     "C",
-    @immut/list.Cons(label2, @immut/list.Nil),
+    @list.cons(label2, @list.empty()),
   )
   let nodeA_with_edges : ElkNode = (
     "A",
     Some("开始节点"),
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -1883,8 +1883,8 @@ test "测试固定布局算法" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1893,19 +1893,19 @@ test "测试固定布局算法" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -1929,8 +1929,8 @@ test "测试力导向布局算法" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1939,8 +1939,8 @@ test "测试力导向布局算法" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1949,20 +1949,20 @@ test "测试力导向布局算法" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e2", "B", "C", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -1986,8 +1986,8 @@ test "测试通用API" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -1996,19 +1996,19 @@ test "测试通用API" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -2017,9 +2017,9 @@ test "测试通用API" {
   let root : ElkNode = nodeA2
 
   // 测试所有算法
-  let algorithms = @immut/list.Cons(
+  let algorithms = @list.cons(
     "LAYERED",
-    @immut/list.Cons("FIXED", @immut/list.Cons("FORCE", @immut/list.Nil)),
+    @list.cons("FIXED", @list.cons("FORCE", @list.empty())),
   )
   let test_algorithm = fn(algorithm : String) {
     let options : LayeredOptions = default_layered_options()
@@ -2049,8 +2049,8 @@ test "测试边界条件" {
   let empty_node : ElkNode = (
     "EMPTY",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2064,12 +2064,12 @@ test "测试边界条件" {
   }
 
   // 测试自环
-  let self_loop : ElkEdge = ("e1", "A", "A", @immut/list.Nil)
+  let self_loop : ElkEdge = ("e1", "A", "A", @list.empty())
   let node_with_self_loop : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(self_loop, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(self_loop, @list.empty()),
     x,
     y,
     w,
@@ -2085,8 +2085,8 @@ test "测试边界条件" {
   let single_node : ElkNode = (
     "SINGLE",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2110,8 +2110,8 @@ test "测试性能边界" {
   let nodeA : ElkNode = (
     "NodeA",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2120,8 +2120,8 @@ test "测试性能边界" {
   let nodeB : ElkNode = (
     "NodeB",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2130,8 +2130,8 @@ test "测试性能边界" {
   let nodeC : ElkNode = (
     "NodeC",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2140,21 +2140,21 @@ test "测试性能边界" {
   let nodeD : ElkNode = (
     "NodeD",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "NodeA", "NodeB", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e2", "NodeB", "NodeC", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e3", "NodeC", "NodeD", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "NodeA", "NodeB", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "NodeB", "NodeC", @list.empty())
+  let edgeCD : ElkEdge = ("e3", "NodeC", "NodeD", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "NodeA",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -2186,8 +2186,8 @@ test "测试增量布局复杂场景" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2196,14 +2196,14 @@ test "测试增量布局复杂场景" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
 
   // 测试添加节点
   let state1 = incremental_layout_add_node(initial_state, nodeA, 0)
@@ -2276,8 +2276,8 @@ test "测试更复杂的力导向布局" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2286,8 +2286,8 @@ test "测试更复杂的力导向布局" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2296,8 +2296,8 @@ test "测试更复杂的力导向布局" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2306,8 +2306,8 @@ test "测试更复杂的力导向布局" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2316,23 +2316,23 @@ test "测试更复杂的力导向布局" {
   let nodeE : ElkNode = (
     "E",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e2", "B", "C", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e3", "C", "D", @immut/list.Nil)
-  let edgeDE : ElkEdge = ("e4", "D", "E", @immut/list.Nil)
-  let edgeAE : ElkEdge = ("e5", "A", "E", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
+  let edgeCD : ElkEdge = ("e3", "C", "D", @list.empty())
+  let edgeDE : ElkEdge = ("e4", "D", "E", @list.empty())
+  let edgeAE : ElkEdge = ("e5", "A", "E", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Cons(edgeAE, @immut/list.Nil)),
+    @list.empty(),
+    @list.cons(edgeAB, @list.cons(edgeAE, @list.empty())),
     x,
     y,
     w,
@@ -2356,8 +2356,8 @@ test "测试未知算法在通用API中" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2366,19 +2366,19 @@ test "测试未知算法在通用API中" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -2494,8 +2494,8 @@ test "测试边缘交叉最小化算法" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2504,8 +2504,8 @@ test "测试边缘交叉最小化算法" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2514,8 +2514,8 @@ test "测试边缘交叉最小化算法" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2524,22 +2524,22 @@ test "测试边缘交叉最小化算法" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeBD : ElkEdge = ("e3", "B", "D", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e4", "C", "D", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
+  let edgeCD : ElkEdge = ("e4", "C", "D", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Cons(edgeAC, @immut/list.Nil)),
+    @list.empty(),
+    @list.cons(edgeAB, @list.cons(edgeAC, @list.empty())),
     x,
     y,
     w,
@@ -2565,8 +2565,8 @@ test "测试复杂交叉边场景" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2575,8 +2575,8 @@ test "测试复杂交叉边场景" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2585,8 +2585,8 @@ test "测试复杂交叉边场景" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2595,8 +2595,8 @@ test "测试复杂交叉边场景" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2605,8 +2605,8 @@ test "测试复杂交叉边场景" {
   let nodeE : ElkNode = (
     "E",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2615,26 +2615,26 @@ test "测试复杂交叉边场景" {
   let nodeF : ElkNode = (
     "F",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeBD : ElkEdge = ("e3", "B", "D", @immut/list.Nil)
-  let edgeBE : ElkEdge = ("e4", "B", "E", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e5", "C", "D", @immut/list.Nil)
-  let edgeCF : ElkEdge = ("e6", "C", "F", @immut/list.Nil)
-  let edgeDE : ElkEdge = ("e7", "D", "E", @immut/list.Nil)
-  let edgeDF : ElkEdge = ("e8", "D", "F", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
+  let edgeBE : ElkEdge = ("e4", "B", "E", @list.empty())
+  let edgeCD : ElkEdge = ("e5", "C", "D", @list.empty())
+  let edgeCF : ElkEdge = ("e6", "C", "F", @list.empty())
+  let edgeDE : ElkEdge = ("e7", "D", "E", @list.empty())
+  let edgeDF : ElkEdge = ("e8", "D", "F", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Cons(edgeAC, @immut/list.Nil)),
+    @list.empty(),
+    @list.cons(edgeAB, @list.cons(edgeAC, @list.empty())),
     x,
     y,
     w,
@@ -2660,8 +2660,8 @@ test "测试多层复杂图" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2670,8 +2670,8 @@ test "测试多层复杂图" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2680,8 +2680,8 @@ test "测试多层复杂图" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2690,8 +2690,8 @@ test "测试多层复杂图" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2700,8 +2700,8 @@ test "测试多层复杂图" {
   let nodeE : ElkNode = (
     "E",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2710,8 +2710,8 @@ test "测试多层复杂图" {
   let nodeF : ElkNode = (
     "F",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2720,8 +2720,8 @@ test "测试多层复杂图" {
   let nodeG : ElkNode = (
     "G",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2730,8 +2730,8 @@ test "测试多层复杂图" {
   let nodeH : ElkNode = (
     "H",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2740,8 +2740,8 @@ test "测试多层复杂图" {
   let nodeI : ElkNode = (
     "I",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2750,33 +2750,33 @@ test "测试多层复杂图" {
   let nodeJ : ElkNode = (
     "J",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeAD : ElkEdge = ("e3", "A", "D", @immut/list.Nil)
-  let edgeBE : ElkEdge = ("e4", "B", "E", @immut/list.Nil)
-  let edgeBF : ElkEdge = ("e5", "B", "F", @immut/list.Nil)
-  let edgeCE : ElkEdge = ("e6", "C", "E", @immut/list.Nil)
-  let edgeCF : ElkEdge = ("e7", "C", "F", @immut/list.Nil)
-  let edgeDG : ElkEdge = ("e8", "D", "G", @immut/list.Nil)
-  let edgeEH : ElkEdge = ("e9", "E", "H", @immut/list.Nil)
-  let edgeFI : ElkEdge = ("e10", "F", "I", @immut/list.Nil)
-  let edgeGJ : ElkEdge = ("e11", "G", "J", @immut/list.Nil)
-  let edgeHJ : ElkEdge = ("e12", "H", "J", @immut/list.Nil)
-  let edgeIJ : ElkEdge = ("e13", "I", "J", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeAD : ElkEdge = ("e3", "A", "D", @list.empty())
+  let edgeBE : ElkEdge = ("e4", "B", "E", @list.empty())
+  let edgeBF : ElkEdge = ("e5", "B", "F", @list.empty())
+  let edgeCE : ElkEdge = ("e6", "C", "E", @list.empty())
+  let edgeCF : ElkEdge = ("e7", "C", "F", @list.empty())
+  let edgeDG : ElkEdge = ("e8", "D", "G", @list.empty())
+  let edgeEH : ElkEdge = ("e9", "E", "H", @list.empty())
+  let edgeFI : ElkEdge = ("e10", "F", "I", @list.empty())
+  let edgeGJ : ElkEdge = ("e11", "G", "J", @list.empty())
+  let edgeHJ : ElkEdge = ("e12", "H", "J", @list.empty())
+  let edgeIJ : ElkEdge = ("e13", "I", "J", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(
+    @list.empty(),
+    @list.cons(
       edgeAB,
-      @immut/list.Cons(edgeAC, @immut/list.Cons(edgeAD, @immut/list.Nil)),
+      @list.cons(edgeAC, @list.cons(edgeAD, @list.empty())),
     ),
     x,
     y,
@@ -2801,8 +2801,8 @@ test "测试所有布局选项组合" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2811,19 +2811,19 @@ test "测试所有布局选项组合" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA2 : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edgeAB, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edgeAB, @list.empty()),
     x,
     y,
     w,
@@ -2879,8 +2879,8 @@ test "测试大规模图性能" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2889,8 +2889,8 @@ test "测试大规模图性能" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2899,8 +2899,8 @@ test "测试大规模图性能" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2909,8 +2909,8 @@ test "测试大规模图性能" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2919,8 +2919,8 @@ test "测试大规模图性能" {
   let nodeE : ElkNode = (
     "E",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2929,8 +2929,8 @@ test "测试大规模图性能" {
   let nodeF : ElkNode = (
     "F",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2939,8 +2939,8 @@ test "测试大规模图性能" {
   let nodeG : ElkNode = (
     "G",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2949,8 +2949,8 @@ test "测试大规模图性能" {
   let nodeH : ElkNode = (
     "H",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2959,8 +2959,8 @@ test "测试大规模图性能" {
   let nodeI : ElkNode = (
     "I",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2969,8 +2969,8 @@ test "测试大规模图性能" {
   let nodeJ : ElkNode = (
     "J",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2979,8 +2979,8 @@ test "测试大规模图性能" {
   let nodeK : ElkNode = (
     "K",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -2989,36 +2989,36 @@ test "测试大规模图性能" {
   let nodeL : ElkNode = (
     "L",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeAD : ElkEdge = ("e3", "A", "D", @immut/list.Nil)
-  let edgeBE : ElkEdge = ("e4", "B", "E", @immut/list.Nil)
-  let edgeBF : ElkEdge = ("e5", "B", "F", @immut/list.Nil)
-  let edgeCG : ElkEdge = ("e6", "C", "G", @immut/list.Nil)
-  let edgeCH : ElkEdge = ("e7", "C", "H", @immut/list.Nil)
-  let edgeDI : ElkEdge = ("e8", "D", "I", @immut/list.Nil)
-  let edgeDJ : ElkEdge = ("e9", "D", "J", @immut/list.Nil)
-  let edgeEK : ElkEdge = ("e10", "E", "K", @immut/list.Nil)
-  let edgeFL : ElkEdge = ("e11", "F", "L", @immut/list.Nil)
-  let edgeGL : ElkEdge = ("e12", "G", "L", @immut/list.Nil)
-  let edgeHL : ElkEdge = ("e13", "H", "L", @immut/list.Nil)
-  let edgeIL : ElkEdge = ("e14", "I", "L", @immut/list.Nil)
-  let edgeJL : ElkEdge = ("e15", "J", "L", @immut/list.Nil)
-  let edgeKL : ElkEdge = ("e16", "K", "L", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeAD : ElkEdge = ("e3", "A", "D", @list.empty())
+  let edgeBE : ElkEdge = ("e4", "B", "E", @list.empty())
+  let edgeBF : ElkEdge = ("e5", "B", "F", @list.empty())
+  let edgeCG : ElkEdge = ("e6", "C", "G", @list.empty())
+  let edgeCH : ElkEdge = ("e7", "C", "H", @list.empty())
+  let edgeDI : ElkEdge = ("e8", "D", "I", @list.empty())
+  let edgeDJ : ElkEdge = ("e9", "D", "J", @list.empty())
+  let edgeEK : ElkEdge = ("e10", "E", "K", @list.empty())
+  let edgeFL : ElkEdge = ("e11", "F", "L", @list.empty())
+  let edgeGL : ElkEdge = ("e12", "G", "L", @list.empty())
+  let edgeHL : ElkEdge = ("e13", "H", "L", @list.empty())
+  let edgeIL : ElkEdge = ("e14", "I", "L", @list.empty())
+  let edgeJL : ElkEdge = ("e15", "J", "L", @list.empty())
+  let edgeKL : ElkEdge = ("e16", "K", "L", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(
+    @list.empty(),
+    @list.cons(
       edgeAB,
-      @immut/list.Cons(edgeAC, @immut/list.Cons(edgeAD, @immut/list.Nil)),
+      @list.cons(edgeAC, @list.cons(edgeAD, @list.empty())),
     ),
     x,
     y,
@@ -3040,11 +3040,11 @@ test "测试边路由所有策略" {
   let target_pos : Position = (100.0, 100.0)
 
   // 测试所有边路由策略
-  let strategies = @immut/list.Cons(
+  let strategies = @list.cons(
     "STRAIGHT",
-    @immut/list.Cons(
+    @list.cons(
       "ORTHOGONAL",
-      @immut/list.Cons("POLYLINE", @immut/list.Cons("SPLINES", @immut/list.Nil)),
+      @list.cons("POLYLINE", @list.cons("SPLINES", @list.empty())),
     ),
   )
   let test_routing_strategy = fn(strategy : String) {
@@ -3132,8 +3132,8 @@ test "测试增量布局完整流程" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3142,8 +3142,8 @@ test "测试增量布局完整流程" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3152,15 +3152,15 @@ test "测试增量布局完整流程" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e2", "B", "C", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
 
   // 测试添加节点
   let state1 = incremental_layout_add_node(initial_state, nodeA, 0)
@@ -3194,8 +3194,8 @@ test "测试力导向布局复杂场景" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3204,8 +3204,8 @@ test "测试力导向布局复杂场景" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3214,8 +3214,8 @@ test "测试力导向布局复杂场景" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3224,8 +3224,8 @@ test "测试力导向布局复杂场景" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3234,8 +3234,8 @@ test "测试力导向布局复杂场景" {
   let nodeE : ElkNode = (
     "E",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3244,32 +3244,32 @@ test "测试力导向布局复杂场景" {
   let nodeF : ElkNode = (
     "F",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeAD : ElkEdge = ("e3", "A", "D", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e4", "B", "C", @immut/list.Nil)
-  let edgeBD : ElkEdge = ("e5", "B", "D", @immut/list.Nil)
-  let edgeBE : ElkEdge = ("e6", "B", "E", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e7", "C", "D", @immut/list.Nil)
-  let edgeCE : ElkEdge = ("e8", "C", "E", @immut/list.Nil)
-  let edgeCF : ElkEdge = ("e9", "C", "F", @immut/list.Nil)
-  let edgeDE : ElkEdge = ("e10", "D", "E", @immut/list.Nil)
-  let edgeDF : ElkEdge = ("e11", "D", "F", @immut/list.Nil)
-  let edgeEF : ElkEdge = ("e12", "E", "F", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeAD : ElkEdge = ("e3", "A", "D", @list.empty())
+  let edgeBC : ElkEdge = ("e4", "B", "C", @list.empty())
+  let edgeBD : ElkEdge = ("e5", "B", "D", @list.empty())
+  let edgeBE : ElkEdge = ("e6", "B", "E", @list.empty())
+  let edgeCD : ElkEdge = ("e7", "C", "D", @list.empty())
+  let edgeCE : ElkEdge = ("e8", "C", "E", @list.empty())
+  let edgeCF : ElkEdge = ("e9", "C", "F", @list.empty())
+  let edgeDE : ElkEdge = ("e10", "D", "E", @list.empty())
+  let edgeDF : ElkEdge = ("e11", "D", "F", @list.empty())
+  let edgeEF : ElkEdge = ("e12", "E", "F", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(
+    @list.empty(),
+    @list.cons(
       edgeAB,
-      @immut/list.Cons(edgeAC, @immut/list.Cons(edgeAD, @immut/list.Nil)),
+      @list.cons(edgeAC, @list.cons(edgeAD, @list.empty())),
     ),
     x,
     y,
@@ -3296,8 +3296,8 @@ test "测试固定布局复杂场景" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3306,8 +3306,8 @@ test "测试固定布局复杂场景" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3316,8 +3316,8 @@ test "测试固定布局复杂场景" {
   let nodeC : ElkNode = (
     "C",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3326,26 +3326,26 @@ test "测试固定布局复杂场景" {
   let nodeD : ElkNode = (
     "D",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
-  let edgeAC : ElkEdge = ("e2", "A", "C", @immut/list.Nil)
-  let edgeAD : ElkEdge = ("e3", "A", "D", @immut/list.Nil)
-  let edgeBC : ElkEdge = ("e4", "B", "C", @immut/list.Nil)
-  let edgeBD : ElkEdge = ("e5", "B", "D", @immut/list.Nil)
-  let edgeCD : ElkEdge = ("e6", "C", "D", @immut/list.Nil)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
+  let edgeAD : ElkEdge = ("e3", "A", "D", @list.empty())
+  let edgeBC : ElkEdge = ("e4", "B", "C", @list.empty())
+  let edgeBD : ElkEdge = ("e5", "B", "D", @list.empty())
+  let edgeCD : ElkEdge = ("e6", "C", "D", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(
+    @list.empty(),
+    @list.cons(
       edgeAB,
-      @immut/list.Cons(edgeAC, @immut/list.Cons(edgeAD, @immut/list.Nil)),
+      @list.cons(edgeAC, @list.cons(edgeAD, @list.empty())),
     ),
     x,
     y,
@@ -3365,7 +3365,7 @@ test "测试固定布局复杂场景" {
 test "group_layers 边界测试" {
   let node_map = @hashmap.new()
   let layers = @hashmap.new()
-  let keys = @immut/list.Nil
+  let keys = @list.empty()
   let map = @hashmap.new()
   let options = default_layered_options()
   let result = group_layers(keys, map, layers, node_map, options)
@@ -3378,7 +3378,7 @@ test "group_layers 边界测试" {
 
 ///|
 test "assign_x/calculate_max_width/assign_coords 空输入测试" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let node_map = @hashmap.new()
   let alignment = "CENTER"
   let max_width : Float = 0.0
@@ -3405,8 +3405,8 @@ test "collect_ids/append_edges 空输入测试" {
     let _ = panic
 
   }
-  let edges1 = @immut/list.Nil
-  let edges2 = @immut/list.Nil
+  let edges1 = @list.empty()
+  let edges2 = @list.empty()
   let appended = append_edges(edges1, edges2)
   if list_length(appended) != 0 {
     let _ = panic
@@ -3416,7 +3416,7 @@ test "collect_ids/append_edges 空输入测试" {
 
 ///|
 test "force_init_pos/collect_node_ids 空输入测试" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let pos = @hashmap.new()
   let result = force_init_pos(ids, pos)
   if result.size() != 0 {
@@ -3443,7 +3443,7 @@ test "to_float 测试" {
 
 ///|
 test "force_sum_rep/force_calc_repulsion/force_sum_att/force_calc_attraction/force_update/force_iterate/force_update_node 空输入测试" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let pos = @hashmap.new()
   let k : Float = 1.0
   let rep = force_calc_repulsion(ids, pos, k, @hashmap.new())
@@ -3469,8 +3469,8 @@ test "force_sum_rep/force_calc_repulsion/force_sum_att/force_calc_attraction/for
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -3487,7 +3487,7 @@ test "force_sum_rep/force_calc_repulsion/force_sum_att/force_calc_attraction/for
 test "补测 group_layers None 分支" {
   let node_map = @hashmap.new()
   let layers = @hashmap.new()
-  let keys = @immut/list.Cons("not_exist", @immut/list.Nil)
+  let keys = @list.cons("not_exist", @list.empty())
   let map = @hashmap.new()
   let options = default_layered_options()
   let result = group_layers(keys, map, layers, node_map, options)
@@ -3497,7 +3497,7 @@ test "补测 group_layers None 分支" {
 
 ///|
 test "补测 assign_x 非法 alignment" {
-  let ids = @immut/list.Cons("A", @immut/list.Nil)
+  let ids = @list.cons("A", @list.empty())
   let node_map = @hashmap.new()
   let x = assign_x(ids, 0.0, 10.0, node_map, "FOO", 10.0)
 
@@ -3506,7 +3506,7 @@ test "补测 assign_x 非法 alignment" {
 
 ///|
 test "补测 calculate_max_width 空节点" {
-  let ids = @immut/list.Cons("not_exist", @immut/list.Nil)
+  let ids = @list.cons("not_exist", @list.empty())
   let node_map = @hashmap.new()
   let mw = calculate_max_width(ids, node_map, 0.0)
 
@@ -3515,7 +3515,7 @@ test "补测 calculate_max_width 空节点" {
 
 ///|
 test "补测 sort_nodes_by_name 空列表" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let result = assign_x(ids, 0.0, 10.0, @hashmap.new(), "CENTER", 10.0)
 
 }
@@ -3523,7 +3523,7 @@ test "补测 sort_nodes_by_name 空列表" {
 
 ///|
 test "补测 sort_nodes_by_degree 空节点" {
-  let ids = @immut/list.Cons("not_exist", @immut/list.Nil)
+  let ids = @list.cons("not_exist", @list.empty())
   let node_map = @hashmap.new()
   let result = calculate_max_width(ids, node_map, 0.0)
 
@@ -3532,7 +3532,7 @@ test "补测 sort_nodes_by_degree 空节点" {
 
 ///|
 test "补测 calculate_x_by_alignment default 分支" {
-  let ids = @immut/list.Cons("A", @immut/list.Nil)
+  let ids = @list.cons("A", @list.empty())
   let node_map = @hashmap.new()
   let x = assign_x(ids, 0.0, 10.0, node_map, "UNKNOWN", 10.0)
 
@@ -3551,7 +3551,7 @@ test "补测 route_edge 未知策略" {
 
 ///|
 test "补测 force_sum_rep 递归终止" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let result = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
   if result.size() != 0 {
     let _ = panic
@@ -3561,7 +3561,7 @@ test "补测 force_sum_rep 递归终止" {
 
 ///|
 test "补测 force_sum_att 递归终止" {
-  let edges = @immut/list.Nil
+  let edges = @list.empty()
   let pos = @hashmap.new()
   let result = force_calc_attraction(@hashmap.new(), pos, 1.0, @hashmap.new())
   if result.size() == 0 {
@@ -3572,7 +3572,7 @@ test "补测 force_sum_att 递归终止" {
 
 ///|
 test "补测 remove_node_from_list 空列表" {
-  let nodes = @immut/list.Nil
+  let nodes = @list.empty()
   let result = assign_x(nodes, 0.0, 10.0, @hashmap.new(), "CENTER", 10.0)
 
 }
@@ -3581,7 +3581,7 @@ test "补测 remove_node_from_list 空列表" {
 ///|
 test "补测 add_edge_to_layout 节点不存在" {
   let state = (@hashmap.new(), @hashmap.new(), @hashmap.new(), @hashmap.new())
-  let edge : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edge : ElkEdge = ("e1", "A", "B", @list.empty())
   let result = incremental_layout_add_edge(state, edge)
 
 }
@@ -3605,8 +3605,8 @@ test "补测 elk_layout 未知算法" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     x,
     y,
     w,
@@ -3624,7 +3624,7 @@ test "补测 elk_layout 未知算法" {
 ///|
 test "补测 minimize_crossings 空层" {
   let layers = @hashmap.new()
-  let edges = @immut/list.Nil
+  let edges = @list.empty()
   let result = minimize_crossings(layers, edges)
 
 }
@@ -3632,9 +3632,9 @@ test "补测 minimize_crossings 空层" {
 
 ///|
 test "补测 count_crossings 空层" {
-  let layer1 = @immut/list.Nil
-  let layer2 = @immut/list.Nil
-  let edges = @immut/list.Nil
+  let layer1 = @list.empty()
+  let layer2 = @list.empty()
+  let edges = @list.empty()
   let crossings = count_crossings(layer1, layer2, edges)
 
 }
@@ -3642,7 +3642,7 @@ test "补测 count_crossings 空层" {
 
 ///|
 test "补测 get_node_at_index 越界" {
-  let nodes = @immut/list.Cons("A", @immut/list.Nil)
+  let nodes = @list.cons("A", @list.empty())
   let node = get_node_at_index(nodes, 5)
 
 }
@@ -3650,7 +3650,7 @@ test "补测 get_node_at_index 越界" {
 
 ///|
 test "补测 has_edge_between 空边" {
-  let result = has_edge_between("A", "B", @immut/list.Nil)
+  let result = has_edge_between("A", "B", @list.empty())
   if result != false {
     let _ = panic
 
@@ -3659,7 +3659,7 @@ test "补测 has_edge_between 空边" {
 
 ///|
 test "补测 reverse_list 空列表" {
-  let lst = @immut/list.Nil
+  let lst = @list.empty()
   let rev = reverse_list(lst)
 
 }
@@ -3667,15 +3667,15 @@ test "补测 reverse_list 空列表" {
 
 ///|
 test "补测 sort_nodes_by_name 全相同" {
-  let ids = @immut/list.Cons("A", @immut/list.Cons("A", @immut/list.Nil))
-  let result = sort_nodes_by_name(ids, @immut/list.Nil)
+  let ids = @list.cons("A", @list.cons("A", @list.empty()))
+  let result = sort_nodes_by_name(ids, @list.empty())
 
 }
 // 只要不 panic 即可
 
 ///|
 test "补测 insert_by_name 空列表" {
-  let result = insert_by_name("A", @immut/list.Nil)
+  let result = insert_by_name("A", @list.empty())
 
 }
 // 只要不 panic 即可
@@ -3683,7 +3683,7 @@ test "补测 insert_by_name 空列表" {
 ///|
 test "补测 insert_by_degree 空列表" {
   let node_map = @hashmap.new()
-  let result = insert_by_degree("A", 1, @immut/list.Nil, node_map)
+  let result = insert_by_degree("A", 1, @list.empty(), node_map)
 
 }
 // 只要不 panic 即可
@@ -3693,8 +3693,8 @@ test "补测 node_degree 空节点" {
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -3715,8 +3715,8 @@ test "补测 collect_all_edges 空节点" {
 
 ///|
 test "补测 append_edges 空列表" {
-  let edges1 = @immut/list.Nil
-  let edges2 = @immut/list.Nil
+  let edges1 = @list.empty()
+  let edges2 = @list.empty()
   let result = append_edges(edges1, edges2)
 
 }
@@ -3724,7 +3724,7 @@ test "补测 append_edges 空列表" {
 
 ///|
 test "补测 remove_node_from_list 不存在节点" {
-  let nodes = @immut/list.Cons("A", @immut/list.Cons("B", @immut/list.Nil))
+  let nodes = @list.cons("A", @list.cons("B", @list.empty()))
   let result = remove_node_from_list(nodes, "C")
 
 }
@@ -3744,8 +3744,8 @@ test "补测 layout_layered 空节点" {
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -3762,8 +3762,8 @@ test "补测 layout_fixed 空节点" {
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -3780,8 +3780,8 @@ test "补测 layout_force 空节点" {
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -3796,7 +3796,7 @@ test "补测 layout_force 空节点" {
 ///|
 test "补测 minimize_crossings 空层和单层" {
   let layers = @hashmap.new()
-  let edges = @immut/list.Nil
+  let edges = @list.empty()
   // 空层
   let result1 = minimize_crossings(layers, edges)
   if result1.size() != 0 {
@@ -3804,7 +3804,7 @@ test "补测 minimize_crossings 空层和单层" {
 
   }
   // 只有一层
-  layers.set(0, @immut/list.Cons("A", @immut/list.Nil))
+  layers.set(0, @list.cons("A", @list.empty()))
   let result2 = minimize_crossings(layers, edges)
   if result2.size() != 1 {
     let _ = panic
@@ -3814,16 +3814,16 @@ test "补测 minimize_crossings 空层和单层" {
 
 ///|
 test "补测 count_crossings 空层和无交叉" {
-  let l1 = @immut/list.Nil
-  let l2 = @immut/list.Nil
-  let edges = @immut/list.Nil
+  let l1 = @list.empty()
+  let l2 = @list.empty()
+  let edges = @list.empty()
   let c1 = count_crossings(l1, l2, edges)
   if c1 != 0 {
     let _ = panic
 
   }
-  let l1b = @immut/list.Cons("A", @immut/list.Nil)
-  let l2b = @immut/list.Cons("B", @immut/list.Nil)
+  let l1b = @list.cons("A", @list.empty())
+  let l2b = @list.cons("B", @list.empty())
   let c2 = count_crossings(l1b, l2b, edges)
   if c2 != 0 {
     let _ = panic
@@ -3833,13 +3833,13 @@ test "补测 count_crossings 空层和无交叉" {
 
 ///|
 test "补测 get_node_at_index 越界和空列表" {
-  let nodes = @immut/list.Nil
+  let nodes = @list.empty()
   let n1 = get_node_at_index(nodes, 0)
   if n1 != "" {
     let _ = panic
 
   }
-  let nodes2 = @immut/list.Cons("A", @immut/list.Nil)
+  let nodes2 = @list.cons("A", @list.empty())
   let n2 = get_node_at_index(nodes2, 5)
   if n2 != "" {
     let _ = panic
@@ -3849,14 +3849,14 @@ test "补测 get_node_at_index 越界和空列表" {
 
 ///|
 test "补测 has_edge_between 空边和无匹配" {
-  let edges = @immut/list.Nil
+  let edges = @list.empty()
   let r1 = has_edge_between("A", "B", edges)
   if r1 != false {
     let _ = panic
 
   }
-  let e : ElkEdge = ("e1", "A", "C", @immut/list.Nil)
-  let edges2 = @immut/list.Cons(e, @immut/list.Nil)
+  let e : ElkEdge = ("e1", "A", "C", @list.empty())
+  let edges2 = @list.cons(e, @list.empty())
   let r2 = has_edge_between("A", "B", edges2)
   if r2 != false {
     let _ = panic
@@ -3866,13 +3866,13 @@ test "补测 has_edge_between 空边和无匹配" {
 
 ///|
 test "补测 reverse_list 空列表和单元素" {
-  let l = @immut/list.Nil
+  let l = @list.empty()
   let r = reverse_list(l)
   if list_length(r) != 0 {
     let _ = panic
 
   }
-  let l2 = @immut/list.Cons("A", @immut/list.Nil)
+  let l2 = @list.cons("A", @list.empty())
   let r2 = reverse_list(l2)
   if list_length(r2) != 1 {
     let _ = panic
@@ -3882,12 +3882,12 @@ test "补测 reverse_list 空列表和单元素" {
 
 ///|
 test "补测 insert_by_name 空列表和已排序" {
-  let r = insert_by_name("A", @immut/list.Nil)
+  let r = insert_by_name("A", @list.empty())
   if list_length(r) != 1 {
     let _ = panic
 
   }
-  let r2 = insert_by_name("B", @immut/list.Cons("A", @immut/list.Nil))
+  let r2 = insert_by_name("B", @list.cons("A", @list.empty()))
   if list_length(r2) != 2 {
     let _ = panic
 
@@ -3899,8 +3899,8 @@ test "补测 node_degree 空节点" {
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -3915,13 +3915,13 @@ test "补测 node_degree 空节点" {
 
 ///|
 test "补测 remove_node_from_list 空列表和不存在节点" {
-  let l = @immut/list.Nil
+  let l = @list.empty()
   let r = remove_node_from_list(l, "A")
   if list_length(r) != 0 {
     let _ = panic
 
   }
-  let l2 = @immut/list.Cons("A", @immut/list.Cons("B", @immut/list.Nil))
+  let l2 = @list.cons("A", @list.cons("B", @list.empty()))
   let r2 = remove_node_from_list(l2, "C")
   if list_length(r2) != 2 {
     let _ = panic
@@ -3931,7 +3931,7 @@ test "补测 remove_node_from_list 空列表和不存在节点" {
 
 ///|
 test "补测 force_init_pos 空输入" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let pos = @hashmap.new()
   let r = force_init_pos(ids, pos)
   if r.size() != 0 {
@@ -3942,7 +3942,7 @@ test "补测 force_init_pos 空输入" {
 
 ///|
 test "补测 force_calc_repulsion 空输入" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let pos = @hashmap.new()
   let r = force_calc_repulsion(ids, pos, 1.0, @hashmap.new())
   if r.size() != 0 {
@@ -3953,7 +3953,7 @@ test "补测 force_calc_repulsion 空输入" {
 
 ///|
 test "补测 force_sum_rep 递归终止" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let r = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
   if r.size() != 0 {
     let _ = panic
@@ -3975,7 +3975,7 @@ test "补测 force_sum_att 空边" {
 ///|
 test "补测 force_iterate 0 次迭代" {
   let pos = @hashmap.new()
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let node_map = @hashmap.new()
   let r = force_iterate(pos, ids, node_map, 1.0, 1.0, 0)
   if r.size() != 0 {
@@ -3986,7 +3986,7 @@ test "补测 force_iterate 0 次迭代" {
 
 ///|
 test "补测 force_update 空输入" {
-  let ids = @immut/list.Nil
+  let ids = @list.empty()
   let pos = @hashmap.new()
   let rep = @hashmap.new()
   let att = @hashmap.new()
@@ -4002,8 +4002,8 @@ test "补测 force_update_node 无位置" {
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4042,8 +4042,8 @@ test "补测 elk_layout 默认分支" {
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4065,8 +4065,8 @@ test "补测 add_edge_to_layout target_layer > source_layer" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4075,14 +4075,14 @@ test "补测 add_edge_to_layout target_layer > source_layer" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
     1.0,
   )
-  let edge : ElkEdge = ("e1", "A", "B", @immut/list.Nil)
+  let edge : ElkEdge = ("e1", "A", "B", @list.empty())
   let state1 = incremental_layout_add_node(state, nodeA, 0)
   let state2 = incremental_layout_add_node(state1, nodeB, 2)
   let state3 = incremental_layout_add_edge(state2, edge)
@@ -4101,7 +4101,7 @@ test "补测 update_layout_positions None 分支" {
 
 ///|
 test "补测 remove_node_from_list Nil" {
-  let l = @immut/list.Nil
+  let l = @list.empty()
   let r = remove_node_from_list(l, "A")
   if list_length(r) != 0 {
     let _ = panic
@@ -4114,8 +4114,8 @@ test "补测 layout_layered 空节点" {
   let node : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4134,19 +4134,19 @@ test "补测 collect_all_edges 非空 map" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
     1.0,
   )
-  let edge : ElkEdge = ("e1", "A", "A", @immut/list.Nil)
+  let edge : ElkEdge = ("e1", "A", "A", @list.empty())
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edge, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edge, @list.empty()),
     0.0,
     0.0,
     1.0,
@@ -4167,8 +4167,8 @@ test "补测 collect_node_ids 非空 map" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4188,19 +4188,19 @@ test "补测 force_edges_for 非空 map" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
     1.0,
   )
-  let edge : ElkEdge = ("e1", "A", "A", @immut/list.Nil)
+  let edge : ElkEdge = ("e1", "A", "A", @list.empty())
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Cons(edge, @immut/list.Nil),
+    @list.empty(),
+    @list.cons(edge, @list.empty()),
     0.0,
     0.0,
     1.0,
@@ -4209,7 +4209,7 @@ test "补测 force_edges_for 非空 map" {
   let map = @hashmap.new()
   map.set("A", nodeA)
   map.set("B", nodeB)
-  let edges = force_edges_for(map, @immut/list.Nil)
+  let edges = force_edges_for(map, @list.empty())
   if list_length(edges) != 1 {
     let _ = panic
 
@@ -4219,11 +4219,11 @@ test "补测 force_edges_for 非空 map" {
 ///|
 test "补测 minimize_crossings 多层多边" {
   let layers = @hashmap.new()
-  layers.set(0, @immut/list.Cons("A", @immut/list.Cons("B", @immut/list.Nil)))
-  layers.set(1, @immut/list.Cons("C", @immut/list.Cons("D", @immut/list.Nil)))
-  let edge1 : ElkEdge = ("e1", "A", "C", @immut/list.Nil)
-  let edge2 : ElkEdge = ("e2", "B", "D", @immut/list.Nil)
-  let edges = @immut/list.Cons(edge1, @immut/list.Cons(edge2, @immut/list.Nil))
+  layers.set(0, @list.cons("A", @list.cons("B", @list.empty())))
+  layers.set(1, @list.cons("C", @list.cons("D", @list.empty())))
+  let edge1 : ElkEdge = ("e1", "A", "C", @list.empty())
+  let edge2 : ElkEdge = ("e2", "B", "D", @list.empty())
+  let edges = @list.cons(edge1, @list.cons(edge2, @list.empty()))
   let result = minimize_crossings(layers, edges)
   if result.size() != 2 {
     let _ = panic
@@ -4233,8 +4233,8 @@ test "补测 minimize_crossings 多层多边" {
 
 ///|
 test "补测 force_sum_rep/force_sum_att 复杂分支" {
-  let ids = @immut/list.Cons("A", @immut/list.Cons("B", @immut/list.Nil))
-  let pos : @hashmap.T[String, (Float, Float)] = @hashmap.new()
+  let ids = @list.cons("A", @list.cons("B", @list.empty()))
+  let pos : @hashmap.HashMap[String, (Float, Float)] = @hashmap.new()
   pos.set("A", (0.0, 0.0))
   pos.set("B", (1.0, 1.0))
   let k : Float = 1.0
@@ -4242,8 +4242,8 @@ test "补测 force_sum_rep/force_sum_att 复杂分支" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4252,8 +4252,8 @@ test "补测 force_sum_rep/force_sum_att 复杂分支" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4272,8 +4272,8 @@ test "补测 assign_coords 多层多节点" {
   let nodeA : ElkNode = (
     "A",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4282,8 +4282,8 @@ test "补测 assign_coords 多层多节点" {
   let nodeB : ElkNode = (
     "B",
     None,
-    @immut/list.Nil,
-    @immut/list.Nil,
+    @list.empty(),
+    @list.empty(),
     0.0,
     0.0,
     1.0,
@@ -4293,8 +4293,8 @@ test "补测 assign_coords 多层多节点" {
   node_map.set("A", nodeA)
   node_map.set("B", nodeB)
   let layers = @hashmap.new()
-  layers.set(0, @immut/list.Cons("A", @immut/list.Nil))
-  layers.set(1, @immut/list.Cons("B", @immut/list.Nil))
+  layers.set(0, @list.cons("A", @list.empty()))
+  layers.set(1, @list.cons("B", @list.empty()))
   let options = default_layered_options()
   assign_coords(layers, 0.0, options, node_map)
 }
@@ -4318,7 +4318,7 @@ test "补测 route_edge 极端坐标" {
 ///|
 test "补测 insert_by_degree None 分支" {
   let node_map = @hashmap.new()
-  let sorted = @immut/list.Cons("A", @immut/list.Nil)
+  let sorted = @list.cons("A", @list.empty())
   // node_map 不含 "A"，触发 None 分支
   let result = insert_by_degree("B", 2, sorted, node_map)
   if list_length(result) != 2 {
@@ -4330,7 +4330,7 @@ test "补测 insert_by_degree None 分支" {
 ///|
 test "补测 assign_x/calculate_max_width/assign_coords None 节点分支" {
   let node_map = @hashmap.new()
-  let ids = @immut/list.Cons("not_exist", @immut/list.Nil)
+  let ids = @list.cons("not_exist", @list.empty())
   // assign_x None 分支
   let _ = assign_x(ids, 0.0, 10.0, node_map, "CENTER", 10.0)
   // calculate_max_width None 分支

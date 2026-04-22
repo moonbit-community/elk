@@ -9,14 +9,14 @@ pub type ElkLabel = (String, Float, Float) // (text, x, y)
 pub type ElkPort = (String, String?, Float, Float, Float, Float) // (id, label, x, y, width, height)
 
 ///|
-pub type ElkEdge = (String, String, String, @immut/list.T[ElkLabel]) // (id, source, target, labels)
+pub type ElkEdge = (String, String, String, @list.List[ElkLabel]) // (id, source, target, labels)
 
 ///|
 pub type ElkNode = (
   String,
   String?,
-  @immut/list.T[ElkPort],
-  @immut/list.T[ElkEdge],
+  @list.List[ElkPort],
+  @list.List[ElkEdge],
   Float,
   Float,
   Float,
@@ -84,10 +84,10 @@ pub type NodePosition = (String, Position) // (node_id, position)
 
 ///|
 pub type LayoutState = (
-  @hashmap.T[String, ElkNode], // 节点映射
-  @hashmap.T[String, Int], // 层映射
-  @hashmap.T[Int, @immut/list.T[String]], // 层到节点列表映射
-  @hashmap.T[String, Position], // 节点位置映射
+  @hashmap.HashMap[String, ElkNode], // 节点映射
+  @hashmap.HashMap[String, Int], // 层映射
+  @hashmap.HashMap[Int, @list.List[String]], // 层到节点列表映射
+  @hashmap.HashMap[String, Position], // 节点位置映射
 )
 
 // 创建默认的LayeredOptions
@@ -113,16 +113,16 @@ pub fn default_layered_options() -> LayeredOptions {
 ///|
 fn visit_edges(
   node : ElkNode,
-  acc : @hashmap.T[String, ElkNode],
-) -> @hashmap.T[String, ElkNode] {
+  acc : @hashmap.HashMap[String, ElkNode],
+) -> @hashmap.HashMap[String, ElkNode] {
   // 防止死循环：已访问过则直接返回
   if acc.contains(node.0) {
     acc
   } else {
     acc.set(node.0, node)
     match node.3 {
-      @immut/list.Nil => acc
-      @immut/list.Cons(edge, rest) => {
+      @list.List::Empty => acc
+      @list.List::More(edge, tail=rest) => {
         let target_node_opt = acc.get(edge.1)
         let acc2 = match target_node_opt {
           Some(target_node) => visit(target_node, acc)
@@ -147,13 +147,13 @@ fn visit_edges(
 ///|
 fn visit(
   node : ElkNode,
-  acc : @hashmap.T[String, ElkNode],
-) -> @hashmap.T[String, ElkNode] {
+  acc : @hashmap.HashMap[String, ElkNode],
+) -> @hashmap.HashMap[String, ElkNode] {
   visit_edges(node, acc)
 }
 
 ///|
-fn build_node_map(root : ElkNode) -> @hashmap.T[String, ElkNode] {
+fn build_node_map(root : ElkNode) -> @hashmap.HashMap[String, ElkNode] {
   let map = @hashmap.new()
   visit(root, map)
 }
@@ -162,20 +162,20 @@ fn build_node_map(root : ElkNode) -> @hashmap.T[String, ElkNode] {
 
 ///|
 fn add_children(
-  edges : @immut/list.T[ElkEdge],
-  q : @immut/list.T[(ElkNode, Int)],
-  node_map : @hashmap.T[String, ElkNode],
+  edges : @list.List[ElkEdge],
+  q : @list.List[(ElkNode, Int)],
+  node_map : @hashmap.HashMap[String, ElkNode],
   next_layer : Int,
-) -> @immut/list.T[(ElkNode, Int)] {
+) -> @list.List[(ElkNode, Int)] {
   match edges {
-    @immut/list.Nil => q
-    @immut/list.Cons(edge, rest_edges) => {
+    @list.List::Empty => q
+    @list.List::More(edge, tail=rest_edges) => {
       let target_node_opt = node_map.get(edge.1)
       match target_node_opt {
         Some(target_node) =>
           add_children(
             rest_edges,
-            @immut/list.Cons((target_node, next_layer), q),
+            @list.cons((target_node, next_layer), q),
             node_map,
             next_layer,
           )
@@ -187,13 +187,13 @@ fn add_children(
 
 ///|
 fn bfs(
-  queue : @immut/list.T[(ElkNode, Int)],
-  layer_map : @hashmap.T[String, Int],
-  node_map : @hashmap.T[String, ElkNode],
-) -> @hashmap.T[String, Int] {
+  queue : @list.List[(ElkNode, Int)],
+  layer_map : @hashmap.HashMap[String, Int],
+  node_map : @hashmap.HashMap[String, ElkNode],
+) -> @hashmap.HashMap[String, Int] {
   match queue {
-    @immut/list.Nil => layer_map
-    @immut/list.Cons((node, layer), rest) =>
+    @list.List::Empty => layer_map
+    @list.List::More((node, layer), tail=rest) =>
       if layer_map.contains(node.0) {
         bfs(rest, layer_map, node_map)
       } else {
@@ -205,19 +205,19 @@ fn bfs(
 }
 
 ///|
-fn assign_layers(root : ElkNode) -> @hashmap.T[String, Int] {
+fn assign_layers(root : ElkNode) -> @hashmap.HashMap[String, Int] {
   let node_map = build_node_map(root)
   let layer_map = @hashmap.new()
-  bfs(@immut/list.Cons((root, 0), @immut/list.Nil), layer_map, node_map)
+  bfs(@list.cons((root, 0), @list.empty()), layer_map, node_map)
 }
 
 // 边缘交叉最小化算法
 
 ///|
 pub fn minimize_crossings(
-  layers : @hashmap.T[Int, @immut/list.T[String]],
-  edges : @immut/list.T[ElkEdge],
-) -> @hashmap.T[Int, @immut/list.T[String]] {
+  layers : @hashmap.HashMap[Int, @list.List[String]],
+  edges : @list.List[ElkEdge],
+) -> @hashmap.HashMap[Int, @list.List[String]] {
   let mut i = 0
   while i < layers.size() - 1 {
     let layer1_opt = layers.get(i)
@@ -240,9 +240,9 @@ pub fn minimize_crossings(
 
 ///|
 pub fn count_crossings(
-  layer1 : @immut/list.T[String],
-  layer2 : @immut/list.T[String],
-  edges : @immut/list.T[ElkEdge],
+  layer1 : @list.List[String],
+  layer2 : @list.List[String],
+  edges : @list.List[ElkEdge],
 ) -> Int {
   let mut crossings = 0
   let mut i = 0
@@ -275,19 +275,19 @@ pub fn count_crossings(
 }
 
 ///|
-pub fn get_node_at_index(nodes : @immut/list.T[String], index : Int) -> String {
+pub fn get_node_at_index(nodes : @list.List[String], index : Int) -> String {
   let mut current = nodes
   let mut i = 0
   while i < index {
     match current {
-      @immut/list.Cons(_, rest) => current = rest
-      @immut/list.Nil => break
+      @list.List::More(_, tail=rest) => current = rest
+      @list.List::Empty => break
     }
     i = i + 1
   }
   match current {
-    @immut/list.Cons(node, _) => node
-    @immut/list.Nil => ""
+    @list.List::More(node, tail=_) => node
+    @list.List::Empty => ""
   }
 }
 
@@ -295,34 +295,34 @@ pub fn get_node_at_index(nodes : @immut/list.T[String], index : Int) -> String {
 pub fn has_edge_between(
   source : String,
   target : String,
-  edges : @immut/list.T[ElkEdge],
+  edges : @list.List[ElkEdge],
 ) -> Bool {
   let mut current = edges
   while true {
     match current {
-      @immut/list.Cons(edge, rest) => {
+      @list.List::More(edge, tail=rest) => {
         if edge.1 == source && edge.2 == target {
           return true
         }
         current = rest
       }
-      @immut/list.Nil => return false
+      @list.List::Empty => return false
     }
   }
   false
 }
 
 ///|
-pub fn[T] reverse_list(lst : @immut/list.T[T]) -> @immut/list.T[T] {
-  let mut result = @immut/list.Nil
+pub fn[T] reverse_list(lst : @list.List[T]) -> @list.List[T] {
+  let mut result = @list.empty()
   let mut current = lst
   while true {
     match current {
-      @immut/list.Cons(head, rest) => {
-        result = @immut/list.Cons(head, result)
+      @list.List::More(head, tail=rest) => {
+        result = @list.cons(head, result)
         current = rest
       }
-      @immut/list.Nil => break
+      @list.List::Empty => break
     }
   }
   result
@@ -332,27 +332,27 @@ pub fn[T] reverse_list(lst : @immut/list.T[T]) -> @immut/list.T[T] {
 
 ///|
 fn sort_nodes(
-  ids : @immut/list.T[String],
+  ids : @list.List[String],
   strategy : NodeSortingStrategy,
-  node_map : @hashmap.T[String, ElkNode],
-) -> @immut/list.T[String] {
+  node_map : @hashmap.HashMap[String, ElkNode],
+) -> @list.List[String] {
   match strategy {
     "NONE" => ids // 不排序，保持原始顺序
     "INPUT_ORDER" => ids // 按输入顺序，与NONE相同
-    "NAME" => sort_nodes_by_name(ids, @immut/list.Nil) // 按名称字母顺序排序
-    "DEGREE" => sort_nodes_by_degree(ids, node_map, @immut/list.Nil) // 按度数（连接数）排序
+    "NAME" => sort_nodes_by_name(ids, @list.empty()) // 按名称字母顺序排序
+    "DEGREE" => sort_nodes_by_degree(ids, node_map, @list.empty()) // 按度数（连接数）排序
     _ => ids // 默认不排序
   }
 }
 
 ///|
 pub fn sort_nodes_by_name(
-  ids : @immut/list.T[String],
-  result : @immut/list.T[String],
-) -> @immut/list.T[String] {
+  ids : @list.List[String],
+  result : @list.List[String],
+) -> @list.List[String] {
   match ids {
-    @immut/list.Nil => result
-    @immut/list.Cons(id, rest) =>
+    @list.List::Empty => result
+    @list.List::More(id, tail=rest) =>
       sort_nodes_by_name(rest, insert_by_name(id, result))
   }
 }
@@ -360,15 +360,15 @@ pub fn sort_nodes_by_name(
 ///|
 pub fn insert_by_name(
   id : String,
-  sorted : @immut/list.T[String],
-) -> @immut/list.T[String] {
+  sorted : @list.List[String],
+) -> @list.List[String] {
   match sorted {
-    @immut/list.Nil => @immut/list.Cons(id, @immut/list.Nil)
-    @immut/list.Cons(head, tail) =>
+    @list.List::Empty => @list.cons(id, @list.empty())
+    @list.List::More(head, tail=tail) =>
       if id <= head {
-        @immut/list.Cons(id, sorted)
+        @list.cons(id, sorted)
       } else {
-        @immut/list.Cons(head, insert_by_name(id, tail))
+        @list.cons(head, insert_by_name(id, tail))
       }
   }
 }
@@ -383,10 +383,10 @@ pub fn node_degree(node : ElkNode) -> Int {
 // 计算列表长度
 
 ///|
-pub fn[T] list_length(lst : @immut/list.T[T]) -> Int {
+pub fn[T] list_length(lst : @list.List[T]) -> Int {
   match lst {
-    @immut/list.Nil => 0
-    @immut/list.Cons(_, rest) => 1 + list_length(rest)
+    @list.List::Empty => 0
+    @list.List::More(_, tail=rest) => 1 + list_length(rest)
   }
 }
 
@@ -394,13 +394,13 @@ pub fn[T] list_length(lst : @immut/list.T[T]) -> Int {
 
 ///|
 fn sort_nodes_by_degree(
-  ids : @immut/list.T[String],
-  node_map : @hashmap.T[String, ElkNode],
-  result : @immut/list.T[String],
-) -> @immut/list.T[String] {
+  ids : @list.List[String],
+  node_map : @hashmap.HashMap[String, ElkNode],
+  result : @list.List[String],
+) -> @list.List[String] {
   match ids {
-    @immut/list.Nil => result
-    @immut/list.Cons(id, rest) => {
+    @list.List::Empty => result
+    @list.List::More(id, tail=rest) => {
       let node_opt = node_map.get(id)
       let degree = match node_opt {
         Some(node) => node_degree(node)
@@ -419,21 +419,21 @@ fn sort_nodes_by_degree(
 pub fn insert_by_degree(
   id : String,
   degree : Int,
-  sorted : @immut/list.T[String],
-  node_map : @hashmap.T[String, ElkNode],
-) -> @immut/list.T[String] {
+  sorted : @list.List[String],
+  node_map : @hashmap.HashMap[String, ElkNode],
+) -> @list.List[String] {
   match sorted {
-    @immut/list.Nil => @immut/list.Cons(id, @immut/list.Nil)
-    @immut/list.Cons(head, tail) => {
+    @list.List::Empty => @list.cons(id, @list.empty())
+    @list.List::More(head, tail=tail) => {
       let head_node_opt = node_map.get(head)
       let head_degree = match head_node_opt {
         Some(node) => node_degree(node)
         None => 0
       }
       if degree >= head_degree { // 度数大的排在前面
-        @immut/list.Cons(id, sorted)
+        @list.cons(id, sorted)
       } else {
-        @immut/list.Cons(head, insert_by_degree(id, degree, tail, node_map))
+        @list.cons(head, insert_by_degree(id, degree, tail, node_map))
       }
     }
   }
@@ -441,23 +441,23 @@ pub fn insert_by_degree(
 
 ///|
 pub fn group_layers(
-  keys : @immut/list.T[String],
-  map : @hashmap.T[String, Int],
-  layers : @hashmap.T[Int, @immut/list.T[String]],
-  node_map : @hashmap.T[String, ElkNode],
+  keys : @list.List[String],
+  map : @hashmap.HashMap[String, Int],
+  layers : @hashmap.HashMap[Int, @list.List[String]],
+  node_map : @hashmap.HashMap[String, ElkNode],
   options : LayeredOptions,
-) -> @hashmap.T[Int, @immut/list.T[String]] {
+) -> @hashmap.HashMap[Int, @list.List[String]] {
   match keys {
-    @immut/list.Nil => layers
-    @immut/list.Cons(id, rest) => {
+    @list.List::Empty => layers
+    @list.List::More(id, tail=rest) => {
       let layer_opt = map.get(id)
       match layer_opt {
         Some(layer) => {
           let old = match layers.get(layer) {
             Some(v) => v
-            None => @immut/list.Nil
+            None => @list.empty()
           }
-          layers.set(layer, @immut/list.Cons(id, old))
+          layers.set(layer, @list.cons(id, old))
           group_layers(rest, map, layers, node_map, options)
         }
         None => group_layers(rest, map, layers, node_map, options)
@@ -485,16 +485,16 @@ fn calculate_x_by_alignment(
 
 ///|
 pub fn assign_x(
-  ids : @immut/list.T[String],
+  ids : @list.List[String],
   x : Float,
   node_spacing : Float,
-  node_map : @hashmap.T[String, ElkNode],
+  node_map : @hashmap.HashMap[String, ElkNode],
   alignment : Alignment,
   max_width : Float,
 ) -> Float {
   match ids {
-    @immut/list.Nil => x
-    @immut/list.Cons(id, rest_ids) => {
+    @list.List::Empty => x
+    @list.List::More(id, tail=rest_ids) => {
       let node_opt = node_map.get(id)
       let node_width = match node_opt {
         Some(node) => node.6
@@ -517,13 +517,13 @@ pub fn assign_x(
 
 ///|
 pub fn calculate_max_width(
-  ids : @immut/list.T[String],
-  node_map : @hashmap.T[String, ElkNode],
+  ids : @list.List[String],
+  node_map : @hashmap.HashMap[String, ElkNode],
   max : Float,
 ) -> Float {
   match ids {
-    @immut/list.Nil => max
-    @immut/list.Cons(id, rest) => {
+    @list.List::Empty => max
+    @list.List::More(id, tail=rest) => {
       let node_opt = node_map.get(id)
       let width = match node_opt {
         Some(node) => node.6
@@ -536,15 +536,15 @@ pub fn calculate_max_width(
 
 ///|
 pub fn assign_coords(
-  layers : @hashmap.T[Int, @immut/list.T[String]],
+  layers : @hashmap.HashMap[Int, @list.List[String]],
   _y : Float,
   options : LayeredOptions,
-  node_map : @hashmap.T[String, ElkNode],
+  node_map : @hashmap.HashMap[String, ElkNode],
 ) -> Unit {
   // 遍历所有层
   let mut i = 0
   while i < layers.size() {
-    let layer_opt : @immut/list.T[String]? = layers.get(i)
+    let layer_opt : @list.List[String]? = layers.get(i)
     match layer_opt {
       Some(ids) => {
         // 按指定策略排序节点
@@ -572,9 +572,9 @@ pub fn assign_coords(
 // 提取所有 id（顶层函数）
 
 ///|
-pub fn collect_ids(map : @hashmap.T[String, Int]) -> @immut/list.T[String] {
-  let mut result = @immut/list.Nil
-  map.each((k, _) => result = @immut/list.Cons(k, result))
+pub fn collect_ids(map : @hashmap.HashMap[String, Int]) -> @list.List[String] {
+  let mut result = @list.empty()
+  map.each((k, _) => result = @list.cons(k, result))
   result
 }
 
@@ -587,20 +587,20 @@ pub fn route_edge(
   source_pos : Position,
   target_pos : Position,
   strategy : EdgeRoutingStrategy,
-) -> @immut/list.T[Position] {
+) -> @list.List[Position] {
   match strategy {
     "STRAIGHT" =>
-      @immut/list.Cons(
+      @list.cons(
         source_pos,
-        @immut/list.Cons(target_pos, @immut/list.Nil),
+        @list.cons(target_pos, @list.empty()),
       )
     "ORTHOGONAL" => route_orthogonal(source_pos, target_pos)
     "POLYLINE" => route_polyline(source_pos, target_pos)
     "SPLINES" => route_splines(source_pos, target_pos)
     _ =>
-      @immut/list.Cons(
+      @list.cons(
         source_pos,
-        @immut/list.Cons(target_pos, @immut/list.Nil),
+        @list.cons(target_pos, @list.empty()),
       )
   }
 }
@@ -609,16 +609,16 @@ pub fn route_edge(
 fn route_orthogonal(
   source : Position,
   target : Position,
-) -> @immut/list.T[Position] {
+) -> @list.List[Position] {
   let (sx, sy) = source
   let (tx, ty) = target
   let mid_x : Float = (sx + tx) / 2.0
   let mid_y : Float = (sy + ty) / 2.0
-  @immut/list.Cons(
+  @list.cons(
     source,
-    @immut/list.Cons(
+    @list.cons(
       (mid_x, sy),
-      @immut/list.Cons((mid_x, ty), @immut/list.Cons(target, @immut/list.Nil)),
+      @list.cons((mid_x, ty), @list.cons(target, @list.empty())),
     ),
   )
 }
@@ -627,14 +627,14 @@ fn route_orthogonal(
 fn route_polyline(
   source : Position,
   target : Position,
-) -> @immut/list.T[Position] {
+) -> @list.List[Position] {
   let (sx, sy) = source
   let (tx, ty) = target
   let mid_x : Float = (sx + tx) / 2.0
   let mid_y : Float = (sy + ty) / 2.0
-  @immut/list.Cons(
+  @list.cons(
     source,
-    @immut/list.Cons((mid_x, mid_y), @immut/list.Cons(target, @immut/list.Nil)),
+    @list.cons((mid_x, mid_y), @list.cons(target, @list.empty())),
   )
 }
 
@@ -642,7 +642,7 @@ fn route_polyline(
 fn route_splines(
   source : Position,
   target : Position,
-) -> @immut/list.T[Position] {
+) -> @list.List[Position] {
   // 简化的样条曲线实现，使用多个控制点
   let (sx, sy) = source
   let (tx, ty) = target
@@ -650,13 +650,13 @@ fn route_splines(
   let ctrl1_y : Float = sy
   let ctrl2_x : Float = sx + (tx - sx) * 0.75
   let ctrl2_y : Float = ty
-  @immut/list.Cons(
+  @list.cons(
     source,
-    @immut/list.Cons(
+    @list.cons(
       (ctrl1_x, ctrl1_y),
-      @immut/list.Cons(
+      @list.cons(
         (ctrl2_x, ctrl2_y),
-        @immut/list.Cons(target, @immut/list.Nil),
+        @list.cons(target, @list.empty()),
       ),
     ),
   )
@@ -685,9 +685,9 @@ fn add_node_to_layout(
   layer_map.set(node.0, layer)
   let existing_nodes = match layer_nodes.get(layer) {
     Some(nodes) => nodes
-    None => @immut/list.Nil
+    None => @list.empty()
   }
-  layer_nodes.set(layer, @immut/list.Cons(node.0, existing_nodes))
+  layer_nodes.set(layer, @list.cons(node.0, existing_nodes))
   (node_map, layer_map, layer_nodes, positions)
 }
 
@@ -710,12 +710,12 @@ fn add_edge_to_layout(state : LayoutState, edge : ElkEdge) -> LayoutState {
     // 重新分配目标节点到新层
     let old_layer_nodes = match layer_nodes.get(target_layer) {
       Some(nodes) => remove_node_from_list(nodes, edge.2)
-      None => @immut/list.Nil
+      None => @list.empty()
     }
     layer_nodes.set(target_layer, old_layer_nodes)
     let new_layer_nodes = match layer_nodes.get(source_layer + 1) {
-      Some(nodes) => @immut/list.Cons(edge.2, nodes)
-      None => @immut/list.Cons(edge.2, @immut/list.Nil)
+      Some(nodes) => @list.cons(edge.2, nodes)
+      None => @list.cons(edge.2, @list.empty())
     }
     layer_nodes.set(source_layer + 1, new_layer_nodes)
   }
@@ -724,20 +724,20 @@ fn add_edge_to_layout(state : LayoutState, edge : ElkEdge) -> LayoutState {
 
 ///|
 pub fn remove_node_from_list(
-  nodes : @immut/list.T[String],
+  nodes : @list.List[String],
   node_id : String,
-) -> @immut/list.T[String] {
-  let mut result = @immut/list.Nil
+) -> @list.List[String] {
+  let mut result = @list.empty()
   let mut current = nodes
   while true {
     match current {
-      @immut/list.Cons(head, rest) => {
+      @list.List::More(head, tail=rest) => {
         if head != node_id {
-          result = @immut/list.Cons(head, result)
+          result = @list.cons(head, result)
         }
         current = rest
       }
-      @immut/list.Nil => break
+      @list.List::Empty => break
     }
   }
   reverse_list(result)
@@ -809,22 +809,22 @@ pub fn layout_layered(root : ElkNode, options : LayeredOptions) -> ElkNode {
 
 ///|
 pub fn collect_all_edges(
-  node_map : @hashmap.T[String, ElkNode],
-) -> @immut/list.T[ElkEdge] {
-  let mut all_edges = @immut/list.Nil
+  node_map : @hashmap.HashMap[String, ElkNode],
+) -> @list.List[ElkEdge] {
+  let mut all_edges = @list.empty()
   node_map.each((_, node) => all_edges = append_edges(all_edges, node.3))
   all_edges
 }
 
 ///|
 pub fn append_edges(
-  edges1 : @immut/list.T[ElkEdge],
-  edges2 : @immut/list.T[ElkEdge],
-) -> @immut/list.T[ElkEdge] {
+  edges1 : @list.List[ElkEdge],
+  edges2 : @list.List[ElkEdge],
+) -> @list.List[ElkEdge] {
   match edges1 {
-    @immut/list.Nil => edges2
-    @immut/list.Cons(head, rest) =>
-      @immut/list.Cons(head, append_edges(rest, edges2))
+    @list.List::Empty => edges2
+    @list.List::More(head, tail=rest) =>
+      @list.cons(head, append_edges(rest, edges2))
   }
 }
 
@@ -840,12 +840,12 @@ pub fn layout_fixed(root : ElkNode, _options : LayeredOptions) -> ElkNode {
 
 ///|
 pub fn force_init_pos(
-  ids : @immut/list.T[String],
-  acc : @hashmap.T[String, (Float, Float)],
-) -> @hashmap.T[String, (Float, Float)] {
+  ids : @list.List[String],
+  acc : @hashmap.HashMap[String, (Float, Float)],
+) -> @hashmap.HashMap[String, (Float, Float)] {
   match ids {
-    @immut/list.Nil => acc
-    @immut/list.Cons(id, rest) => {
+    @list.List::Empty => acc
+    @list.List::More(id, tail=rest) => {
       acc.set(id, (0.0, 0.0))
       force_init_pos(rest, acc)
     }
@@ -854,14 +854,14 @@ pub fn force_init_pos(
 
 ///|
 pub fn force_calc_repulsion(
-  ids : @immut/list.T[String],
-  pos : @hashmap.T[String, (Float, Float)],
+  ids : @list.List[String],
+  pos : @hashmap.HashMap[String, (Float, Float)],
   k : Float,
-  acc : @hashmap.T[String, (Float, Float)],
-) -> @hashmap.T[String, (Float, Float)] {
+  acc : @hashmap.HashMap[String, (Float, Float)],
+) -> @hashmap.HashMap[String, (Float, Float)] {
   match ids {
-    @immut/list.Nil => acc
-    @immut/list.Cons(id, rest) => {
+    @list.List::Empty => acc
+    @list.List::More(id, tail=rest) => {
       let pos_opt = pos.get(id)
       let (x, y) = match pos_opt {
         Some((x, y)) => (x, y)
@@ -876,19 +876,19 @@ pub fn force_calc_repulsion(
 
 ///|
 fn force_sum_rep(
-  ids : @immut/list.T[String],
+  ids : @list.List[String],
   id : String,
   x : Float,
   y : Float,
-  pos : @hashmap.T[String, (Float, Float)],
+  pos : @hashmap.HashMap[String, (Float, Float)],
   k : Float,
-  ids2 : @immut/list.T[String],
+  ids2 : @list.List[String],
   fx : Float,
   fy : Float,
 ) -> (Float, Float) {
   match ids2 {
-    @immut/list.Nil => (fx, fy)
-    @immut/list.Cons(id2, rest2) =>
+    @list.List::Empty => (fx, fy)
+    @list.List::More(id2, tail=rest2) =>
       if id == id2 {
         force_sum_rep(ids, id, x, y, pos, k, rest2, fx, fy)
       } else {
@@ -918,21 +918,21 @@ fn force_sum_rep(
 
 ///|
 fn force_append_edges(
-  edges : @immut/list.T[ElkEdge],
-  acc : @immut/list.T[ElkEdge],
-) -> @immut/list.T[ElkEdge] {
+  edges : @list.List[ElkEdge],
+  acc : @list.List[ElkEdge],
+) -> @list.List[ElkEdge] {
   match edges {
-    @immut/list.Nil => acc
-    @immut/list.Cons(e, rest) =>
-      force_append_edges(rest, @immut/list.Cons(e, acc))
+    @list.List::Empty => acc
+    @list.List::More(e, tail=rest) =>
+      force_append_edges(rest, @list.cons(e, acc))
   }
 }
 
 ///|
 pub fn force_edges_for(
-  map : @hashmap.T[String, ElkNode],
-  acc : @immut/list.T[ElkEdge],
-) -> @immut/list.T[ElkEdge] {
+  map : @hashmap.HashMap[String, ElkNode],
+  acc : @list.List[ElkEdge],
+) -> @list.List[ElkEdge] {
   let mut result = acc
   map.each((_, node) => result = force_append_edges(node.3, result))
   result
@@ -940,14 +940,14 @@ pub fn force_edges_for(
 
 ///|
 fn force_sum_att(
-  edges : @immut/list.T[ElkEdge],
-  pos : @hashmap.T[String, (Float, Float)],
+  edges : @list.List[ElkEdge],
+  pos : @hashmap.HashMap[String, (Float, Float)],
   k : Float,
-  acc2 : @hashmap.T[String, (Float, Float)],
-) -> @hashmap.T[String, (Float, Float)] {
+  acc2 : @hashmap.HashMap[String, (Float, Float)],
+) -> @hashmap.HashMap[String, (Float, Float)] {
   match edges {
-    @immut/list.Nil => acc2
-    @immut/list.Cons(e, rest) => {
+    @list.List::Empty => acc2
+    @list.List::More(e, tail=rest) => {
       let (src, tgt) = (e.1, e.2)
       let src_pos_opt = pos.get(src)
       let tgt_pos_opt = pos.get(tgt)
@@ -986,24 +986,24 @@ fn force_sum_att(
 
 ///|
 pub fn force_calc_attraction(
-  node_map : @hashmap.T[String, ElkNode],
-  pos : @hashmap.T[String, (Float, Float)],
+  node_map : @hashmap.HashMap[String, ElkNode],
+  pos : @hashmap.HashMap[String, (Float, Float)],
   k : Float,
-  acc : @hashmap.T[String, (Float, Float)],
-) -> @hashmap.T[String, (Float, Float)] {
-  let all_edges = force_edges_for(node_map, @immut/list.Nil)
+  acc : @hashmap.HashMap[String, (Float, Float)],
+) -> @hashmap.HashMap[String, (Float, Float)] {
+  let all_edges = force_edges_for(node_map, @list.empty())
   force_sum_att(all_edges, pos, k, acc)
 }
 
 ///|
 pub fn force_iterate(
-  pos : @hashmap.T[String, (Float, Float)],
-  ids : @immut/list.T[String],
-  node_map : @hashmap.T[String, ElkNode],
+  pos : @hashmap.HashMap[String, (Float, Float)],
+  ids : @list.List[String],
+  node_map : @hashmap.HashMap[String, ElkNode],
   k : Float,
   cool : Float,
   iter : Int,
-) -> @hashmap.T[String, (Float, Float)] {
+) -> @hashmap.HashMap[String, (Float, Float)] {
   if iter == 0 {
     pos
   } else {
@@ -1021,17 +1021,17 @@ pub fn force_iterate(
 
 ///|
 pub fn force_update(
-  ids : @immut/list.T[String],
-  pos : @hashmap.T[String, (Float, Float)],
-  rep : @hashmap.T[String, (Float, Float)],
-  att : @hashmap.T[String, (Float, Float)],
+  ids : @list.List[String],
+  pos : @hashmap.HashMap[String, (Float, Float)],
+  rep : @hashmap.HashMap[String, (Float, Float)],
+  att : @hashmap.HashMap[String, (Float, Float)],
   cool : Float,
   iter : Int,
-  acc : @hashmap.T[String, (Float, Float)],
-) -> @hashmap.T[String, (Float, Float)] {
+  acc : @hashmap.HashMap[String, (Float, Float)],
+) -> @hashmap.HashMap[String, (Float, Float)] {
   match ids {
-    @immut/list.Nil => acc
-    @immut/list.Cons(id, rest) => {
+    @list.List::Empty => acc
+    @list.List::More(id, tail=rest) => {
       let pos_opt = pos.get(id)
       let (x, y) = match pos_opt {
         Some((x, y)) => (x, y)
@@ -1060,7 +1060,7 @@ pub fn force_update(
 ///|
 pub fn force_update_node(
   node : ElkNode,
-  pos : @hashmap.T[String, (Float, Float)],
+  pos : @hashmap.HashMap[String, (Float, Float)],
 ) -> ElkNode {
   let pos_opt = pos.get(node.0)
   let (x, y) = match pos_opt {
@@ -1075,10 +1075,10 @@ pub fn force_update_node(
 
 ///|
 pub fn collect_node_ids(
-  map : @hashmap.T[String, ElkNode],
-) -> @immut/list.T[String] {
-  let mut result = @immut/list.Nil
-  map.each((id, _) => result = @immut/list.Cons(id, result))
+  map : @hashmap.HashMap[String, ElkNode],
+) -> @list.List[String] {
+  let mut result = @list.empty()
+  map.each((id, _) => result = @list.cons(id, result))
   result
 }
 
@@ -1138,7 +1138,7 @@ pub fn incremental_layout_update(
 ///|
 pub fn incremental_layout_get_positions(
   state : LayoutState,
-) -> @hashmap.T[String, Position] {
+) -> @hashmap.HashMap[String, Position] {
   let (_, _, _, positions) = state
   positions
 }
