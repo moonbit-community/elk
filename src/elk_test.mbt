@@ -41,11 +41,11 @@ test "简单分层布局" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
   if result.4 != 0.0 {
-    let _ = panic
+    panic()
 
   }
   if result.5 != 0.0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -108,11 +108,11 @@ test "不同对齐方式测试" {
   )
   let result : ElkNode = layout_layered(root, options)
   if result.4 != 0.0 {
-    let _ = panic
+    panic()
 
   }
   if result.5 != 0.0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -185,7 +185,7 @@ test "边缘交叉最小化测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -242,7 +242,7 @@ test "增量式布局测试" {
 
   // 验证位置不为空
   if positions.length() == 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -255,7 +255,7 @@ test "边缘路由测试" {
   // 测试直线路由
   let straight_route = route_edge("A", "B", source_pos, target_pos, "STRAIGHT")
   if list_length(straight_route) != 2 {
-    let _ = panic
+    panic()
 
   }
 
@@ -264,21 +264,21 @@ test "边缘路由测试" {
     "A", "B", source_pos, target_pos, "ORTHOGONAL",
   )
   if list_length(orthogonal_route) != 4 {
-    let _ = panic
+    panic()
 
   }
 
   // 测试折线路由
   let polyline_route = route_edge("A", "B", source_pos, target_pos, "POLYLINE")
   if list_length(polyline_route) != 3 {
-    let _ = panic
+    panic()
 
   }
 
   // 测试样条路由
   let spline_route = route_edge("A", "B", source_pos, target_pos, "SPLINES")
   if list_length(spline_route) != 4 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -386,7 +386,7 @@ test "多层复杂图测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -461,7 +461,7 @@ test "带标签和端口的复杂图测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -523,7 +523,7 @@ test "Force布局算法测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -572,7 +572,7 @@ test "通用布局API测试" {
   let layered_options : LayoutOptions = ("layered", options)
   let layered_result : ElkNode = elk_layout(root, layered_options)
   if layered_result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 
@@ -580,7 +580,7 @@ test "通用布局API测试" {
   let fixed_options : LayoutOptions = ("fixed", options)
   let fixed_result : ElkNode = elk_layout(root, fixed_options)
   if fixed_result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 
@@ -588,7 +588,7 @@ test "通用布局API测试" {
   let force_options : LayoutOptions = ("force", options)
   let force_result : ElkNode = elk_layout(root, force_options)
   if force_result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -616,7 +616,7 @@ test "性能测试-中等规模图" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -678,7 +678,7 @@ test "不同布局方向测试" {
         )
         let result : ElkNode = layout_layered(root, options)
         if result.0 == "" {
-          let _ = panic
+          panic()
 
         }
         current = rest
@@ -714,7 +714,7 @@ test "单节点图测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -773,7 +773,7 @@ test "无边图测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -813,7 +813,7 @@ test "自环边测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -875,7 +875,7 @@ test "循环图测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -947,7 +947,7 @@ test "不同排序策略测试" {
         )
         let result : ElkNode = layout_layered(root, options)
         if result.0 == "" {
-          let _ = panic
+          panic()
 
         }
         current = rest
@@ -1020,7 +1020,7 @@ test "不同对齐方式测试 组合" {
         )
         let result : ElkNode = layout_layered(root, options)
         if result.0 == "" {
-          let _ = panic
+          panic()
 
         }
         current = rest
@@ -1033,14 +1033,14 @@ test "不同对齐方式测试 组合" {
 ///|
 test "工具函数测试" {
   // 测试 list_length 函数
-  let empty_list = @list.empty()
+  let empty_list : @list.List[String] = @list.empty()
   if list_length(empty_list) != 0 {
-    let _ = panic
+    panic()
 
   }
   let single_list = @list.cons("A", @list.empty())
   if list_length(single_list) != 1 {
-    let _ = panic
+    panic()
 
   }
   let multi_list = @list.cons(
@@ -1048,13 +1048,13 @@ test "工具函数测试" {
     @list.cons("B", @list.cons("C", @list.empty())),
   )
   if list_length(multi_list) != 3 {
-    let _ = panic
+    panic()
 
   }
 
   // 测试列表长度计算
   if list_length(multi_list) != 3 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1065,43 +1065,43 @@ test "默认选项测试" {
 
   // 验证默认选项的各个字段
   if options.0 != 50.0 {
-    let _ = panic
+    panic()
 
   } // layer_spacing
   if options.1 != 30.0 {
-    let _ = panic
+    panic()
 
   } // node_spacing
   if options.2 != "DOWN" {
-    let _ = panic
+    panic()
 
   } // direction
   if options.3 != "INPUT_ORDER" {
-    let _ = panic
+    panic()
 
   } // node_sorting
   if options.4 != "STRAIGHT" {
-    let _ = panic
+    panic()
 
   } // edge_routing
   if options.5 != "CENTER" {
-    let _ = panic
+    panic()
 
   } // alignment
   if options.6 != true {
-    let _ = panic
+    panic()
 
   } // consider_node_labels
   if options.7 != true {
-    let _ = panic
+    panic()
 
   } // consider_port_positions
   if options.8 != 1.0 {
-    let _ = panic
+    panic()
 
   } // aspect_ratio
   if options.9 != 10 {
-    let _ = panic
+    panic()
 
   }
 } // iterations
@@ -1138,7 +1138,7 @@ test "大规模图性能测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1223,7 +1223,7 @@ test "复杂增量式布局测试" {
 
   // 验证位置不为空
   if positions.length() == 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1234,7 +1234,7 @@ test "边缘路由边界条件测试" {
   let same_pos : Position = (0.0, 0.0)
   let straight_same = route_edge("A", "A", same_pos, same_pos, "STRAIGHT")
   if list_length(straight_same) != 2 {
-    let _ = panic
+    panic()
 
   }
 
@@ -1245,7 +1245,7 @@ test "边缘路由边界条件测试" {
     "A", "B", vertical_source, vertical_target, "ORTHOGONAL",
   )
   if list_length(orthogonal_vertical) != 4 {
-    let _ = panic
+    panic()
 
   }
 
@@ -1256,7 +1256,7 @@ test "边缘路由边界条件测试" {
     "A", "B", horizontal_source, horizontal_target, "POLYLINE",
   )
   if list_length(polyline_horizontal) != 3 {
-    let _ = panic
+    panic()
 
   }
 
@@ -1269,7 +1269,7 @@ test "边缘路由边界条件测试" {
     "UNKNOWN",
   )
   if list_length(unknown_route) != 2 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1358,7 +1358,7 @@ test "Force布局复杂图测试" {
 
   // 验证结果不为空
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1405,7 +1405,7 @@ test "通用API未知算法测试" {
   let layout_options : LayoutOptions = ("UNKNOWN", options)
   let result : ElkNode = elk_layout(root, layout_options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1464,7 +1464,7 @@ test "测试所有布局方向" {
     )
     let result : ElkNode = layout_layered(root, options)
     if result.0 == "" {
-      let _ = panic
+      panic()
 
     }
   }
@@ -1533,7 +1533,7 @@ test "测试所有排序策略" {
     )
     let result : ElkNode = layout_layered(root, options)
     if result.0 == "" {
-      let _ = panic
+      panic()
 
     }
   }
@@ -1606,7 +1606,7 @@ test "测试所有对齐策略" {
     )
     let result : ElkNode = layout_layered(root, options)
     if result.0 == "" {
-      let _ = panic
+      panic()
 
     }
   }
@@ -1673,7 +1673,7 @@ test "测试所有边路由策略" {
     )
     let result : ElkNode = layout_layered(root, options)
     if result.0 == "" {
-      let _ = panic
+      panic()
 
     }
   }
@@ -1798,7 +1798,7 @@ test "测试复杂图结构" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1869,7 +1869,7 @@ test "测试带标签和端口的图" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1915,7 +1915,7 @@ test "测试固定布局算法" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_fixed(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -1972,7 +1972,7 @@ test "测试力导向布局算法" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_force(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2026,7 +2026,7 @@ test "测试通用API" {
     let layout_options : LayoutOptions = (algorithm, options)
     let result : ElkNode = elk_layout(root, layout_options)
     if result.0 == "" {
-      let _ = panic
+      panic()
 
     }
   }
@@ -2059,7 +2059,7 @@ test "测试边界条件" {
   let options : LayeredOptions = default_layered_options()
   let result1 : ElkNode = layout_layered(empty_node, options)
   if result1.0 == "" {
-    let _ = panic
+    panic()
 
   }
 
@@ -2077,7 +2077,7 @@ test "测试边界条件" {
   )
   let result2 : ElkNode = layout_layered(node_with_self_loop, options)
   if result2.0 == "" {
-    let _ = panic
+    panic()
 
   }
 
@@ -2094,7 +2094,7 @@ test "测试边界条件" {
   )
   let result3 : ElkNode = layout_layered(single_node, options)
   if result3.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2164,7 +2164,7 @@ test "测试性能边界" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2219,7 +2219,7 @@ test "测试增量布局复杂场景" {
   // 测试获取位置
   let positions = incremental_layout_get_positions(state4)
   if positions.length() == 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2233,7 +2233,7 @@ test "测试边路由边界条件" {
   let same_pos : Position = (50.0, 50.0)
   let straight_same = route_edge("A", "B", same_pos, same_pos, "STRAIGHT")
   if list_length(straight_same) != 2 {
-    let _ = panic
+    panic()
 
   }
 
@@ -2243,7 +2243,7 @@ test "测试边路由边界条件" {
     "A", "B", source_pos, vertical_pos, "ORTHOGONAL",
   )
   if list_length(orthogonal_vertical) != 4 {
-    let _ = panic
+    panic()
 
   }
 
@@ -2253,14 +2253,14 @@ test "测试边路由边界条件" {
     "A", "B", source_pos, horizontal_pos, "POLYLINE",
   )
   if list_length(polyline_horizontal) != 3 {
-    let _ = panic
+    panic()
 
   }
 
   // 测试未知策略
   let unknown_route = route_edge("A", "B", source_pos, target_pos, "UNKNOWN")
   if list_length(unknown_route) != 2 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2342,7 +2342,7 @@ test "测试更复杂的力导向布局" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_force(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2389,7 +2389,7 @@ test "测试未知算法在通用API中" {
   let layout_options : LayoutOptions = ("UNKNOWN", options)
   let result : ElkNode = elk_layout(root, layout_options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2398,7 +2398,7 @@ test "测试未知算法在通用API中" {
 test "测试示例1: 基本分层布局" {
   let result = example_basic_layered()
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2407,7 +2407,7 @@ test "测试示例1: 基本分层布局" {
 test "测试示例2: 复杂多层图布局" {
   let result = example_complex_multilayer()
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2416,7 +2416,7 @@ test "测试示例2: 复杂多层图布局" {
 test "测试示例3: 带标签和端口的图" {
   let result = example_with_labels_and_ports()
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2425,7 +2425,7 @@ test "测试示例3: 带标签和端口的图" {
 test "测试示例4: Force布局算法" {
   let result = example_force_layout()
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2442,7 +2442,7 @@ test "测试示例5: 增量式布局" {
 test "测试示例6: 不同布局方向" {
   let results = example_different_directions()
   if list_length(results) != 4 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2451,7 +2451,7 @@ test "测试示例6: 不同布局方向" {
 test "测试示例7: 边缘路由演示" {
   let routes = example_edge_routing()
   if list_length(routes) != 4 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2460,7 +2460,7 @@ test "测试示例7: 边缘路由演示" {
 test "测试示例8: 性能测试图" {
   let result = example_performance_test()
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2469,7 +2469,7 @@ test "测试示例8: 性能测试图" {
 test "测试示例9: 通用布局API演示" {
   let results = example_universal_api()
   if list_length(results) != 3 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2478,7 +2478,7 @@ test "测试示例9: 通用布局API演示" {
 test "测试示例10: 复杂工作流图" {
   let result = example_workflow_graph()
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2549,7 +2549,7 @@ test "测试边缘交叉最小化算法" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2644,7 +2644,7 @@ test "测试复杂交叉边场景" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2787,7 +2787,7 @@ test "测试多层复杂图" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -2846,7 +2846,7 @@ test "测试所有布局选项组合" {
     )
     let result : ElkNode = layout_layered(root, options)
     if result.0 == "" {
-      let _ = panic
+      panic()
 
     }
   }
@@ -3029,7 +3029,7 @@ test "测试大规模图性能" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_layered(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3050,7 +3050,7 @@ test "测试边路由所有策略" {
   let test_routing_strategy = fn(strategy : String) {
     let route = route_edge("A", "B", source_pos, target_pos, strategy)
     if list_length(route) < 2 {
-      let _ = panic
+      panic()
 
     }
   }
@@ -3069,7 +3069,7 @@ test "测试边路由边界情况" {
   let same_pos : Position = (50.0, 50.0)
   let straight_same = route_edge("A", "B", same_pos, same_pos, "STRAIGHT")
   if list_length(straight_same) != 2 {
-    let _ = panic
+    panic()
 
   }
 
@@ -3083,7 +3083,7 @@ test "测试边路由边界情况" {
     "ORTHOGONAL",
   )
   if list_length(orthogonal_vertical) != 4 {
-    let _ = panic
+    panic()
 
   }
 
@@ -3097,7 +3097,7 @@ test "测试边路由边界情况" {
     "POLYLINE",
   )
   if list_length(polyline_horizontal) != 3 {
-    let _ = panic
+    panic()
 
   }
 
@@ -3110,7 +3110,7 @@ test "测试边路由边界情况" {
     "UNKNOWN",
   )
   if list_length(unknown_route) != 2 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3178,7 +3178,7 @@ test "测试增量布局完整流程" {
   // 测试获取位置
   let positions = incremental_layout_get_positions(state6)
   if positions.length() == 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3280,7 +3280,7 @@ test "测试力导向布局复杂场景" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_force(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3356,7 +3356,7 @@ test "测试固定布局复杂场景" {
   let options : LayeredOptions = default_layered_options()
   let result : ElkNode = layout_fixed(root, options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3371,7 +3371,7 @@ test "group_layers 边界测试" {
   let result = group_layers(keys, map, layers, node_map, options)
   // 空输入应返回空 layers
   if result.length() != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3384,12 +3384,12 @@ test "assign_x/calculate_max_width/assign_coords 空输入测试" {
   let max_width : Float = 0.0
   let x = assign_x(ids, 0.0, 10.0, node_map, alignment, max_width)
   if x != 0.0 {
-    let _ = panic
+    panic()
 
   }
   let mw = calculate_max_width(ids, node_map, 0.0)
   if mw != 0.0 {
-    let _ = panic
+    panic()
 
   }
   let layers = @hashmap.new()
@@ -3402,14 +3402,14 @@ test "collect_ids/append_edges 空输入测试" {
   let map = @hashmap.new()
   let ids = collect_ids(map)
   if list_length(ids) != 0 {
-    let _ = panic
+    panic()
 
   }
   let edges1 = @list.empty()
   let edges2 = @list.empty()
   let appended = append_edges(edges1, edges2)
   if list_length(appended) != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3420,13 +3420,13 @@ test "force_init_pos/collect_node_ids 空输入测试" {
   let pos = @hashmap.new()
   let result = force_init_pos(ids, pos)
   if result.length() != 0 {
-    let _ = panic
+    panic()
 
   }
   let node_map = @hashmap.new()
   let node_ids = collect_node_ids(node_map)
   if list_length(node_ids) != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3436,7 +3436,7 @@ test "to_float 测试" {
   let i : Int = 42
   let f = to_float(i)
   if f != 42.0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3448,22 +3448,22 @@ test "force_sum_rep/force_calc_repulsion/force_sum_att/force_calc_attraction/for
   let k : Float = 1.0
   let rep = force_calc_repulsion(ids, pos, k, @hashmap.new())
   if rep.length() != 0 {
-    let _ = panic
+    panic()
 
   }
   let att = force_calc_attraction(@hashmap.new(), pos, k, @hashmap.new())
   if att.length() != 0 {
-    let _ = panic
+    panic()
 
   }
   let updated = force_update(ids, pos, rep, att, 1.0, 1, @hashmap.new())
   if updated.length() != 0 {
-    let _ = panic
+    panic()
 
   }
   let iterated = force_iterate(pos, ids, @hashmap.new(), k, 1.0, 1)
   if iterated.length() != 0 {
-    let _ = panic
+    panic()
 
   }
   let node : ElkNode = (
@@ -3478,7 +3478,7 @@ test "force_sum_rep/force_calc_repulsion/force_sum_att/force_calc_attraction/for
   )
   let node2 = force_update_node(node, pos)
   if node2.0 != "A" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3544,7 +3544,7 @@ test "补测 route_edge 未知策略" {
   let pos : Position = (0.0, 0.0)
   let route = route_edge("A", "B", pos, pos, "UNKNOWN")
   if list_length(route) != 2 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3554,18 +3554,18 @@ test "补测 force_sum_rep 递归终止" {
   let ids = @list.empty()
   let result = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
   if result.length() != 0 {
-    let _ = panic
+    panic()
 
   }
 }
 
 ///|
 test "补测 force_sum_att 递归终止" {
-  let edges = @list.empty()
+  let edges : @list.List[ElkEdge] = @list.empty()
   let pos = @hashmap.new()
   let result = force_calc_attraction(@hashmap.new(), pos, 1.0, @hashmap.new())
   if result.length() == 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3616,7 +3616,7 @@ test "补测 elk_layout 未知算法" {
   let layout_options : LayoutOptions = ("UNKNOWN", options)
   let result : ElkNode = elk_layout(nodeA, layout_options)
   if result.0 == "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3652,14 +3652,14 @@ test "补测 get_node_at_index 越界" {
 test "补测 has_edge_between 空边" {
   let result = has_edge_between("A", "B", @list.empty())
   if result != false {
-    let _ = panic
+    panic()
 
   }
 }
 
 ///|
 test "补测 reverse_list 空列表" {
-  let lst = @list.empty()
+  let lst : @list.List[String] = @list.empty()
   let rev = reverse_list(lst)
 
 }
@@ -3800,14 +3800,14 @@ test "补测 minimize_crossings 空层和单层" {
   // 空层
   let result1 = minimize_crossings(layers, edges)
   if result1.length() != 0 {
-    let _ = panic
+    panic()
 
   }
   // 只有一层
   layers.set(0, @list.cons("A", @list.empty()))
   let result2 = minimize_crossings(layers, edges)
   if result2.length() != 1 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3819,14 +3819,14 @@ test "补测 count_crossings 空层和无交叉" {
   let edges = @list.empty()
   let c1 = count_crossings(l1, l2, edges)
   if c1 != 0 {
-    let _ = panic
+    panic()
 
   }
   let l1b = @list.cons("A", @list.empty())
   let l2b = @list.cons("B", @list.empty())
   let c2 = count_crossings(l1b, l2b, edges)
   if c2 != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3836,13 +3836,13 @@ test "补测 get_node_at_index 越界和空列表" {
   let nodes = @list.empty()
   let n1 = get_node_at_index(nodes, 0)
   if n1 != "" {
-    let _ = panic
+    panic()
 
   }
   let nodes2 = @list.cons("A", @list.empty())
   let n2 = get_node_at_index(nodes2, 5)
   if n2 != "" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3852,30 +3852,30 @@ test "补测 has_edge_between 空边和无匹配" {
   let edges = @list.empty()
   let r1 = has_edge_between("A", "B", edges)
   if r1 != false {
-    let _ = panic
+    panic()
 
   }
   let e : ElkEdge = ("e1", "A", "C", @list.empty())
   let edges2 = @list.cons(e, @list.empty())
   let r2 = has_edge_between("A", "B", edges2)
   if r2 != false {
-    let _ = panic
+    panic()
 
   }
 }
 
 ///|
 test "补测 reverse_list 空列表和单元素" {
-  let l = @list.empty()
+  let l : @list.List[String] = @list.empty()
   let r = reverse_list(l)
   if list_length(r) != 0 {
-    let _ = panic
+    panic()
 
   }
   let l2 = @list.cons("A", @list.empty())
   let r2 = reverse_list(l2)
   if list_length(r2) != 1 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3884,12 +3884,12 @@ test "补测 reverse_list 空列表和单元素" {
 test "补测 insert_by_name 空列表和已排序" {
   let r = insert_by_name("A", @list.empty())
   if list_length(r) != 1 {
-    let _ = panic
+    panic()
 
   }
   let r2 = insert_by_name("B", @list.cons("A", @list.empty()))
   if list_length(r2) != 2 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3908,7 +3908,7 @@ test "补测 node_degree 空节点二" {
   )
   let d = node_degree(node)
   if d != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3918,13 +3918,13 @@ test "补测 remove_node_from_list 空列表和不存在节点" {
   let l = @list.empty()
   let r = remove_node_from_list(l, "A")
   if list_length(r) != 0 {
-    let _ = panic
+    panic()
 
   }
   let l2 = @list.cons("A", @list.cons("B", @list.empty()))
   let r2 = remove_node_from_list(l2, "C")
   if list_length(r2) != 2 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3935,7 +3935,7 @@ test "补测 force_init_pos 空输入" {
   let pos = @hashmap.new()
   let r = force_init_pos(ids, pos)
   if r.length() != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3946,7 +3946,7 @@ test "补测 force_calc_repulsion 空输入" {
   let pos = @hashmap.new()
   let r = force_calc_repulsion(ids, pos, 1.0, @hashmap.new())
   if r.length() != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3956,7 +3956,7 @@ test "补测 force_sum_rep 递归终止二" {
   let ids = @list.empty()
   let r = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
   if r.length() != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3967,7 +3967,7 @@ test "补测 force_sum_att 空边" {
   let pos = @hashmap.new()
   let r = force_calc_attraction(node_map, pos, 1.0, @hashmap.new())
   if r.length() == 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3979,7 +3979,7 @@ test "补测 force_iterate 0 次迭代" {
   let node_map = @hashmap.new()
   let r = force_iterate(pos, ids, node_map, 1.0, 1.0, 0)
   if r.length() != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -3992,7 +3992,7 @@ test "补测 force_update 空输入" {
   let att = @hashmap.new()
   let r = force_update(ids, pos, rep, att, 1.0, 1, @hashmap.new())
   if r.length() != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4012,7 +4012,7 @@ test "补测 force_update_node 无位置" {
   let pos = @hashmap.new()
   let r = force_update_node(node, pos)
   if r.0 != "A" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4022,7 +4022,7 @@ test "补测 collect_node_ids 空 map" {
   let map = @hashmap.new()
   let r = collect_node_ids(map)
   if list_length(r) != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4032,7 +4032,7 @@ test "补测 to_float" {
   let i : Int = 42
   let f = to_float(i)
   if f != 42.0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4053,7 +4053,7 @@ test "补测 elk_layout 默认分支" {
   let layout_options : LayoutOptions = ("unknown", options)
   let r = elk_layout(node, layout_options)
   if r.0 != "A" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4104,7 +4104,7 @@ test "补测 remove_node_from_list Nil" {
   let l = @list.empty()
   let r = remove_node_from_list(l, "A")
   if list_length(r) != 0 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4124,7 +4124,7 @@ test "补测 layout_layered 空节点二" {
   let options = default_layered_options()
   let result = layout_layered(node, options)
   if result.0 != "A" {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4157,7 +4157,7 @@ test "补测 collect_all_edges 非空 map" {
   map.set("B", nodeB)
   let edges = collect_all_edges(map)
   if list_length(edges) != 1 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4178,7 +4178,7 @@ test "补测 collect_node_ids 非空 map" {
   map.set("A", nodeA)
   let ids = collect_node_ids(map)
   if list_length(ids) != 1 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4211,7 +4211,7 @@ test "补测 force_edges_for 非空 map" {
   map.set("B", nodeB)
   let edges = force_edges_for(map, @list.empty())
   if list_length(edges) != 1 {
-    let _ = panic
+    panic()
 
   }
 }
@@ -4226,7 +4226,7 @@ test "补测 minimize_crossings 多层多边" {
   let edges = @list.cons(edge1, @list.cons(edge2, @list.empty()))
   let result = minimize_crossings(layers, edges)
   if result.length() != 2 {
-    let _ = panic
+    panic()
 
   }
 }
