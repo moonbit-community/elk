@@ -9,7 +9,7 @@ pub fn example_basic_layered() -> ElkNode {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let nodeA : ElkNode = (
+  let _nodeA : ElkNode = (
     "A",
     None,
     @list.empty(),
@@ -19,7 +19,7 @@ pub fn example_basic_layered() -> ElkNode {
     w,
     h,
   )
-  let nodeB : ElkNode = (
+  let _nodeB : ElkNode = (
     "B",
     None,
     @list.empty(),
@@ -29,7 +29,7 @@ pub fn example_basic_layered() -> ElkNode {
     w,
     h,
   )
-  let nodeC : ElkNode = (
+  let _nodeC : ElkNode = (
     "C",
     None,
     @list.empty(),
@@ -40,7 +40,7 @@ pub fn example_basic_layered() -> ElkNode {
     h,
   )
   let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
-  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
+  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
@@ -65,7 +65,7 @@ pub fn example_complex_multilayer() -> ElkNode {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let nodeA : ElkNode = (
+  let _nodeA : ElkNode = (
     "A",
     Some("Start"),
     @list.empty(),
@@ -75,7 +75,7 @@ pub fn example_complex_multilayer() -> ElkNode {
     w,
     h,
   )
-  let nodeB : ElkNode = (
+  let _nodeB : ElkNode = (
     "B",
     Some("Process1"),
     @list.empty(),
@@ -85,7 +85,7 @@ pub fn example_complex_multilayer() -> ElkNode {
     w,
     h,
   )
-  let nodeC : ElkNode = (
+  let _nodeC : ElkNode = (
     "C",
     Some("Process2"),
     @list.empty(),
@@ -95,7 +95,7 @@ pub fn example_complex_multilayer() -> ElkNode {
     w,
     h,
   )
-  let nodeD : ElkNode = (
+  let _nodeD : ElkNode = (
     "D",
     Some("Sub1"),
     @list.empty(),
@@ -105,7 +105,7 @@ pub fn example_complex_multilayer() -> ElkNode {
     w,
     h,
   )
-  let nodeE : ElkNode = (
+  let _nodeE : ElkNode = (
     "E",
     Some("Sub2"),
     @list.empty(),
@@ -115,7 +115,7 @@ pub fn example_complex_multilayer() -> ElkNode {
     w,
     h,
   )
-  let nodeF : ElkNode = (
+  let _nodeF : ElkNode = (
     "F",
     Some("Sub3"),
     @list.empty(),
@@ -125,7 +125,7 @@ pub fn example_complex_multilayer() -> ElkNode {
     w,
     h,
   )
-  let nodeG : ElkNode = (
+  let _nodeG : ElkNode = (
     "G",
     Some("End"),
     @list.empty(),
@@ -137,13 +137,13 @@ pub fn example_complex_multilayer() -> ElkNode {
   )
   let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
-  let edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
-  let edgeBE : ElkEdge = ("e4", "B", "E", @list.empty())
-  let edgeCD : ElkEdge = ("e5", "C", "D", @list.empty())
-  let edgeCF : ElkEdge = ("e6", "C", "F", @list.empty())
-  let edgeDG : ElkEdge = ("e7", "D", "G", @list.empty())
-  let edgeEG : ElkEdge = ("e8", "E", "G", @list.empty())
-  let edgeFG : ElkEdge = ("e9", "F", "G", @list.empty())
+  let _edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
+  let _edgeBE : ElkEdge = ("e4", "B", "E", @list.empty())
+  let _edgeCD : ElkEdge = ("e5", "C", "D", @list.empty())
+  let _edgeCF : ElkEdge = ("e6", "C", "F", @list.empty())
+  let _edgeDG : ElkEdge = ("e7", "D", "G", @list.empty())
+  let _edgeEG : ElkEdge = ("e8", "E", "G", @list.empty())
+  let _edgeFG : ElkEdge = ("e9", "F", "G", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
     Some("Start"),
@@ -182,7 +182,7 @@ pub fn example_with_labels_and_ports() -> ElkNode {
   let h : Float = 10.0
 
   // 创建带标签的节点
-  let nodeA : ElkNode = (
+  let _nodeA : ElkNode = (
     "A",
     Some("Input"),
     @list.empty(),
@@ -192,7 +192,7 @@ pub fn example_with_labels_and_ports() -> ElkNode {
     w,
     h,
   )
-  let nodeB : ElkNode = (
+  let _nodeB : ElkNode = (
     "B",
     Some("Process"),
     @list.empty(),
@@ -202,7 +202,7 @@ pub fn example_with_labels_and_ports() -> ElkNode {
     w,
     h,
   )
-  let nodeC : ElkNode = (
+  let _nodeC : ElkNode = (
     "C",
     Some("Output"),
     @list.empty(),
@@ -222,7 +222,7 @@ pub fn example_with_labels_and_ports() -> ElkNode {
     "B",
     @list.cons(label1, @list.empty()),
   )
-  let edgeBC : ElkEdge = (
+  let _edgeBC : ElkEdge = (
     "e2",
     "B",
     "C",
@@ -253,7 +253,7 @@ pub fn example_force_layout() -> ElkNode {
   let h : Float = 10.0
 
   // 创建用于Force布局的图（无向图）
-  let nodeA : ElkNode = (
+  let _nodeA : ElkNode = (
     "A",
     None,
     @list.empty(),
@@ -263,7 +263,7 @@ pub fn example_force_layout() -> ElkNode {
     w,
     h,
   )
-  let nodeB : ElkNode = (
+  let _nodeB : ElkNode = (
     "B",
     None,
     @list.empty(),
@@ -273,7 +273,7 @@ pub fn example_force_layout() -> ElkNode {
     w,
     h,
   )
-  let nodeC : ElkNode = (
+  let _nodeC : ElkNode = (
     "C",
     None,
     @list.empty(),
@@ -283,7 +283,7 @@ pub fn example_force_layout() -> ElkNode {
     w,
     h,
   )
-  let nodeD : ElkNode = (
+  let _nodeD : ElkNode = (
     "D",
     None,
     @list.empty(),
@@ -294,8 +294,8 @@ pub fn example_force_layout() -> ElkNode {
     h,
   )
   let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
-  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
-  let edgeCD : ElkEdge = ("e3", "C", "D", @list.empty())
+  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
+  let _edgeCD : ElkEdge = ("e3", "C", "D", @list.empty())
   let edgeAD : ElkEdge = ("e4", "A", "D", @list.empty())
   let edgeAC : ElkEdge = ("e5", "A", "C", @list.empty())
   let nodeA_with_edges : ElkNode = (
@@ -386,7 +386,7 @@ pub fn example_different_directions() -> @list.List[ElkNode] {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let nodeA : ElkNode = (
+  let _nodeA : ElkNode = (
     "A",
     None,
     @list.empty(),
@@ -396,7 +396,7 @@ pub fn example_different_directions() -> @list.List[ElkNode] {
     w,
     h,
   )
-  let nodeB : ElkNode = (
+  let _nodeB : ElkNode = (
     "B",
     None,
     @list.empty(),
@@ -513,7 +513,7 @@ pub fn example_universal_api() -> @list.List[ElkNode] {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let nodeA : ElkNode = (
+  let _nodeA : ElkNode = (
     "A",
     None,
     @list.empty(),
@@ -523,7 +523,7 @@ pub fn example_universal_api() -> @list.List[ElkNode] {
     w,
     h,
   )
-  let nodeB : ElkNode = (
+  let _nodeB : ElkNode = (
     "B",
     None,
     @list.empty(),
@@ -573,7 +573,7 @@ pub fn example_workflow_graph() -> ElkNode {
   let h : Float = 10.0
 
   // 创建一个工作流图：开始 -> 决策 -> 分支 -> 合并 -> 结束
-  let nodeStart : ElkNode = (
+  let _nodeStart : ElkNode = (
     "Start",
     Some("开始"),
     @list.empty(),
@@ -583,7 +583,7 @@ pub fn example_workflow_graph() -> ElkNode {
     w,
     h,
   )
-  let nodeDecision : ElkNode = (
+  let _nodeDecision : ElkNode = (
     "Decision",
     Some("决策"),
     @list.empty(),
@@ -593,7 +593,7 @@ pub fn example_workflow_graph() -> ElkNode {
     w,
     h,
   )
-  let nodeBranch1 : ElkNode = (
+  let _nodeBranch1 : ElkNode = (
     "Branch1",
     Some("分支1"),
     @list.empty(),
@@ -603,7 +603,7 @@ pub fn example_workflow_graph() -> ElkNode {
     w,
     h,
   )
-  let nodeBranch2 : ElkNode = (
+  let _nodeBranch2 : ElkNode = (
     "Branch2",
     Some("分支2"),
     @list.empty(),
@@ -613,7 +613,7 @@ pub fn example_workflow_graph() -> ElkNode {
     w,
     h,
   )
-  let nodeMerge : ElkNode = (
+  let _nodeMerge : ElkNode = (
     "Merge",
     Some("合并"),
     @list.empty(),
@@ -623,7 +623,7 @@ pub fn example_workflow_graph() -> ElkNode {
     w,
     h,
   )
-  let nodeEnd : ElkNode = (
+  let _nodeEnd : ElkNode = (
     "End",
     Some("结束"),
     @list.empty(),
@@ -634,11 +634,11 @@ pub fn example_workflow_graph() -> ElkNode {
     h,
   )
   let edge1 : ElkEdge = ("e1", "Start", "Decision", @list.empty())
-  let edge2 : ElkEdge = ("e2", "Decision", "Branch1", @list.empty())
-  let edge3 : ElkEdge = ("e3", "Decision", "Branch2", @list.empty())
-  let edge4 : ElkEdge = ("e4", "Branch1", "Merge", @list.empty())
-  let edge5 : ElkEdge = ("e5", "Branch2", "Merge", @list.empty())
-  let edge6 : ElkEdge = ("e6", "Merge", "End", @list.empty())
+  let _edge2 : ElkEdge = ("e2", "Decision", "Branch1", @list.empty())
+  let _edge3 : ElkEdge = ("e3", "Decision", "Branch2", @list.empty())
+  let _edge4 : ElkEdge = ("e4", "Branch1", "Merge", @list.empty())
+  let _edge5 : ElkEdge = ("e5", "Branch2", "Merge", @list.empty())
+  let _edge6 : ElkEdge = ("e6", "Merge", "End", @list.empty())
   let nodeStart_with_edges : ElkNode = (
     "Start",
     Some("开始"),

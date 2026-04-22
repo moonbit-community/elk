@@ -582,8 +582,8 @@ pub fn collect_ids(map : @hashmap.HashMap[String, Int]) -> @list.List[String] {
 
 ///|
 pub fn route_edge(
-  source : String,
-  target : String,
+  _source : String,
+  _target : String,
   source_pos : Position,
   target_pos : Position,
   strategy : EdgeRoutingStrategy,
@@ -613,7 +613,7 @@ fn route_orthogonal(
   let (sx, sy) = source
   let (tx, ty) = target
   let mid_x : Float = (sx + tx) / 2.0
-  let mid_y : Float = (sy + ty) / 2.0
+  let _mid_y : Float = (sy + ty) / 2.0
   @list.cons(
     source,
     @list.cons(
@@ -665,7 +665,7 @@ fn route_splines(
 // 增量式布局功能
 
 ///|
-fn create_layout_state() -> LayoutState {
+fn _create_layout_state() -> LayoutState {
   (
     @hashmap.new(), // 节点映射
     @hashmap.new(), // 层映射
