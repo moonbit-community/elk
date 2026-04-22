@@ -1,6 +1,7 @@
 # Moonbit build artifacts
 target/
 .mooncakes/
+_build/
 
 # OS generated files
 .DS_Store
