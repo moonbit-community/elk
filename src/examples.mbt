@@ -9,36 +9,9 @@ pub fn example_basic_layered() -> ElkNode {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let _nodeA : ElkNode = (
-    "A",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
-  let _nodeB : ElkNode = (
-    "B",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
-  let _nodeC : ElkNode = (
-    "C",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
+  let _nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
+  let _nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
+  let _nodeC : ElkNode = ("C", None, @list.empty(), @list.empty(), x, y, w, h)
   let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let _edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
   let nodeA_with_edges : ElkNode = (
@@ -216,18 +189,8 @@ pub fn example_with_labels_and_ports() -> ElkNode {
   // 创建带标签的边
   let label1 : ElkLabel = ("data", 0.0, 0.0)
   let label2 : ElkLabel = ("result", 0.0, 0.0)
-  let edgeAB : ElkEdge = (
-    "e1",
-    "A",
-    "B",
-    @list.cons(label1, @list.empty()),
-  )
-  let _edgeBC : ElkEdge = (
-    "e2",
-    "B",
-    "C",
-    @list.cons(label2, @list.empty()),
-  )
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.cons(label1, @list.empty()))
+  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.cons(label2, @list.empty()))
   let nodeA_with_edges : ElkNode = (
     "A",
     Some("Input"),
@@ -253,46 +216,10 @@ pub fn example_force_layout() -> ElkNode {
   let h : Float = 10.0
 
   // 创建用于Force布局的图（无向图）
-  let _nodeA : ElkNode = (
-    "A",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
-  let _nodeB : ElkNode = (
-    "B",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
-  let _nodeC : ElkNode = (
-    "C",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
-  let _nodeD : ElkNode = (
-    "D",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
+  let _nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
+  let _nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
+  let _nodeC : ElkNode = ("C", None, @list.empty(), @list.empty(), x, y, w, h)
+  let _nodeD : ElkNode = ("D", None, @list.empty(), @list.empty(), x, y, w, h)
   let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let _edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
   let _edgeCD : ElkEdge = ("e3", "C", "D", @list.empty())
@@ -302,10 +229,7 @@ pub fn example_force_layout() -> ElkNode {
     "A",
     None,
     @list.empty(),
-    @list.cons(
-      edgeAB,
-      @list.cons(edgeAD, @list.cons(edgeAC, @list.empty())),
-    ),
+    @list.cons(edgeAB, @list.cons(edgeAD, @list.cons(edgeAC, @list.empty()))),
     x,
     y,
     w,
@@ -386,26 +310,8 @@ pub fn example_different_directions() -> @list.List[ElkNode] {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let _nodeA : ElkNode = (
-    "A",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
-  let _nodeB : ElkNode = (
-    "B",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
+  let _nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
+  let _nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
   let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
@@ -422,10 +328,7 @@ pub fn example_different_directions() -> @list.List[ElkNode] {
   // 测试不同方向
   let directions = @list.cons(
     "DOWN",
-    @list.cons(
-      "UP",
-      @list.cons("LEFT", @list.cons("RIGHT", @list.empty())),
-    ),
+    @list.cons("UP", @list.cons("LEFT", @list.cons("RIGHT", @list.empty()))),
   )
   let mut results = @list.empty()
   let mut current = directions
@@ -513,26 +416,8 @@ pub fn example_universal_api() -> @list.List[ElkNode] {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let _nodeA : ElkNode = (
-    "A",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
-  let _nodeB : ElkNode = (
-    "B",
-    None,
-    @list.empty(),
-    @list.empty(),
-    x,
-    y,
-    w,
-    h,
-  )
+  let _nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
+  let _nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
   let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
   let nodeA_with_edges : ElkNode = (
     "A",
@@ -556,10 +441,7 @@ pub fn example_universal_api() -> @list.List[ElkNode] {
   let fixed_result : ElkNode = elk_layout(root, fixed_options)
   @list.cons(
     layered_result,
-    @list.cons(
-      force_result,
-      @list.cons(fixed_result, @list.empty()),
-    ),
+    @list.cons(force_result, @list.cons(fixed_result, @list.empty())),
   )
 }
 
