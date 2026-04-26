@@ -2305,7 +2305,7 @@ test "补测 force_sum_att 递归终止" {
   let _edges : @list.List[ElkEdge] = @list.empty()
   let pos = @hashmap.new()
   let result = force_calc_attraction(@hashmap.new(), pos, 1.0, @hashmap.new())
-  if result.length() == 0 {
+  if result.length() != 0 {
     panic()
   }
 }
@@ -2659,7 +2659,7 @@ test "补测 force_sum_att 空边" {
   let node_map = @hashmap.new()
   let pos = @hashmap.new()
   let r = force_calc_attraction(node_map, pos, 1.0, @hashmap.new())
-  if r.length() == 0 {
+  if r.length() != 0 {
     panic()
   }
 }
