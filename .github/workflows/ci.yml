@@ -27,11 +27,11 @@ jobs:
 
       - name: Build project
         run: |
-          moon build
+          moon check --target all --deny-warn
 
       - name: Run tests
         run: |
-          moon test
+          moon test --target all
 
       - name: Generate coverage report
         run: |
