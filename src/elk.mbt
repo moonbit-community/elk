@@ -154,7 +154,7 @@ fn visit(
 
 ///|
 fn build_node_map(root : ElkNode) -> @hashmap.HashMap[String, ElkNode] {
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   visit(root, map)
 }
 
@@ -207,7 +207,7 @@ fn bfs(
 ///|
 fn assign_layers(root : ElkNode) -> @hashmap.HashMap[String, Int] {
   let node_map = build_node_map(root)
-  let layer_map = @hashmap.new()
+  let layer_map = @hashmap.HashMap([], capacity=0)
   bfs(@list.cons((root, 0), @list.empty()), layer_map, node_map)
 }
 
@@ -649,10 +649,10 @@ fn route_splines(source : Position, target : Position) -> @list.List[Position] {
 ///|
 fn _create_layout_state() -> LayoutState {
   (
-    @hashmap.new(), // 节点映射
-    @hashmap.new(), // 层映射
-    @hashmap.new(), // 层到节点列表映射
-    @hashmap.new(),
+    @hashmap.HashMap([], capacity=0), // 节点映射
+    @hashmap.HashMap([], capacity=0), // 层映射
+    @hashmap.HashMap([], capacity=0), // 层到节点列表映射
+    @hashmap.HashMap([], capacity=0),
   ) // 节点位置映射
 }
 
@@ -735,7 +735,7 @@ fn update_layout_positions(
   // 重新计算所有节点的位置
   let mut layer_index = 0
   let mut y_pos : Float = 0.0
-  let new_positions = @hashmap.new()
+  let new_positions = @hashmap.HashMap([], capacity=0)
   while layer_index < layer_nodes.length() {
     let layer_nodes_opt = layer_nodes.get(layer_index)
     match layer_nodes_opt {
@@ -770,7 +770,7 @@ pub fn layout_layered(root : ElkNode, options : LayeredOptions) -> ElkNode {
 
   // 3. 按层分组
   let keys = collect_ids(layer_map)
-  let layers = @hashmap.new()
+  let layers = @hashmap.HashMap([], capacity=0)
   let grouped_layers = group_layers(keys, layer_map, layers, node_map, options)
 
   // 4. 边缘交叉最小化
@@ -989,11 +989,11 @@ pub fn force_iterate(
   if iter == 0 {
     pos
   } else {
-    let rep = @hashmap.new()
+    let rep = @hashmap.HashMap([], capacity=0)
     let rep_forces = force_calc_repulsion(ids, pos, k, rep)
-    let att = @hashmap.new()
+    let att = @hashmap.HashMap([], capacity=0)
     let att_forces = force_calc_attraction(node_map, pos, k, att)
-    let new_pos = @hashmap.new()
+    let new_pos = @hashmap.HashMap([], capacity=0)
     let updated_pos = force_update(
       ids, pos, rep_forces, att_forces, cool, iter, new_pos,
     )
@@ -1077,7 +1077,7 @@ pub fn to_float(i : Int) -> Float {
 pub fn layout_force(root : ElkNode, options : LayeredOptions) -> ElkNode {
   let node_map = build_node_map(root)
   let ids = collect_node_ids(node_map)
-  let pos = @hashmap.new()
+  let pos = @hashmap.HashMap([], capacity=0)
   let init_pos = force_init_pos(ids, pos)
 
   // 使用配置的迭代次数
