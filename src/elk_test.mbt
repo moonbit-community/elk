@@ -122,10 +122,10 @@ test "增量式布局测试" {
 
   // 创建初始状态
   let initial_state = (
-    @hashmap.new(), // 节点映射
-    @hashmap.new(), // 层映射
-    @hashmap.new(), // 层到节点列表映射
-    @hashmap.new(), // 节点位置映射
+    @hashmap.HashMap([], capacity=0), // 节点映射
+    @hashmap.HashMap([], capacity=0), // 层映射
+    @hashmap.HashMap([], capacity=0), // 层到节点列表映射
+    @hashmap.HashMap([], capacity=0), // 节点位置映射
   )
 
   // 添加节点
@@ -776,10 +776,10 @@ test "复杂增量式布局测试" {
 
   // 创建初始状态
   let initial_state = (
-    @hashmap.new(), // 节点映射
-    @hashmap.new(), // 层映射
-    @hashmap.new(), // 层到节点列表映射
-    @hashmap.new(), // 节点位置映射
+    @hashmap.HashMap([], capacity=0), // 节点映射
+    @hashmap.HashMap([], capacity=0), // 层映射
+    @hashmap.HashMap([], capacity=0), // 层到节点列表映射
+    @hashmap.HashMap([], capacity=0), // 节点位置映射
   )
 
   // 逐步添加多个节点
@@ -1488,10 +1488,10 @@ test "测试增量布局复杂场景" {
 
   // 创建复杂的增量布局测试
   let initial_state = (
-    @hashmap.new(), // 节点映射
-    @hashmap.new(), // 层映射
-    @hashmap.new(), // 层到节点映射
-    @hashmap.new(), // 位置映射
+    @hashmap.HashMap([], capacity=0), // 节点映射
+    @hashmap.HashMap([], capacity=0), // 层映射
+    @hashmap.HashMap([], capacity=0), // 层到节点映射
+    @hashmap.HashMap([], capacity=0), // 位置映射
   )
   let nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
   let nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
@@ -2012,10 +2012,10 @@ test "测试增量布局完整流程" {
 
   // 创建初始状态
   let initial_state = (
-    @hashmap.new(), // 节点映射
-    @hashmap.new(), // 层映射
-    @hashmap.new(), // 层到节点映射
-    @hashmap.new(), // 位置映射
+    @hashmap.HashMap([], capacity=0), // 节点映射
+    @hashmap.HashMap([], capacity=0), // 层映射
+    @hashmap.HashMap([], capacity=0), // 层到节点映射
+    @hashmap.HashMap([], capacity=0), // 位置映射
   )
   let nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
   let nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
@@ -2125,10 +2125,10 @@ test "测试固定布局复杂场景" {
 
 ///|
 test "group_layers 边界测试" {
-  let node_map = @hashmap.new()
-  let layers = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
+  let layers = @hashmap.HashMap([], capacity=0)
   let keys = @list.empty()
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   let options = default_layered_options()
   let result = group_layers(keys, map, layers, node_map, options)
   // 空输入应返回空 layers
@@ -2140,7 +2140,7 @@ test "group_layers 边界测试" {
 ///|
 test "assign_x/calculate_max_width/assign_coords 空输入测试" {
   let ids = @list.empty()
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let alignment = "CENTER"
   let max_width : Float = 0.0
   let x = assign_x(ids, 0.0, 10.0, node_map, alignment, max_width)
@@ -2151,14 +2151,14 @@ test "assign_x/calculate_max_width/assign_coords 空输入测试" {
   if mw != 0.0 {
     panic()
   }
-  let layers = @hashmap.new()
+  let layers = @hashmap.HashMap([], capacity=0)
   let options = default_layered_options()
   assign_coords(layers, 0.0, options, node_map)
 } // 只要不 panic 即可
 
 ///|
 test "collect_ids/append_edges 空输入测试" {
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   let ids = collect_ids(map)
   if list_length(ids) != 0 {
     panic()
@@ -2174,12 +2174,12 @@ test "collect_ids/append_edges 空输入测试" {
 ///|
 test "force_init_pos/collect_node_ids 空输入测试" {
   let ids = @list.empty()
-  let pos = @hashmap.new()
+  let pos = @hashmap.HashMap([], capacity=0)
   let result = force_init_pos(ids, pos)
   if result.length() != 0 {
     panic()
   }
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let node_ids = collect_node_ids(node_map)
   if list_length(node_ids) != 0 {
     panic()
@@ -2198,21 +2198,41 @@ test "to_float 测试" {
 ///|
 test "force_sum_rep/force_calc_repulsion/force_sum_att/force_calc_attraction/force_update/force_iterate/force_update_node 空输入测试" {
   let ids = @list.empty()
-  let pos = @hashmap.new()
+  let pos = @hashmap.HashMap([], capacity=0)
   let k : Float = 1.0
-  let rep = force_calc_repulsion(ids, pos, k, @hashmap.new())
+  let rep = force_calc_repulsion(ids, pos, k, @hashmap.HashMap([], capacity=0))
   if rep.length() != 0 {
     panic()
   }
-  let att = force_calc_attraction(@hashmap.new(), pos, k, @hashmap.new())
+  let att = force_calc_attraction(
+    @hashmap.HashMap([], capacity=0),
+    pos,
+    k,
+    @hashmap.HashMap([], capacity=0),
+  )
   if att.length() != 0 {
     panic()
   }
-  let updated = force_update(ids, pos, rep, att, 1.0, 1, @hashmap.new())
+  let updated = force_update(
+    ids,
+    pos,
+    rep,
+    att,
+    1.0,
+    1,
+    @hashmap.HashMap([], capacity=0),
+  )
   if updated.length() != 0 {
     panic()
   }
-  let iterated = force_iterate(pos, ids, @hashmap.new(), k, 1.0, 1)
+  let iterated = force_iterate(
+    pos,
+    ids,
+    @hashmap.HashMap([], capacity=0),
+    k,
+    1.0,
+    1,
+  )
   if iterated.length() != 0 {
     panic()
   }
@@ -2234,10 +2254,10 @@ test "force_sum_rep/force_calc_repulsion/force_sum_att/force_calc_attraction/for
 
 ///|
 test "补测 group_layers None 分支" {
-  let node_map = @hashmap.new()
-  let layers = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
+  let layers = @hashmap.HashMap([], capacity=0)
   let keys = @list.cons("not_exist", @list.empty())
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   let options = default_layered_options()
   let _result = group_layers(keys, map, layers, node_map, options)
 }
@@ -2246,7 +2266,7 @@ test "补测 group_layers None 分支" {
 ///|
 test "补测 assign_x 非法 alignment" {
   let ids = @list.cons("A", @list.empty())
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let _x = assign_x(ids, 0.0, 10.0, node_map, "FOO", 10.0)
 }
 // 只要不 panic 即可
@@ -2254,7 +2274,7 @@ test "补测 assign_x 非法 alignment" {
 ///|
 test "补测 calculate_max_width 空节点" {
   let ids = @list.cons("not_exist", @list.empty())
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let _mw = calculate_max_width(ids, node_map, 0.0)
 }
 // 只要不 panic 即可
@@ -2262,14 +2282,21 @@ test "补测 calculate_max_width 空节点" {
 ///|
 test "补测 sort_nodes_by_name 空列表" {
   let ids = @list.empty()
-  let _result = assign_x(ids, 0.0, 10.0, @hashmap.new(), "CENTER", 10.0)
+  let _result = assign_x(
+    ids,
+    0.0,
+    10.0,
+    @hashmap.HashMap([], capacity=0),
+    "CENTER",
+    10.0,
+  )
 }
 // 只要不 panic 即可
 
 ///|
 test "补测 sort_nodes_by_degree 空节点" {
   let ids = @list.cons("not_exist", @list.empty())
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let _result = calculate_max_width(ids, node_map, 0.0)
 }
 // 只要不 panic 即可
@@ -2277,7 +2304,7 @@ test "补测 sort_nodes_by_degree 空节点" {
 ///|
 test "补测 calculate_x_by_alignment default 分支" {
   let ids = @list.cons("A", @list.empty())
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let _x = assign_x(ids, 0.0, 10.0, node_map, "UNKNOWN", 10.0)
 }
 // 只要不 panic 即可
@@ -2294,7 +2321,12 @@ test "补测 route_edge 未知策略" {
 ///|
 test "补测 force_sum_rep 递归终止" {
   let ids = @list.empty()
-  let result = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
+  let result = force_calc_repulsion(
+    ids,
+    @hashmap.HashMap([], capacity=0),
+    1.0,
+    @hashmap.HashMap([], capacity=0),
+  )
   if result.length() != 0 {
     panic()
   }
@@ -2303,8 +2335,13 @@ test "补测 force_sum_rep 递归终止" {
 ///|
 test "补测 force_sum_att 递归终止" {
   let _edges : @list.List[ElkEdge] = @list.empty()
-  let pos = @hashmap.new()
-  let result = force_calc_attraction(@hashmap.new(), pos, 1.0, @hashmap.new())
+  let pos = @hashmap.HashMap([], capacity=0)
+  let result = force_calc_attraction(
+    @hashmap.HashMap([], capacity=0),
+    pos,
+    1.0,
+    @hashmap.HashMap([], capacity=0),
+  )
   if result.length() != 0 {
     panic()
   }
@@ -2313,13 +2350,25 @@ test "补测 force_sum_att 递归终止" {
 ///|
 test "补测 remove_node_from_list 空列表" {
   let nodes = @list.empty()
-  let _result = assign_x(nodes, 0.0, 10.0, @hashmap.new(), "CENTER", 10.0)
+  let _result = assign_x(
+    nodes,
+    0.0,
+    10.0,
+    @hashmap.HashMap([], capacity=0),
+    "CENTER",
+    10.0,
+  )
 }
 // 只要不 panic 即可
 
 ///|
 test "补测 add_edge_to_layout 节点不存在" {
-  let state = (@hashmap.new(), @hashmap.new(), @hashmap.new(), @hashmap.new())
+  let state = (
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+  )
   let edge : ElkEdge = ("e1", "A", "B", @list.empty())
   let _result = incremental_layout_add_edge(state, edge)
 }
@@ -2327,7 +2376,12 @@ test "补测 add_edge_to_layout 节点不存在" {
 
 ///|
 test "补测 update_layout_positions 空层" {
-  let state = (@hashmap.new(), @hashmap.new(), @hashmap.new(), @hashmap.new())
+  let state = (
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+  )
   let options = default_layered_options()
   let _result = incremental_layout_update(state, options)
 }
@@ -2350,7 +2404,7 @@ test "补测 elk_layout 未知算法" {
 
 ///|
 test "补测 minimize_crossings 空层" {
-  let layers = @hashmap.new()
+  let layers = @hashmap.HashMap([], capacity=0)
   let edges = @list.empty()
   let _result = minimize_crossings(layers, edges)
 }
@@ -2402,7 +2456,7 @@ test "补测 insert_by_name 空列表" {
 
 ///|
 test "补测 insert_by_degree 空列表" {
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let _result = insert_by_degree("A", 1, @list.empty(), node_map)
 }
 // 只要不 panic 即可
@@ -2425,7 +2479,7 @@ test "补测 node_degree 空节点" {
 
 ///|
 test "补测 collect_all_edges 空节点" {
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let _edges = collect_all_edges(node_map)
 }
 // 只要不 panic 即可
@@ -2447,7 +2501,12 @@ test "补测 remove_node_from_list 不存在节点" {
 
 ///|
 test "补测 update_layout_positions 空节点" {
-  let state = (@hashmap.new(), @hashmap.new(), @hashmap.new(), @hashmap.new())
+  let state = (
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+  )
   let options = default_layered_options()
   let _result = incremental_layout_update(state, options)
 }
@@ -2506,7 +2565,7 @@ test "补测 layout_force 空节点" {
 
 ///|
 test "补测 minimize_crossings 空层和单层" {
-  let layers = @hashmap.new()
+  let layers = @hashmap.HashMap([], capacity=0)
   let edges = @list.empty()
   // 空层
   let result1 = minimize_crossings(layers, edges)
@@ -2628,7 +2687,7 @@ test "补测 remove_node_from_list 空列表和不存在节点" {
 ///|
 test "补测 force_init_pos 空输入" {
   let ids = @list.empty()
-  let pos = @hashmap.new()
+  let pos = @hashmap.HashMap([], capacity=0)
   let r = force_init_pos(ids, pos)
   if r.length() != 0 {
     panic()
@@ -2638,8 +2697,8 @@ test "补测 force_init_pos 空输入" {
 ///|
 test "补测 force_calc_repulsion 空输入" {
   let ids = @list.empty()
-  let pos = @hashmap.new()
-  let r = force_calc_repulsion(ids, pos, 1.0, @hashmap.new())
+  let pos = @hashmap.HashMap([], capacity=0)
+  let r = force_calc_repulsion(ids, pos, 1.0, @hashmap.HashMap([], capacity=0))
   if r.length() != 0 {
     panic()
   }
@@ -2648,7 +2707,12 @@ test "补测 force_calc_repulsion 空输入" {
 ///|
 test "补测 force_sum_rep 递归终止二" {
   let ids = @list.empty()
-  let r = force_calc_repulsion(ids, @hashmap.new(), 1.0, @hashmap.new())
+  let r = force_calc_repulsion(
+    ids,
+    @hashmap.HashMap([], capacity=0),
+    1.0,
+    @hashmap.HashMap([], capacity=0),
+  )
   if r.length() != 0 {
     panic()
   }
@@ -2656,9 +2720,14 @@ test "补测 force_sum_rep 递归终止二" {
 
 ///|
 test "补测 force_sum_att 空边" {
-  let node_map = @hashmap.new()
-  let pos = @hashmap.new()
-  let r = force_calc_attraction(node_map, pos, 1.0, @hashmap.new())
+  let node_map = @hashmap.HashMap([], capacity=0)
+  let pos = @hashmap.HashMap([], capacity=0)
+  let r = force_calc_attraction(
+    node_map,
+    pos,
+    1.0,
+    @hashmap.HashMap([], capacity=0),
+  )
   if r.length() != 0 {
     panic()
   }
@@ -2666,9 +2735,9 @@ test "补测 force_sum_att 空边" {
 
 ///|
 test "补测 force_iterate 0 次迭代" {
-  let pos = @hashmap.new()
+  let pos = @hashmap.HashMap([], capacity=0)
   let ids = @list.empty()
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let r = force_iterate(pos, ids, node_map, 1.0, 1.0, 0)
   if r.length() != 0 {
     panic()
@@ -2678,10 +2747,18 @@ test "补测 force_iterate 0 次迭代" {
 ///|
 test "补测 force_update 空输入" {
   let ids = @list.empty()
-  let pos = @hashmap.new()
-  let rep = @hashmap.new()
-  let att = @hashmap.new()
-  let r = force_update(ids, pos, rep, att, 1.0, 1, @hashmap.new())
+  let pos = @hashmap.HashMap([], capacity=0)
+  let rep = @hashmap.HashMap([], capacity=0)
+  let att = @hashmap.HashMap([], capacity=0)
+  let r = force_update(
+    ids,
+    pos,
+    rep,
+    att,
+    1.0,
+    1,
+    @hashmap.HashMap([], capacity=0),
+  )
   if r.length() != 0 {
     panic()
   }
@@ -2699,7 +2776,7 @@ test "补测 force_update_node 无位置" {
     1.0,
     1.0,
   )
-  let pos = @hashmap.new()
+  let pos = @hashmap.HashMap([], capacity=0)
   let r = force_update_node(node, pos)
   if r.0 != "A" {
     panic()
@@ -2708,7 +2785,7 @@ test "补测 force_update_node 无位置" {
 
 ///|
 test "补测 collect_node_ids 空 map" {
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   let r = collect_node_ids(map)
   if list_length(r) != 0 {
     panic()
@@ -2746,7 +2823,12 @@ test "补测 elk_layout 默认分支" {
 
 ///|
 test "补测 add_edge_to_layout target_layer > source_layer" {
-  let state = (@hashmap.new(), @hashmap.new(), @hashmap.new(), @hashmap.new())
+  let state = (
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+  )
   // 只设置目标节点层，且大于源节点层
   let nodeA : ElkNode = (
     "A",
@@ -2777,7 +2859,12 @@ test "补测 add_edge_to_layout target_layer > source_layer" {
 
 ///|
 test "补测 update_layout_positions None 分支" {
-  let state = (@hashmap.new(), @hashmap.new(), @hashmap.new(), @hashmap.new())
+  let state = (
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+    @hashmap.HashMap([], capacity=0),
+  )
   let options = default_layered_options()
   let _result = incremental_layout_update(state, options)
 }
@@ -2834,7 +2921,7 @@ test "补测 collect_all_edges 非空 map" {
     1.0,
     1.0,
   )
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   map.set("A", nodeA)
   map.set("B", nodeB)
   let edges = collect_all_edges(map)
@@ -2855,7 +2942,7 @@ test "补测 collect_node_ids 非空 map" {
     1.0,
     1.0,
   )
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   map.set("A", nodeA)
   let ids = collect_node_ids(map)
   if list_length(ids) != 1 {
@@ -2886,7 +2973,7 @@ test "补测 force_edges_for 非空 map" {
     1.0,
     1.0,
   )
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   map.set("A", nodeA)
   map.set("B", nodeB)
   let edges = force_edges_for(map, @list.empty())
@@ -2897,7 +2984,7 @@ test "补测 force_edges_for 非空 map" {
 
 ///|
 test "补测 minimize_crossings 多层多边" {
-  let layers = @hashmap.new()
+  let layers = @hashmap.HashMap([], capacity=0)
   layers.set(0, @list.cons("A", @list.cons("B", @list.empty())))
   layers.set(1, @list.cons("C", @list.cons("D", @list.empty())))
   let edge1 : ElkEdge = ("e1", "A", "C", @list.empty())
@@ -2912,11 +2999,14 @@ test "补测 minimize_crossings 多层多边" {
 ///|
 test "补测 force_sum_rep/force_sum_att 复杂分支" {
   let ids = @list.cons("A", @list.cons("B", @list.empty()))
-  let pos : @hashmap.HashMap[String, (Float, Float)] = @hashmap.new()
+  let pos : @hashmap.HashMap[String, (Float, Float)] = @hashmap.HashMap(
+    [],
+    capacity=0,
+  )
   pos.set("A", (0.0, 0.0))
   pos.set("B", (1.0, 1.0))
   let k : Float = 1.0
-  let _rep = force_calc_repulsion(ids, pos, k, @hashmap.new())
+  let _rep = force_calc_repulsion(ids, pos, k, @hashmap.HashMap([], capacity=0))
   let nodeA : ElkNode = (
     "A",
     None,
@@ -2937,10 +3027,15 @@ test "补测 force_sum_rep/force_sum_att 复杂分支" {
     1.0,
     1.0,
   )
-  let map = @hashmap.new()
+  let map = @hashmap.HashMap([], capacity=0)
   map.set("A", nodeA)
   map.set("B", nodeB)
-  let _att = force_calc_attraction(map, pos, k, @hashmap.new())
+  let _att = force_calc_attraction(
+    map,
+    pos,
+    k,
+    @hashmap.HashMap([], capacity=0),
+  )
 }
 // 只要不 panic 即可
 
@@ -2966,10 +3061,10 @@ test "补测 assign_coords 多层多节点" {
     1.0,
     1.0,
   )
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   node_map.set("A", nodeA)
   node_map.set("B", nodeB)
-  let layers = @hashmap.new()
+  let layers = @hashmap.HashMap([], capacity=0)
   layers.set(0, @list.cons("A", @list.empty()))
   layers.set(1, @list.cons("B", @list.empty()))
   let options = default_layered_options()
@@ -2993,7 +3088,7 @@ test "补测 route_edge 极端坐标" {
 
 ///|
 test "补测 insert_by_degree None 分支" {
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let sorted = @list.cons("A", @list.empty())
   // node_map 不含 "A"，触发 None 分支
   let result = insert_by_degree("B", 2, sorted, node_map)
@@ -3004,14 +3099,14 @@ test "补测 insert_by_degree None 分支" {
 
 ///|
 test "补测 assign_x/calculate_max_width/assign_coords None 节点分支" {
-  let node_map = @hashmap.new()
+  let node_map = @hashmap.HashMap([], capacity=0)
   let ids = @list.cons("not_exist", @list.empty())
   // assign_x None 分支
   let _ = assign_x(ids, 0.0, 10.0, node_map, "CENTER", 10.0)
   // calculate_max_width None 分支
   let _ = calculate_max_width(ids, node_map, 0.0)
   // assign_coords 空节点分支
-  let layers = @hashmap.new()
+  let layers = @hashmap.HashMap([], capacity=0)
   layers.set(0, ids)
   let options = default_layered_options()
   assign_coords(layers, 0.0, options, node_map)

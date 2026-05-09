@@ -246,10 +246,10 @@ pub fn example_force_layout() -> ElkNode {
 pub fn example_incremental_layout() -> LayoutState {
   // 创建初始布局状态
   let initial_state = (
-    @hashmap.new(), // 节点映射
-    @hashmap.new(), // 层映射
-    @hashmap.new(), // 层到节点列表映射
-    @hashmap.new(), // 节点位置映射
+    @hashmap.HashMap([], capacity=0), // 节点映射
+    @hashmap.HashMap([], capacity=0), // 层映射
+    @hashmap.HashMap([], capacity=0), // 层到节点列表映射
+    @hashmap.HashMap([], capacity=0), // 节点位置映射
   )
   let x : Float = 0.0
   let y : Float = 0.0
