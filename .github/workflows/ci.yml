@@ -17,8 +17,11 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Setup Moonbit
-        uses: hustcer/setup-moonbit@develop
+      - name: install
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+
 
       - name: Check Moonbit version
         run: |
