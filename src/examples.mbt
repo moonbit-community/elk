@@ -9,16 +9,16 @@ pub fn example_basic_layered() -> ElkNode {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let _nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
-  let _nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
-  let _nodeC : ElkNode = ("C", None, @list.empty(), @list.empty(), x, y, w, h)
-  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
-  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
+  let _nodeA : ElkNode = ("A", None, @list.List([]), @list.List([]), x, y, w, h)
+  let _nodeB : ElkNode = ("B", None, @list.List([]), @list.List([]), x, y, w, h)
+  let _nodeC : ElkNode = ("C", None, @list.List([]), @list.List([]), x, y, w, h)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.List([]))
+  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.List([]))
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @list.empty(),
-    @list.cons(edgeAB, @list.empty()),
+    @list.List([]),
+    @list.cons(edgeAB, @list.List([])),
     x,
     y,
     w,
@@ -41,8 +41,8 @@ pub fn example_complex_multilayer() -> ElkNode {
   let _nodeA : ElkNode = (
     "A",
     Some("Start"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -51,8 +51,8 @@ pub fn example_complex_multilayer() -> ElkNode {
   let _nodeB : ElkNode = (
     "B",
     Some("Process1"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -61,8 +61,8 @@ pub fn example_complex_multilayer() -> ElkNode {
   let _nodeC : ElkNode = (
     "C",
     Some("Process2"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -71,8 +71,8 @@ pub fn example_complex_multilayer() -> ElkNode {
   let _nodeD : ElkNode = (
     "D",
     Some("Sub1"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -81,8 +81,8 @@ pub fn example_complex_multilayer() -> ElkNode {
   let _nodeE : ElkNode = (
     "E",
     Some("Sub2"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -91,8 +91,8 @@ pub fn example_complex_multilayer() -> ElkNode {
   let _nodeF : ElkNode = (
     "F",
     Some("Sub3"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -101,27 +101,27 @@ pub fn example_complex_multilayer() -> ElkNode {
   let _nodeG : ElkNode = (
     "G",
     Some("End"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
     h,
   )
-  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
-  let edgeAC : ElkEdge = ("e2", "A", "C", @list.empty())
-  let _edgeBD : ElkEdge = ("e3", "B", "D", @list.empty())
-  let _edgeBE : ElkEdge = ("e4", "B", "E", @list.empty())
-  let _edgeCD : ElkEdge = ("e5", "C", "D", @list.empty())
-  let _edgeCF : ElkEdge = ("e6", "C", "F", @list.empty())
-  let _edgeDG : ElkEdge = ("e7", "D", "G", @list.empty())
-  let _edgeEG : ElkEdge = ("e8", "E", "G", @list.empty())
-  let _edgeFG : ElkEdge = ("e9", "F", "G", @list.empty())
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.List([]))
+  let edgeAC : ElkEdge = ("e2", "A", "C", @list.List([]))
+  let _edgeBD : ElkEdge = ("e3", "B", "D", @list.List([]))
+  let _edgeBE : ElkEdge = ("e4", "B", "E", @list.List([]))
+  let _edgeCD : ElkEdge = ("e5", "C", "D", @list.List([]))
+  let _edgeCF : ElkEdge = ("e6", "C", "F", @list.List([]))
+  let _edgeDG : ElkEdge = ("e7", "D", "G", @list.List([]))
+  let _edgeEG : ElkEdge = ("e8", "E", "G", @list.List([]))
+  let _edgeFG : ElkEdge = ("e9", "F", "G", @list.List([]))
   let nodeA_with_edges : ElkNode = (
     "A",
     Some("Start"),
-    @list.empty(),
-    @list.cons(edgeAB, @list.cons(edgeAC, @list.empty())),
+    @list.List([]),
+    @list.cons(edgeAB, @list.cons(edgeAC, @list.List([]))),
     x,
     y,
     w,
@@ -158,8 +158,8 @@ pub fn example_with_labels_and_ports() -> ElkNode {
   let _nodeA : ElkNode = (
     "A",
     Some("Input"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -168,8 +168,8 @@ pub fn example_with_labels_and_ports() -> ElkNode {
   let _nodeB : ElkNode = (
     "B",
     Some("Process"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -178,8 +178,8 @@ pub fn example_with_labels_and_ports() -> ElkNode {
   let _nodeC : ElkNode = (
     "C",
     Some("Output"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -189,13 +189,13 @@ pub fn example_with_labels_and_ports() -> ElkNode {
   // 创建带标签的边
   let label1 : ElkLabel = ("data", 0.0, 0.0)
   let label2 : ElkLabel = ("result", 0.0, 0.0)
-  let edgeAB : ElkEdge = ("e1", "A", "B", @list.cons(label1, @list.empty()))
-  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.cons(label2, @list.empty()))
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.cons(label1, @list.List([])))
+  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.cons(label2, @list.List([])))
   let nodeA_with_edges : ElkNode = (
     "A",
     Some("Input"),
-    @list.empty(),
-    @list.cons(edgeAB, @list.empty()),
+    @list.List([]),
+    @list.cons(edgeAB, @list.List([])),
     x,
     y,
     w,
@@ -216,20 +216,20 @@ pub fn example_force_layout() -> ElkNode {
   let h : Float = 10.0
 
   // 创建用于Force布局的图（无向图）
-  let _nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
-  let _nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
-  let _nodeC : ElkNode = ("C", None, @list.empty(), @list.empty(), x, y, w, h)
-  let _nodeD : ElkNode = ("D", None, @list.empty(), @list.empty(), x, y, w, h)
-  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
-  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
-  let _edgeCD : ElkEdge = ("e3", "C", "D", @list.empty())
-  let edgeAD : ElkEdge = ("e4", "A", "D", @list.empty())
-  let edgeAC : ElkEdge = ("e5", "A", "C", @list.empty())
+  let _nodeA : ElkNode = ("A", None, @list.List([]), @list.List([]), x, y, w, h)
+  let _nodeB : ElkNode = ("B", None, @list.List([]), @list.List([]), x, y, w, h)
+  let _nodeC : ElkNode = ("C", None, @list.List([]), @list.List([]), x, y, w, h)
+  let _nodeD : ElkNode = ("D", None, @list.List([]), @list.List([]), x, y, w, h)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.List([]))
+  let _edgeBC : ElkEdge = ("e2", "B", "C", @list.List([]))
+  let _edgeCD : ElkEdge = ("e3", "C", "D", @list.List([]))
+  let edgeAD : ElkEdge = ("e4", "A", "D", @list.List([]))
+  let edgeAC : ElkEdge = ("e5", "A", "C", @list.List([]))
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @list.empty(),
-    @list.cons(edgeAB, @list.cons(edgeAD, @list.cons(edgeAC, @list.empty()))),
+    @list.List([]),
+    @list.cons(edgeAB, @list.cons(edgeAD, @list.cons(edgeAC, @list.List([])))),
     x,
     y,
     w,
@@ -260,8 +260,8 @@ pub fn example_incremental_layout() -> LayoutState {
   let nodeA : ElkNode = (
     "A",
     Some("Start"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -271,8 +271,8 @@ pub fn example_incremental_layout() -> LayoutState {
   let nodeB : ElkNode = (
     "B",
     Some("Process"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -282,8 +282,8 @@ pub fn example_incremental_layout() -> LayoutState {
   let nodeC : ElkNode = (
     "C",
     Some("End"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -292,9 +292,9 @@ pub fn example_incremental_layout() -> LayoutState {
   let state3 = incremental_layout_add_node(state2, nodeC, 2)
 
   // 添加边
-  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.List([]))
   let state4 = incremental_layout_add_edge(state3, edgeAB)
-  let edgeBC : ElkEdge = ("e2", "B", "C", @list.empty())
+  let edgeBC : ElkEdge = ("e2", "B", "C", @list.List([]))
   let state5 = incremental_layout_add_edge(state4, edgeBC)
 
   // 更新布局
@@ -310,14 +310,14 @@ pub fn example_different_directions() -> @list.List[ElkNode] {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let _nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
-  let _nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
-  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let _nodeA : ElkNode = ("A", None, @list.List([]), @list.List([]), x, y, w, h)
+  let _nodeB : ElkNode = ("B", None, @list.List([]), @list.List([]), x, y, w, h)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.List([]))
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @list.empty(),
-    @list.cons(edgeAB, @list.empty()),
+    @list.List([]),
+    @list.cons(edgeAB, @list.List([])),
     x,
     y,
     w,
@@ -328,9 +328,9 @@ pub fn example_different_directions() -> @list.List[ElkNode] {
   // 测试不同方向
   let directions = @list.cons(
     "DOWN",
-    @list.cons("UP", @list.cons("LEFT", @list.cons("RIGHT", @list.empty()))),
+    @list.cons("UP", @list.cons("LEFT", @list.cons("RIGHT", @list.List([])))),
   )
-  let mut results = @list.empty()
+  let mut results = @list.List([])
   let mut current = directions
   while true {
     match current {
@@ -361,10 +361,10 @@ pub fn example_edge_routing() -> @list.List[@list.List[Position]] {
     "STRAIGHT",
     @list.cons(
       "ORTHOGONAL",
-      @list.cons("POLYLINE", @list.cons("SPLINES", @list.empty())),
+      @list.cons("POLYLINE", @list.cons("SPLINES", @list.List([]))),
     ),
   )
-  let mut routes = @list.empty()
+  let mut routes = @list.List([])
   let mut current = strategies
   while true {
     match current {
@@ -389,21 +389,21 @@ pub fn example_performance_test() -> ElkNode {
   let h : Float = 10.0
 
   // 创建一个中等规模的图（20个节点）
-  let mut edges = @list.empty()
+  let mut edges = @list.List([])
   let mut i = 0
   while i < 19 {
     let source = "node" + i.to_string()
     let target = "node" + (i + 1).to_string()
-    let edge : ElkEdge = ("e" + i.to_string(), source, target, @list.empty())
+    let edge : ElkEdge = ("e" + i.to_string(), source, target, @list.List([]))
     edges = @list.cons(edge, edges)
     i = i + 1
   }
 
   // 添加一些交叉边
-  let cross_edge1 : ElkEdge = ("cross1", "node0", "node10", @list.empty())
-  let cross_edge2 : ElkEdge = ("cross2", "node5", "node15", @list.empty())
+  let cross_edge1 : ElkEdge = ("cross1", "node0", "node10", @list.List([]))
+  let cross_edge2 : ElkEdge = ("cross2", "node5", "node15", @list.List([]))
   edges = @list.cons(cross_edge1, @list.cons(cross_edge2, edges))
-  let root : ElkNode = ("node0", None, @list.empty(), edges, x, y, w, h)
+  let root : ElkNode = ("node0", None, @list.List([]), edges, x, y, w, h)
   let options : LayeredOptions = default_layered_options()
   layout_layered(root, options)
 }
@@ -416,14 +416,14 @@ pub fn example_universal_api() -> @list.List[ElkNode] {
   let y : Float = 0.0
   let w : Float = 10.0
   let h : Float = 10.0
-  let _nodeA : ElkNode = ("A", None, @list.empty(), @list.empty(), x, y, w, h)
-  let _nodeB : ElkNode = ("B", None, @list.empty(), @list.empty(), x, y, w, h)
-  let edgeAB : ElkEdge = ("e1", "A", "B", @list.empty())
+  let _nodeA : ElkNode = ("A", None, @list.List([]), @list.List([]), x, y, w, h)
+  let _nodeB : ElkNode = ("B", None, @list.List([]), @list.List([]), x, y, w, h)
+  let edgeAB : ElkEdge = ("e1", "A", "B", @list.List([]))
   let nodeA_with_edges : ElkNode = (
     "A",
     None,
-    @list.empty(),
-    @list.cons(edgeAB, @list.empty()),
+    @list.List([]),
+    @list.cons(edgeAB, @list.List([])),
     x,
     y,
     w,
@@ -441,7 +441,7 @@ pub fn example_universal_api() -> @list.List[ElkNode] {
   let fixed_result : ElkNode = elk_layout(root, fixed_options)
   @list.cons(
     layered_result,
-    @list.cons(force_result, @list.cons(fixed_result, @list.empty())),
+    @list.cons(force_result, @list.cons(fixed_result, @list.List([]))),
   )
 }
 
@@ -458,8 +458,8 @@ pub fn example_workflow_graph() -> ElkNode {
   let _nodeStart : ElkNode = (
     "Start",
     Some("开始"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -468,8 +468,8 @@ pub fn example_workflow_graph() -> ElkNode {
   let _nodeDecision : ElkNode = (
     "Decision",
     Some("决策"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -478,8 +478,8 @@ pub fn example_workflow_graph() -> ElkNode {
   let _nodeBranch1 : ElkNode = (
     "Branch1",
     Some("分支1"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -488,8 +488,8 @@ pub fn example_workflow_graph() -> ElkNode {
   let _nodeBranch2 : ElkNode = (
     "Branch2",
     Some("分支2"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -498,8 +498,8 @@ pub fn example_workflow_graph() -> ElkNode {
   let _nodeMerge : ElkNode = (
     "Merge",
     Some("合并"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
@@ -508,24 +508,24 @@ pub fn example_workflow_graph() -> ElkNode {
   let _nodeEnd : ElkNode = (
     "End",
     Some("结束"),
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     x,
     y,
     w,
     h,
   )
-  let edge1 : ElkEdge = ("e1", "Start", "Decision", @list.empty())
-  let _edge2 : ElkEdge = ("e2", "Decision", "Branch1", @list.empty())
-  let _edge3 : ElkEdge = ("e3", "Decision", "Branch2", @list.empty())
-  let _edge4 : ElkEdge = ("e4", "Branch1", "Merge", @list.empty())
-  let _edge5 : ElkEdge = ("e5", "Branch2", "Merge", @list.empty())
-  let _edge6 : ElkEdge = ("e6", "Merge", "End", @list.empty())
+  let edge1 : ElkEdge = ("e1", "Start", "Decision", @list.List([]))
+  let _edge2 : ElkEdge = ("e2", "Decision", "Branch1", @list.List([]))
+  let _edge3 : ElkEdge = ("e3", "Decision", "Branch2", @list.List([]))
+  let _edge4 : ElkEdge = ("e4", "Branch1", "Merge", @list.List([]))
+  let _edge5 : ElkEdge = ("e5", "Branch2", "Merge", @list.List([]))
+  let _edge6 : ElkEdge = ("e6", "Merge", "End", @list.List([]))
   let nodeStart_with_edges : ElkNode = (
     "Start",
     Some("开始"),
-    @list.empty(),
-    @list.cons(edge1, @list.empty()),
+    @list.List([]),
+    @list.cons(edge1, @list.List([])),
     x,
     y,
     w,
