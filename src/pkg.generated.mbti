@@ -9,7 +9,7 @@ import {
 // Values
 pub fn append_edges(@list.List[(String, String, String, @list.List[(String, Float, Float)])], @list.List[(String, String, String, @list.List[(String, Float, Float)])]) -> @list.List[(String, String, String, @list.List[(String, Float, Float)])]
 
-pub fn assign_coords(@hashmap.HashMap[Int, @list.List[String]], Float, (Float, Float, String, String, String, String, Bool, Bool, Float, Int), @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)]) -> Unit
+pub fn assign_coords(@hashmap.HashMap[Int32, @list.List[String]], Float, (Float, Float, String, String, String, String, Bool, Bool, Float, Int32), @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)]) -> Unit
 
 pub fn assign_x(@list.List[String], Float, Float, @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], String, Float) -> Float
 
@@ -17,15 +17,15 @@ pub fn calculate_max_width(@list.List[String], @hashmap.HashMap[String, (String,
 
 pub fn collect_all_edges(@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)]) -> @list.List[(String, String, String, @list.List[(String, Float, Float)])]
 
-pub fn collect_ids(@hashmap.HashMap[String, Int]) -> @list.List[String]
+pub fn collect_ids(@hashmap.HashMap[String, Int32]) -> @list.List[String]
 
 pub fn collect_node_ids(@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)]) -> @list.List[String]
 
-pub fn count_crossings(@list.List[String], @list.List[String], @list.List[(String, String, String, @list.List[(String, Float, Float)])]) -> Int
+pub fn count_crossings(@list.List[String], @list.List[String], @list.List[(String, String, String, @list.List[(String, Float, Float)])]) -> Int32
 
-pub fn default_layered_options() -> (Float, Float, String, String, String, String, Bool, Bool, Float, Int)
+pub fn default_layered_options() -> (Float, Float, String, String, String, String, Bool, Bool, Float, Int32)
 
-pub fn elk_layout((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), (String, (Float, Float, String, String, String, String, Bool, Bool, Float, Int))) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
+pub fn elk_layout((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), (String, (Float, Float, String, String, String, String, Bool, Bool, Float, Int32))) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
 
 pub fn example_basic_layered() -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
 
@@ -37,7 +37,7 @@ pub fn example_edge_routing() -> @list.List[@list.List[(Float, Float)]]
 
 pub fn example_force_layout() -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
 
-pub fn example_incremental_layout() -> (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
+pub fn example_incremental_layout() -> (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
 
 pub fn example_performance_test() -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
 
@@ -55,41 +55,41 @@ pub fn force_edges_for(@hashmap.HashMap[String, (String, String?, @list.List[(St
 
 pub fn force_init_pos(@list.List[String], @hashmap.HashMap[String, (Float, Float)]) -> @hashmap.HashMap[String, (Float, Float)]
 
-pub fn force_iterate(@hashmap.HashMap[String, (Float, Float)], @list.List[String], @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], Float, Float, Int) -> @hashmap.HashMap[String, (Float, Float)]
+pub fn force_iterate(@hashmap.HashMap[String, (Float, Float)], @list.List[String], @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], Float, Float, Int32) -> @hashmap.HashMap[String, (Float, Float)]
 
-pub fn force_update(@list.List[String], @hashmap.HashMap[String, (Float, Float)], @hashmap.HashMap[String, (Float, Float)], @hashmap.HashMap[String, (Float, Float)], Float, Int, @hashmap.HashMap[String, (Float, Float)]) -> @hashmap.HashMap[String, (Float, Float)]
+pub fn force_update(@list.List[String], @hashmap.HashMap[String, (Float, Float)], @hashmap.HashMap[String, (Float, Float)], @hashmap.HashMap[String, (Float, Float)], Float, Int32, @hashmap.HashMap[String, (Float, Float)]) -> @hashmap.HashMap[String, (Float, Float)]
 
 pub fn force_update_node((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), @hashmap.HashMap[String, (Float, Float)]) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
 
-pub fn get_node_at_index(@list.List[String], Int) -> String
+pub fn get_node_at_index(@list.List[String], Int32) -> String
 
-pub fn group_layers(@list.List[String], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> @hashmap.HashMap[Int, @list.List[String]]
+pub fn group_layers(@list.List[String], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], (Float, Float, String, String, String, String, Bool, Bool, Float, Int32)) -> @hashmap.HashMap[Int32, @list.List[String]]
 
 pub fn has_edge_between(String, String, @list.List[(String, String, String, @list.List[(String, Float, Float)])]) -> Bool
 
-pub fn incremental_layout_add_edge((@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)]), (String, String, String, @list.List[(String, Float, Float)])) -> (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
+pub fn incremental_layout_add_edge((@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)]), (String, String, String, @list.List[(String, Float, Float)])) -> (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
 
-pub fn incremental_layout_add_node((@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)]), (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), Int) -> (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
+pub fn incremental_layout_add_node((@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)]), (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), Int32) -> (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
 
-pub fn incremental_layout_get_positions((@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])) -> @hashmap.HashMap[String, (Float, Float)]
+pub fn incremental_layout_get_positions((@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])) -> @hashmap.HashMap[String, (Float, Float)]
 
-pub fn incremental_layout_update((@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)]), (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
+pub fn incremental_layout_update((@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)]), (Float, Float, String, String, String, String, Bool, Bool, Float, Int32)) -> (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
 
-pub fn insert_by_degree(String, Int, @list.List[String], @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)]) -> @list.List[String]
+pub fn insert_by_degree(String, Int32, @list.List[String], @hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)]) -> @list.List[String]
 
 pub fn insert_by_name(String, @list.List[String]) -> @list.List[String]
 
-pub fn layout_fixed((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
+pub fn layout_fixed((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int32)) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
 
-pub fn layout_force((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
+pub fn layout_force((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int32)) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
 
-pub fn layout_layered((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int)) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
+pub fn layout_layered((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float), (Float, Float, String, String, String, String, Bool, Bool, Float, Int32)) -> (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)
 
-pub fn[T] list_length(@list.List[T]) -> Int
+pub fn[T] list_length(@list.List[T]) -> Int32
 
-pub fn minimize_crossings(@hashmap.HashMap[Int, @list.List[String]], @list.List[(String, String, String, @list.List[(String, Float, Float)])]) -> @hashmap.HashMap[Int, @list.List[String]]
+pub fn minimize_crossings(@hashmap.HashMap[Int32, @list.List[String]], @list.List[(String, String, String, @list.List[(String, Float, Float)])]) -> @hashmap.HashMap[Int32, @list.List[String]]
 
-pub fn node_degree((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)) -> Int
+pub fn node_degree((String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)) -> Int32
 
 pub fn remove_node_from_list(@list.List[String], String) -> @list.List[String]
 
@@ -99,7 +99,7 @@ pub fn route_edge(String, String, (Float, Float), (Float, Float), String) -> @li
 
 pub fn sort_nodes_by_name(@list.List[String], @list.List[String]) -> @list.List[String]
 
-pub fn to_float(Int) -> Float
+pub fn to_float(Int32) -> Float
 
 // Errors
 
@@ -120,15 +120,15 @@ pub type ElkNode = (String, String?, @list.List[(String, String?, Float, Float, 
 
 pub type ElkPort = (String, String?, Float, Float, Float, Float)
 
-pub type LayeredOptions = (Float, Float, String, String, String, String, Bool, Bool, Float, Int)
+pub type LayeredOptions = (Float, Float, String, String, String, String, Bool, Bool, Float, Int32)
 
 pub type LayoutAlgorithm = String
 
 pub type LayoutDirection = String
 
-pub type LayoutOptions = (String, (Float, Float, String, String, String, String, Bool, Bool, Float, Int))
+pub type LayoutOptions = (String, (Float, Float, String, String, String, String, Bool, Bool, Float, Int32))
 
-pub type LayoutState = (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int], @hashmap.HashMap[Int, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
+pub type LayoutState = (@hashmap.HashMap[String, (String, String?, @list.List[(String, String?, Float, Float, Float, Float)], @list.List[(String, String, String, @list.List[(String, Float, Float)])], Float, Float, Float, Float)], @hashmap.HashMap[String, Int32], @hashmap.HashMap[Int32, @list.List[String]], @hashmap.HashMap[String, (Float, Float)])
 
 pub type NodePosition = (String, (Float, Float))
 
@@ -137,4 +137,3 @@ pub type NodeSortingStrategy = String
 pub type Position = (Float, Float)
 
 // Traits
-
